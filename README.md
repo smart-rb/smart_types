@@ -1,0 +1,1 @@
+# SmartCore::Types &middot; [![Gem Version](https://badge.fury.io/rb/smart_types.svg)](https://badge.fury.io/rb/smart_types) [![Build Status](https://travis-ci.org/smart-rb/smart_types.svg?branch=master)](https://travis-ci.org/smart-rb/smart_types)
