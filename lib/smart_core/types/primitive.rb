@@ -5,11 +5,12 @@
 class SmartCore::Types::Primitive
   require_relative 'primitive/checker'
   require_relative 'primitive/caster'
-  require_relative 'primitive/sum_checker'
+  require_relative 'primitive/undefined_caster'
   require_relative 'primitive/mult_checker'
+  require_relative 'primitive/sum_checker'
   require_relative 'primitive/factory'
-  require_relative 'primitive/mult_factory'
   require_relative 'primitive/sum_factory'
+  require_relative 'primitive/mult_factory'
 
   # @since 0.1.0
   include SmartCore::Types::System::ProducerDSL

@@ -24,7 +24,7 @@ module SmartCore::Types::System::ProducerDSL
     # @api public
     # @since 0.1.0
     def define_type(type_name, &type_definition)
-      self::Factory.new(self).create_type(type_name, &type_definition)
+      self::Factory.create_type(self, type_name, type_definition)
     end
   end
 end

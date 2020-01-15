@@ -2,7 +2,7 @@
 
 # @api private
 # @since 0.1.0
-class SmartCore::Types::Primitive::Factory::TypeDefinitions
+class SmartCore::Types::Primitive::Factory::DefinitionContext
   # @return [Proc]
   #
   # @api private
@@ -30,6 +30,7 @@ class SmartCore::Types::Primitive::Factory::TypeDefinitions
   # @api public
   # @since 0.1.0
   def define_checker(&checker)
+    raise 'No checker definition block' unless block_given?
     @type_checker = checker
   end
 
@@ -39,6 +40,7 @@ class SmartCore::Types::Primitive::Factory::TypeDefinitions
   # @api public
   # @since 0.1.0
   def define_caster(&caster)
+    raise 'No caster definition block' unless block_given?
     @type_caster = caster
   end
 end

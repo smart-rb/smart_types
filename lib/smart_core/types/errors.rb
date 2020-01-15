@@ -13,6 +13,7 @@ module SmartCore::Types
   # @since 0.1.0
   NoCasterDefintionError = Class.new(Error)
 
+
   # @api public
   # @since 0.1.0
   NoCheckerDefinitionError = Class.new(Error)
