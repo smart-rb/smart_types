@@ -58,7 +58,7 @@ SmartCore::Types::Value::Module
 
 ---
 
-## Type integration
+## Type system integration
 
 ```ruby
 # documentation is coming
