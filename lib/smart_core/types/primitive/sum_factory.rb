@@ -2,7 +2,7 @@
 
 # @api private
 # @since 0.1.0
-module SmartCore::Types::Primitive::Sumfactory
+module SmartCore::Types::Primitive::SumFactory
   require_relative 'sum_factory/definition_context'
 
   class << self

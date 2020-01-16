@@ -9,7 +9,7 @@ module SmartCore::Types::System::ProducerDSL
     #
     # @api private
     # @since 0.1.0
-    def inlcuded(base_klass)
+    def included(base_klass)
       base_klass.extend(ClassMethods)
     end
   end

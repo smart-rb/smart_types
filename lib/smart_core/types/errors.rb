@@ -11,10 +11,17 @@ module SmartCore::Types
 
   # @api public
   # @since 0.1.0
-  NoCasterDefintionError = Class.new(Error)
+  NameError = Class.new(SmartCore::NameError)
 
+  # @api public
+  # @since 0.1.0
+  NoTypeCastSupportError = Class.new(Error)
 
   # @api public
   # @since 0.1.0
   NoCheckerDefinitionError = Class.new(Error)
+
+  # @api public
+  # @since 0.1.0
+  IncorrectTypeNameError = Class.new(NameError)
 end

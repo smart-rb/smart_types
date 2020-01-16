@@ -18,13 +18,15 @@ class SmartCore::Types::Primitive::Factory
       type_checker = build_type_checker(type_definitions)
       type_caster = build_type_caster(type_definitions)
       type = build_type(type_category, type_checker, type_caster)
-      type.tap { type_category.const_set(:type_name, type) }
+      type.tap { register_new_type(type_category, type_name, type) }
     end
 
     private
 
     # @param type_definition [Proc]
     # @return [SmartCore::Types::Primitive::Factory::DefinitionContext]
+    #
+    # @raise [SmartCore::Types::NoCheckerDefinitionError]
     #
     # @api private
     # @since 0.1.0
@@ -33,7 +35,10 @@ class SmartCore::Types::Primitive::Factory
       SmartCore::Types::Primitive::Factory::DefinitionContext.new.tap do |context|
         context.instance_eval(&type_definition)
       end.tap do |context|
-        raise 'Type checker is not provided' if context.type_checker.nil?
+        raise(
+          SmartCore::Types::NoCheckerDefinitionError,
+          'Type checker is not provided (use .define_checker for it)'
+        ) if context.type_checker.nil?
       end
     end
 
@@ -68,6 +73,24 @@ class SmartCore::Types::Primitive::Factory
     # @since 0.1.0
     def build_type(type_category, type_checker, type_caster)
       Class.new(type_category).new(type_checker, type_caster)
+    end
+
+    # @param type_category [Class<SmartCore::Types::Primitive>]
+    # @param type_name [String, Symbol]
+    # @param type [SmartCore::Types::Primitive]
+    # @return [void]
+    #
+    # @raise [SmartCore::Types::IncorrectTypeNameError]
+    #
+    # @api private
+    # @since 0.1.0
+    def register_new_type(type_category, type_name, type)
+      type_category.const_set(type_name, type)
+    rescue ::NameError
+      raise(
+        SmartCore::Types::IncorrectTypeNameError,
+        "Incorrect constant name for new type (#{type_name})"
+      )
     end
   end
 end
