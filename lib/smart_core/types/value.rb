@@ -7,4 +7,5 @@ class SmartCore::Types::Value < SmartCore::Types::Primitive
   require_relative 'value/symbol'
   require_relative 'value/text'
   require_relative 'value/integer'
+  require_relative 'value/float'
 end

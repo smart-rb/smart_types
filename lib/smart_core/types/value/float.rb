@@ -2,16 +2,16 @@
 
 # @api public
 # @since 0.1.0
-SmartCore::Types::Value.define_type(:Integer) do |type|
+SmartCore::Types::Value.define_type(:Float) do |type|
   type.define_checker do |value|
-    value.is_a?(::Integer)
+    value.is_a?(::Float)
   end
 
   type.define_caster do |value|
     begin
-      Integer(value)
+      Float(value)
     rescue ::TypeError, ::ArgumentError
-      value.to_i
+      value.to_f
     end
   end
 end
