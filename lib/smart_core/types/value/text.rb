@@ -7,7 +7,5 @@ SmartCore::Types::Value.define_type(:Text) do |type|
     value.is_a?(::String) || value.is_a?(::Symbol)
   end
 
-  type.define_caster do |value|
-    value.to_s
-  end
+  type.define_caster(&:to_s)
 end

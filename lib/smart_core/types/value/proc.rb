@@ -7,7 +7,5 @@ SmartCore::Types::Value.define_type(:Proc) do |type|
     value.is_a?(::Proc)
   end
 
-  type.define_caster do |value|
-    value.to_proc
-  end
+  type.define_caster(&:to_proc)
 end
