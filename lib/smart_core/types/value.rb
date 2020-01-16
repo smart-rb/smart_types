@@ -10,4 +10,5 @@ class SmartCore::Types::Value < SmartCore::Types::Primitive
   require_relative 'value/float'
   require_relative 'value/numeric'
   require_relative 'value/boolean'
+  require_relative 'value/array'
 end
