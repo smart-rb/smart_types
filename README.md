@@ -1,8 +1,10 @@
 # SmartCore::Types &middot; [![Gem Version](https://badge.fury.io/rb/smart_types.svg)](https://badge.fury.io/rb/smart_types) [![Build Status](https://travis-ci.org/smart-rb/smart_types.svg?branch=master)](https://travis-ci.org/smart-rb/smart_types)
 
-Full-featured type system for any ruby project. Support for custom type definitioning,
+Full-featured type system for any ruby project. Supports custom type definitioning,
 type validation, type casting and type categorizing. Provides a set of commonly used type
 categories and general purpose types. Has a flexible and simplest type definition toolchain.
+
+Just add and use :) Enjoy! :)
 
 ## Installation
 
