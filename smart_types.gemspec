@@ -10,10 +10,15 @@ Gem::Specification.new do |spec|
   spec.authors = ['Rustam Ibragimov']
   spec.email   = ['iamdaiver@gmail.com']
 
-  spec.summary     = '1'
-  spec.description = '2'
-  spec.homepage    = 'https://github.com/smart-rb/smart_types'
-  spec.license     = 'MIT'
+  spec.summary = 'Full-featured type system for any ruby project.'
+  spec.description = <<~DESCRIPTION
+    Full-featured type system for any ruby project. Support for custom type definitioning,
+    type validation, type casting and type categorizing. Provides a set of commonly used type
+    categories and general purpose types. Has a flexible and simplest type definition toolchain.
+  DESCRIPTION
+
+  spec.homepage = 'https://github.com/smart-rb/smart_types'
+  spec.license  = 'MIT'
 
   spec.metadata['homepage_uri']    = spec.homepage
   spec.metadata['source_code_uri'] = 'https://github.com/smart-rb/smart_types'
