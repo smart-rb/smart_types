@@ -15,7 +15,7 @@ module SmartCore::Types
 
   # @api public
   # @since 0.1.0
-  NoTypeCastSupportError = Class.new(Error)
+  TypeCastingError = Class.new(Error)
 
   # @api public
   # @since 0.1.0
