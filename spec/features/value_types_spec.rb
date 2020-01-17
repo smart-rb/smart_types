@@ -13,7 +13,7 @@ RSpec.describe 'SmartCore::Types::Value types' do
       expect(SmartCore::Types::Value::Text.cast('test')).to eq('test')
       expect(SmartCore::Types::Value::Text.cast(:test)).to eq('test')
       expect(SmartCore::Types::Value::Text.cast([])).to eq('[]')
-      expect(SmartCore::Types::Value::Text.cast([])).to eq('{}')
+      expect(SmartCore::Types::Value::Text.cast({})).to eq('{}')
     end
   end
 end

@@ -2,10 +2,7 @@
 
 # @api public
 # @since 0.1.0
-SmartCore::Types::Value.define_type(:Text) do |type|
-  type.define_checker do |value|
-    value.is_a?(::String) || value.is_a?(::Symbol)
-  end
-
-  type.define_caster(&:to_s)
-end
+SmartCore::Types::Value::Text = SmartCore::Types::System.type_sum(
+  SmartCore::Types::Value::String,
+  SmartCore::Types::Value::Symbol
+) { |type| type.define_caster(&:to_s) }

@@ -27,7 +27,7 @@ module SmartCore::Types::Primitive::SumFactory
     # @pai private
     # @since 0.1.0
     def build_type_definitions(type_definition)
-      SmatCore::Types::Primitive::SumFactory::DefinitionContext.new.tap do |context|
+      SmartCore::Types::Primitive::SumFactory::DefinitionContext.new.tap do |context|
         context.instance_eval(&type_definition) if type_definition
       end
     end

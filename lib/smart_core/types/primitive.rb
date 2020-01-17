@@ -62,7 +62,7 @@ class SmartCore::Types::Primitive
   # @api public
   # @since 0.1.0
   def |(another_primitive)
-    self.class::SumFactory.create_type(self, another_primitive)
+    self.class::SumFactory.create_type([self, another_primitive])
   end
 
   # @param another_primitive [SmartCore::Types::Primitive]
@@ -71,6 +71,6 @@ class SmartCore::Types::Primitive
   # @api public
   # @since 0.1.0
   def &(another_primitive)
-    self.class::MultFactory.create_type(self, another_primitive)
+    self.class::MultFactory.create_type([self, another_primitive])
   end
 end
