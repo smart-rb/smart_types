@@ -1,6 +1,6 @@
 # SmartCore::Types &middot; [![Gem Version](https://badge.fury.io/rb/smart_types.svg)](https://badge.fury.io/rb/smart_types) [![Build Status](https://travis-ci.org/smart-rb/smart_types.svg?branch=master)](https://travis-ci.org/smart-rb/smart_types)
 
-> A set of objects that acts like types (type checking and type casting) with a support for the basic type algebra.
+> A set of objects that acts like types (type checking and type casting) with a support for basic type algebra.
 
 Full-featured type system for any ruby project. Supports custom type definitioning,
 type validation, type casting and type categorizing. Provides a set of commonly used type
