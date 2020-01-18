@@ -2,7 +2,16 @@
 
 # @api private
 # @since 0.1.0
-class SmartCore::Types::Primitive::UndefinedCaster
+class SmartCore::Types::Primitive::UndefinedCaster < SmartCore::Types::Primitive::Caster
+  # @param expression [NilClass, Any]
+  # @return [void]
+  #
+  # @api private
+  # @since 0.1.0
+  def initialize(expression = nil)
+    super
+  end
+
   # @param value [Any]
   # @return [void]
   #
