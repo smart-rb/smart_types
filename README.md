@@ -64,6 +64,14 @@ SmartCore::Types::Value::Module
 
 ---
 
+## Basic type algebra
+
+```ruby
+# documentation is coming
+```
+
+---
+
 ## Type system integration
 
 ```ruby
