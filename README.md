@@ -26,6 +26,18 @@ require 'smart_core/types'
 
 ---
 
+## Type Interface
+
+```ruby
+# documentation is coming
+
+type.valid?(value)
+type.cast(value)
+type.nilable
+type3 = type1 | type2
+type4 = type1 & type2
+```
+
 ## Supported types
 
 - Primitive Value Types:
