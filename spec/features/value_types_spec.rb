@@ -9,7 +9,7 @@ RSpec.describe 'SmartCore::Types::Value types' do
       expect(SmartCore::Types::Value::Text.valid?(Object.new)).to eq(false)
     end
 
-    specify 'nilable type-checking' do
+    specify '(nilable) type-checking' do
       expect(SmartCore::Types::Value::Text.nilable.valid?('test')).to eq(true)
       expect(SmartCore::Types::Value::Text.nilable.valid?(:test)).to eq(true)
       expect(SmartCore::Types::Value::Text.nilable.valid?(123)).to eq(false)
@@ -23,6 +23,13 @@ RSpec.describe 'SmartCore::Types::Value types' do
       expect(SmartCore::Types::Value::Text.cast(:test)).to eq('test')
       expect(SmartCore::Types::Value::Text.cast([])).to eq('[]')
       expect(SmartCore::Types::Value::Text.cast({})).to eq('{}')
+    end
+
+    specify '(nilable) type-casting' do
+      expect(SmartCore::Types::Value::Text.nilable.cast('test')).to eq('test')
+      expect(SmartCore::Types::Value::Text.nilable.cast(:test)).to eq('test')
+      expect(SmartCore::Types::Value::Text.nilable.cast([])).to eq('[]')
+      expect(SmartCore::Types::Value::Text.nilable.cast({})).to eq('{}')
     end
   end
 end

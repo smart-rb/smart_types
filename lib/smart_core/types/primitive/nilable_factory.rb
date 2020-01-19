@@ -32,7 +32,7 @@ module SmartCore::Types::Primitive::NilableFactory
     # @api private
     # @since 0.1.0
     def build_type_caster(type)
-      type.checker
+      type.caster
     end
 
     # @param type [SmartCore::Types::Primitive]
