@@ -48,6 +48,26 @@ SmartCore::Types::Value::Module
 
 ---
 
+## Nilable types
+
+```ruby
+SmartCore::Types::Value::Any.nilable
+SmartCore::Types::Value::String.nilable
+SmartCore::Types::Value::Symbol.nilable
+SmartCore::Types::Value::Text.nilable
+SmartCore::Types::Value::Integer.nilable
+SmartCore::Types::Value::Float.nilable
+SmartCore::Types::Value::Numeric.nilable
+SmartCore::Types::Value::Boolean.nilable
+SmartCore::Types::Value::Array.nilable
+SmartCore::Types::Value::Hash.nilable
+SmartCore::Types::Value::Proc.nilable
+SmartCore::Types::Value::Class.nilable
+SmartCore::Types::Value::Module.nilable
+```
+
+---
+
 ## Type validation and type casting
 
 ```ruby
