@@ -59,8 +59,8 @@ class SmartCore::Types::Primitive
   # @api public
   # @since 0.1.0
   def validate!(value)
-    checker.call(value) || raise(SmartCore::TypeError, <<~ERROR_MESSAGE)
-      Invalid type (given #{value.class}, expects #{self.class}-related)
+    valid?(value) || raise(SmartCore::Types::TypeError, <<~ERROR_MESSAGE)
+      Invalid type (given #{value.class}, expects #{self}-related)
     ERROR_MESSAGE
   end
 

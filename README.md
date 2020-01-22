@@ -32,6 +32,7 @@ require 'smart_core/types'
 # documentation is coming
 
 type.valid?(value)
+type.validate!(value)
 type.cast(value)
 type.nilable
 type3 = type1 | type2

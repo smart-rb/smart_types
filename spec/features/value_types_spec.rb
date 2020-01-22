@@ -7,6 +7,7 @@ RSpec.describe 'SmartCore::Types::Value types' do
       expect(SmartCore::Types::Value::Text.valid?(:test)).to eq(true)
       expect(SmartCore::Types::Value::Text.valid?(123)).to eq(false)
       expect(SmartCore::Types::Value::Text.valid?(Object.new)).to eq(false)
+      expect(SmartCore::Types::Value::Text.valid?(nil)).to eq(false)
     end
 
     specify '(nilable) type-checking' do
@@ -14,8 +15,43 @@ RSpec.describe 'SmartCore::Types::Value types' do
       expect(SmartCore::Types::Value::Text.nilable.valid?(:test)).to eq(true)
       expect(SmartCore::Types::Value::Text.nilable.valid?(123)).to eq(false)
       expect(SmartCore::Types::Value::Text.nilable.valid?(Object.new)).to eq(false)
-
       expect(SmartCore::Types::Value::Text.nilable.valid?(nil)).to eq(true)
+    end
+
+    specify 'type-validation' do
+      expect do
+        SmartCore::Types::Value::Text.validate!('test')
+      end.not_to raise_error
+
+      expect do
+        SmartCore::Types::Value::Text.validate!(:test)
+      end.not_to raise_error
+
+      expect do
+        SmartCore::Types::Value::Text.validate!(123)
+      end.to raise_error(SmartCore::Types::TypeError)
+
+      expect do
+        SmartCore::Types::Value::Text.validate!(nil)
+      end.to raise_error(SmartCore::Types::TypeError)
+    end
+
+    specify '(nilable) type-validation' do
+      expect do
+        SmartCore::Types::Value::Text.nilable.validate!('test')
+      end.not_to raise_error
+
+      expect do
+        SmartCore::Types::Value::Text.nilable.validate!(:test)
+      end.not_to raise_error
+
+      expect do
+        SmartCore::Types::Value::Text.nilable.validate!(nil)
+      end.not_to raise_error
+
+      expect do
+        SmartCore::Types::Value::Text.nilable.validate!(123)
+      end.to raise_error(SmartCore::Types::TypeError)
     end
 
     specify 'type-casting' do

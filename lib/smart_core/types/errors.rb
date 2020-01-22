@@ -15,6 +15,10 @@ module SmartCore::Types
 
   # @api public
   # @since 0.1.0
+  TypeError = Class.new(SmartCore::TypeError)
+
+  # @api public
+  # @since 0.1.0
   TypeCastingError = Class.new(Error)
 
   # @api public
