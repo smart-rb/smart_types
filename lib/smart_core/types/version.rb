@@ -7,6 +7,6 @@ module SmartCore
     # @api public
     # @since 0.1.0
     # @version 0.1.0
-    VERSION = '0.1.0.alpha'
+    VERSION = '0.1.0.alpha2'
   end
 end
