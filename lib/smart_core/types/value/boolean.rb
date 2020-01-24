@@ -6,4 +6,8 @@ SmartCore::Types::Value.define_type(:Boolean) do |type|
   type.define_checker do |value|
     value.is_a?(::TrueClass) || value.is_a?(::FalseClass)
   end
+
+  type.define_caster do |value|
+    !!value
+  end
 end
