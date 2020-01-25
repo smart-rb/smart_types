@@ -31,7 +31,6 @@ class SmartCore::Types::Primitive
 
   # @param checker [SmartCore::Types::Primitive::Checker]
   # @param caster [SmartCore::Types::Primitive::Caster]
-  # @param nilable [SmartCore::Types::Primitive]
   # @return [void]
   #
   # @api private
