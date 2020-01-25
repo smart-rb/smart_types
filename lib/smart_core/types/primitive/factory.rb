@@ -17,7 +17,7 @@ class SmartCore::Types::Primitive::Factory
       type_definitions = build_type_definitions(type_definition)
       type_checker = build_type_checker(type_definitions)
       type_caster = build_type_caster(type_definitions)
-      type = build_type(type_category, type_checker, type_caster)
+      type = build_type(type_category, type_name, type_checker, type_caster)
       type.tap { register_new_type(type_category, type_name, type) }
     end
 
@@ -65,14 +65,15 @@ class SmartCore::Types::Primitive::Factory
     end
 
     # @param type_klass [Class<SmartCore::Types::Primitive>]
+    # @param type_name [String, Symbol]
     # @param type_checker [SmartCore::Types::Primitive::Checker]
     # @param type_caster [SmartCore::Types::Primitive::Caster]
     # @return [SmartCore::Types::Primitive]
     #
     # @api private
     # @since 0.1.0
-    def build_type(type_category, type_checker, type_caster)
-      Class.new(type_category).new(type_checker, type_caster)
+    def build_type(type_category, type_name, type_checker, type_caster)
+      Class.new(type_category).new(type_checker, type_caster, type_name.to_s)
     end
 
     # @param type_category [Class<SmartCore::Types::Primitive>]

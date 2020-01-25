@@ -29,17 +29,25 @@ class SmartCore::Types::Primitive
   # @since 0.1.0
   attr_reader :caster
 
+  # @return [String]
+  #
+  # @api private
+  # @since 0.1.0
+  attr_reader :name
+
   # @param checker [SmartCore::Types::Primitive::Checker]
   # @param caster [SmartCore::Types::Primitive::Caster]
+  # @param name [String]
   # @return [void]
   #
   # @api private
   # @since 0.1.0
-  def initialize(checker, caster)
+  def initialize(checker, caster, name)
     @lock = SmartCore::Engine::Lock.new
     @checker = checker
     @caster = caster
     @nilable = nil
+    @name = name.freeze
   end
 
   # @param value [Any]
@@ -59,7 +67,7 @@ class SmartCore::Types::Primitive
   # @since 0.1.0
   def validate!(value)
     valid?(value) || raise(SmartCore::Types::TypeError, <<~ERROR_MESSAGE)
-      Invalid type (given #{value.class}, expects #{self}-related)
+      Invalid type (given #{(class << value; superclass; end).name}, expects #{name}/SmartCore)
     ERROR_MESSAGE
   end
 
