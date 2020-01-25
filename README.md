@@ -81,6 +81,14 @@ SmartCore::Types::Value::Module.nilable
 
 ---
 
+## Constrained types
+
+```ruby
+# documentation is coming
+```
+
+---
+
 ## Type validation and type casting
 
 ```ruby
@@ -93,6 +101,17 @@ SmartCore::Types::Value::Module.nilable
 
 ```ruby
 # documentation is coming
+
+# example:
+SmartCore::Types::Value.define_type(:String) do |type|
+  type.define_checker do |value|
+    value.is_a?(::String)
+  end
+
+  type.define_caster do |value|
+    value.to_s
+  end
+end
 ```
 
 ---
