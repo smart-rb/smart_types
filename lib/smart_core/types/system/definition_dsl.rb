@@ -17,24 +17,26 @@ module SmartCore::Types::System::DefinitionDSL
   # @api private
   # @since 0.1.0
   module ClassMethods
+    # @param type_name [String, Symbol]
     # @param types [Array<SmartCore::Types::Pirmitive>]
     # @param type_definition [Block]
     # @return [SmartCore::Types::Primitive]
     #
     # @api public
     # @since 0.1.0
-    def type_sum(*types, &type_definition)
-      SmartCore::Types::Primitive::SumFactory.create_type(types, type_definition)
+    def type_sum(type_name, *types, &type_definition)
+      SmartCore::Types::Primitive::SumFactory.create_type(type_name, types, type_definition)
     end
 
+    # @param type_name [String, Symbol]
     # @param types [Array<SmartCore::Types::Pirmitive>]
     # @param type_definition [Block]
     # @return [SmartCore::Types::Primitive]
     #
     # @api public
     # @since 0.1.0
-    def type_mult(*types, &type_definition)
-      SmartCore::Types::Primitive::MultFactory.create_type(types, type_definition)
+    def type_mult(type_name, *types, &type_definition)
+      SmartCore::Types::Primitive::MultFactory.create_type(type_name, types, type_definition)
     end
   end
 end

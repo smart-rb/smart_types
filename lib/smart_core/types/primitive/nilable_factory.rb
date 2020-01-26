@@ -43,7 +43,7 @@ module SmartCore::Types::Primitive::NilableFactory
     # @api private
     # @since 0.1.0
     def build_type(type, type_checker, type_caster)
-      Class.new(type.class).new(type_checker, type_caster)
+      Class.new(type.class).new(type_checker, type_caster, type.name)
     end
   end
 end

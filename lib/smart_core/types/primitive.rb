@@ -66,8 +66,16 @@ class SmartCore::Types::Primitive
   # @api public
   # @since 0.1.0
   def validate!(value)
-    valid?(value) || raise(SmartCore::Types::TypeError, <<~ERROR_MESSAGE)
-      Invalid type (given #{(class << value; superclass; end).name}, expects #{name}/SmartCore)
+    return if valid?(value)
+
+    value_type = begin
+      value.class.name
+    rescue NoMethodError
+      (class << value; superclass; end).name
+    end
+
+    raise(SmartCore::Types::TypeError, <<~ERROR_MESSAGE)
+      Invalid type (given #{value_type}, expects #{name}/SmartCore)
     ERROR_MESSAGE
   end
 
