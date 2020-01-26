@@ -68,11 +68,13 @@ class SmartCore::Types::Primitive
   def validate!(value)
     return if valid?(value)
 
+    # rubocop:disable Layout/RescueEnsureAlignment
     value_type = begin
       value.class.name
     rescue NoMethodError
       (class << value; superclass; end).name
     end
+    # rubocop:enable Layout/RescueEnsureAlignment
 
     raise(SmartCore::Types::TypeError, <<~ERROR_MESSAGE)
       Invalid type (given #{value_type}, expects #{name}/SmartCore)
