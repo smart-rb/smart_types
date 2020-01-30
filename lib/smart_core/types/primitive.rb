@@ -29,12 +29,6 @@ class SmartCore::Types::Primitive
   # @since 0.1.0
   attr_reader :caster
 
-  # @return [String]
-  #
-  # @api private
-  # @since 0.1.0
-  attr_reader :name
-
   # @param checker [SmartCore::Types::Primitive::Checker]
   # @param caster [SmartCore::Types::Primitive::Caster]
   # @param name [String]
@@ -42,12 +36,19 @@ class SmartCore::Types::Primitive
   #
   # @api private
   # @since 0.1.0
-  def initialize(checker, caster, name)
+  def initialize(checker, caster)
     @lock = SmartCore::Engine::Lock.new
     @checker = checker
     @caster = caster
     @nilable = nil
-    @name = name.freeze
+  end
+
+  # @return [String]
+  #
+  # @api public
+  # @since 0.1.0
+  def name
+    self.class.name
   end
 
   # @param value [Any]
@@ -77,7 +78,7 @@ class SmartCore::Types::Primitive
     # rubocop:enable Layout/RescueEnsureAlignment
 
     raise(SmartCore::Types::TypeError, <<~ERROR_MESSAGE)
-      Invalid type (given #{value_type}, expects #{name}/SmartCore)
+      Invalid type (given #{value_type}, expects #{self.class.name}/SmartCore)
     ERROR_MESSAGE
   end
 

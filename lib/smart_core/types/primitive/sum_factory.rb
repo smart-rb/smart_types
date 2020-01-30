@@ -6,18 +6,17 @@ module SmartCore::Types::Primitive::SumFactory
   require_relative 'sum_factory/definition_context'
 
   class << self
-    # @param type_name [String, Symbol]
     # @param types [Array<SmartCore::Types::Primtive>]
     # @param type_definition [NilClass, Proc]
     # @return [SmartCore::Types::Primitive]
     #
     # @api private
     # @since 0.1.0
-    def create_type(type_name, types, type_definition)
+    def create_type(types, type_definition)
       type_definitions = build_type_definitions(type_definition)
       type_checker = build_type_checker(types, type_definitions)
       type_caster = build_type_caster(types, type_definitions)
-      build_type(type_name, type_checker, type_caster)
+      build_type(type_checker, type_caster)
     end
 
     private
@@ -57,16 +56,14 @@ module SmartCore::Types::Primitive::SumFactory
       end
     end
 
-    # @param type_name [String, Symbol]
     # @param type_checker [SmartCore::Types::Primitive::SumChecker]
     # @param type_caster [SmartCore::Types::Primitive::Caster]
     # @return [SmartCore::Types::Primitive]
     #
     # @api private
     # @since 0.1.0
-    def build_type(type_name, type_checker, type_caster)
-      # TODO: fail if type_name is not a string or a symbol
-      SmartCore::Types::Primitive.new(type_checker, type_caster, type_name)
+    def build_type(type_checker, type_caster)
+      SmartCore::Types::Primitive.new(type_checker, type_caster)
     end
   end
 end

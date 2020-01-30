@@ -73,7 +73,7 @@ class SmartCore::Types::Primitive::Factory
     # @api private
     # @since 0.1.0
     def build_type(type_category, type_name, type_checker, type_caster)
-      Class.new(type_category).new(type_checker, type_caster, type_name.to_s)
+      Class.new(type_category).new(type_checker, type_caster)
     end
 
     # @param type_category [Class<SmartCore::Types::Primitive>]
