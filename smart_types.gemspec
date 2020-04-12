@@ -3,7 +3,7 @@
 require_relative 'lib/smart_core/types/version'
 
 Gem::Specification.new do |spec|
-  spec.required_ruby_version = Gem::Requirement.new('>= 2.4.9')
+  spec.required_ruby_version = Gem::Requirement.new('>= 2.4.10')
 
   spec.name    = 'smart_types'
   spec.version = SmartCore::Types::VERSION
@@ -37,6 +37,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'bundler',          '~> 2.1'
   spec.add_development_dependency 'rake',             '~> 13.0'
   spec.add_development_dependency 'rspec',            '~> 3.9'
-  spec.add_development_dependency 'armitage-rubocop', '~> 0.80'
+  spec.add_development_dependency 'armitage-rubocop', '~> 0.81'
   spec.add_development_dependency 'simplecov',        '~> 0.18'
 end

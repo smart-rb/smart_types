@@ -5,7 +5,7 @@ inherit_gem:
     - lib/rubocop.rspec.yml
 
 AllCops:
-  TargetRubyVersion: 2.4.9
+  TargetRubyVersion: 2.7.1
   Include:
     - lib/**/*.rb
     - spec/**/*.rb
@@ -13,3 +13,7 @@ AllCops:
     - Rakefile
     - smart_types.gemspec
     - bin/console
+
+# NOTE: support for old ruby versions
+Style/RedundantBegin:
+  Enabled: false
