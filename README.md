@@ -154,6 +154,18 @@ SmartCore::Types::Value.type(:Time) do |type|
 end
 ```
 
+- pipelined type caster definition for the sum-based types:
+
+```ruby
+SmartCore::Types::Value::TimeLike = SmartCore::Types::System.type_sum(
+  SmartCore::Types::Time,
+  SmartCore::Types::DateTime,
+  SmartCore::Types::Date,
+) do |type|
+  type.define_caster(:pipelined) # try Time.cast => try DateTime.cast => try Date.cast
+end
+```
+
 ## Contributing
 
 - Fork it ( https://github.com/smart-rb/smart_types )
