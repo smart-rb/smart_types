@@ -57,6 +57,9 @@ SmartCore::Types::Value::Hash
 SmartCore::Types::Value::Proc
 SmartCore::Types::Value::Class
 SmartCore::Types::Value::Module
+SmartCore::Types::Value::Time
+SmartCore::Types::Value::DateTime
+SmartCore::Types::Value::Date
 ```
 
 ---
@@ -77,6 +80,9 @@ SmartCore::Types::Value::Hash.nilable
 SmartCore::Types::Value::Proc.nilable
 SmartCore::Types::Value::Class.nilable
 SmartCore::Types::Value::Module.nilable
+SmartCore::Types::Value::Time.nilable
+SmartCore::Types::Value::DateTime.nilable
+SmartCore::Types::Value::Date.nilable
 ```
 
 ---
@@ -172,11 +178,17 @@ end
 # before:
 SmartCore::Types::Value::Boolean.validate!(123)
 # => SmartCore::Types::TypeError
+SmartCore::Types::Value::Class.cast(123)
+# => SmartCore::Types::TypeCastingError
 
 # after:
 SmartCore::Types::Value::Boolean.validate!(123)
 # => SmartCore::Types::Value::Boolean::TypeError
 # (inheritance tree: Types::Value::<Type>::TypeError => Types::Value::TypeError => Types::TypeError)
+
+SmartCore::Types::Value::Class.cast(123)
+# => SmartCore::Types::Value::Class::TypeCastingError
+# (inheritance tree: the same as above)
 ```
 
 ## Contributing
