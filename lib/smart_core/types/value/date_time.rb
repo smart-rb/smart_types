@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'date'
+
 SmartCore::Types::Value.define_type(:DateTime) do |type|
   type.define_checker do |value|
     value.is_a?(::DateTime)
