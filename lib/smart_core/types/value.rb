@@ -17,4 +17,7 @@ class SmartCore::Types::Value < SmartCore::Types::Primitive
   require_relative 'value/class'
   require_relative 'value/module'
   require_relative 'value/any'
+  require_relative 'value/time'
+  require_relative 'value/date'
+  require_relative 'value/date_time'
 end
