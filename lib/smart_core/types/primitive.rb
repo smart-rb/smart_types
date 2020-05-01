@@ -14,8 +14,17 @@ class SmartCore::Types::Primitive
   require_relative 'primitive/mult_factory'
   require_relative 'primitive/nilable_factory'
 
-  # @since 0.1.0
-  include SmartCore::Types::System::ProducerDSL
+  class << self
+    # @param type_name [String, Symbol]
+    # @param type_definition [Block]
+    # @return [SmartCore::Types::Primitive]
+    #
+    # @api public
+    # @since 0.1.0
+    def define_type(type_name, &type_definition)
+      self::Factory.create_type(self, type_name, type_definition)
+    end
+  end
 
   # @return [SmartCore::Types::Primitive::Checker]
   #

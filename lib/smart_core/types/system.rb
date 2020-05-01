@@ -3,9 +3,25 @@
 # @api private
 # @since 0.1.0
 module SmartCore::Types::System
-  require_relative 'system/producer_dsl'
-  require_relative 'system/definition_dsl'
+  class << self
+    # @param types [Array<SmartCore::Types::Pirmitive>]
+    # @param type_definition [Block]
+    # @return [SmartCore::Types::Primitive]
+    #
+    # @api public
+    # @since 0.1.0
+    def type_sum(*types, &type_definition)
+      SmartCore::Types::Primitive::SumFactory.create_type(types, type_definition)
+    end
 
-  # @since 0.1.0
-  include SmartCore::Types::System::DefinitionDSL
+    # @param types [Array<SmartCore::Types::Pirmitive>]
+    # @param type_definition [Block]
+    # @return [SmartCore::Types::Primitive]
+    #
+    # @api public
+    # @since 0.1.0
+    def type_mult(*types, &type_definition)
+      SmartCore::Types::Primitive::MultFactory.create_type(types, type_definition)
+    end
+  end
 end
