@@ -194,11 +194,11 @@ SmartCore::Types::Value::Class.cast(123)
 - type refinements
 
 ```ruby
-SmartCore::Types::Value::Time.refine_checker |value|
+SmartCore::Types::Value::Time.refine_checker do |value, original_checker|
   # new type checker
 end
 
-SmartCore::Types::Value::Time.refine_caster do |value|
+SmartCore::Types::Value::Time.refine_caster do |value, original_caster|
   # new type caster
 end
 ```
