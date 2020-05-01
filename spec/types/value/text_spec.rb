@@ -18,6 +18,7 @@ RSpec.describe 'SmartCore::Types::Value::Text' do
     specify 'type-checking' do
       expect(type.valid?('test')).to eq(true)
       expect(type.valid?(:test)).to eq(true)
+
       expect(type.valid?(123)).to eq(false)
       expect(type.valid?(Object.new)).to eq(false)
       expect(type.valid?(nil)).to eq(false)
@@ -26,6 +27,7 @@ RSpec.describe 'SmartCore::Types::Value::Text' do
     specify 'type-validation' do
       expect { type.validate!('test') }.not_to raise_error
       expect { type.validate!(:test) }.not_to raise_error
+
       expect { type.validate!(123) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(nil) }.to raise_error(SmartCore::Types::TypeError)
     end
@@ -48,6 +50,7 @@ RSpec.describe 'SmartCore::Types::Value::Text' do
       expect { type.validate!('test') }.not_to raise_error
       expect { type.validate!(:test) }.not_to raise_error
       expect { type.validate!(nil) }.not_to raise_error
+
       expect { type.validate!(123) }.to raise_error(SmartCore::Types::TypeError)
     end
   end
