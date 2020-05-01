@@ -166,6 +166,19 @@ SmartCore::Types::Value::TimeLike = SmartCore::Types::System.type_sum(
 end
 ```
 
+- namespaced type errors
+
+```ruby
+# before:
+SmartCore::Types::Value::Boolean.validate!(123)
+# => SmartCore::Types::TypeError
+
+# after:
+SmartCore::Types::Value::Boolean.validate!(123)
+# => SmartCore::Types::Value::Boolean::TypeError
+# (inheritance tree: Types::Value::<Type>::TypeError => Types::Value::TypeError => Types::TypeError)
+```
+
 ## Contributing
 
 - Fork it ( https://github.com/smart-rb/smart_types )
