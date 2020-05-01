@@ -8,6 +8,10 @@ SmartCore::Types::Value.define_type(:Date) do |type|
   end
 
   type.define_caster do |value|
-    ::Date.parse(value)
+    begin
+      ::Date.parse(value)
+    rescue ::Date::Error, ::TypeError
+      raise(SmartCore::Types::TypeCastingError, 'Invalid date')
+    end
   end
 end

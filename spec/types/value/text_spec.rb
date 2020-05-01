@@ -41,9 +41,10 @@ RSpec.describe 'SmartCore::Types::Value::Text' do
     specify 'type-checking' do
       expect(type.valid?('test')).to eq(true)
       expect(type.valid?(:test)).to eq(true)
+      expect(type.valid?(nil)).to eq(true)
+
       expect(type.valid?(123)).to eq(false)
       expect(type.valid?(Object.new)).to eq(false)
-      expect(type.valid?(nil)).to eq(true)
     end
 
     specify 'type-validation' do
