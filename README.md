@@ -132,6 +132,28 @@ end
 
 ---
 
+## Roadmap
+
+- type configuration
+
+```ruby
+SmartCore::Types::Value.type(:Time) do |type|
+  type.configuration do |config| # config definition
+    setting :iso, :rfc2822
+    # TODO: think about a more convinient DSL
+  end
+
+  type.define_caster do |value, config| # config usage
+    case config.standard
+    when :rfc2822
+      ::Time.rfc2822(value)
+    else
+      # ...
+    end
+  end
+end
+```
+
 ## Contributing
 
 - Fork it ( https://github.com/smart-rb/smart_types )
