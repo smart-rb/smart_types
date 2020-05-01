@@ -191,6 +191,18 @@ SmartCore::Types::Value::Class.cast(123)
 # (inheritance tree: the same as above)
 ```
 
+- type refinements
+
+```ruby
+SmartCore::Types::Value::Time.refine_checker |value|
+  # new type checker
+end
+
+SmartCore::Types::Value::Time.refine_caster do |value|
+  # new type caster
+end
+```
+
 ## Contributing
 
 - Fork it ( https://github.com/smart-rb/smart_types )
