@@ -7,7 +7,9 @@ RSpec.describe 'SmartCore::Types::Value::Array' do
       expect(type.cast('test')).to eq(['test'])
       expect(type.cast(:test)).to eq([:test])
       expect(type.cast([])).to eq([])
+      expect(type.cast([123, '456', :test])).to eq([123, '456', :test])
       expect(type.cast({})).to eq([])
+      expect(type.cast({ a: 1, b: '2', 'c' => :test})).to eq([[:a, 1], [:b, '2'], ['c', :test]])
       expect(type.cast(nil)).to eq([])
     end
   end
