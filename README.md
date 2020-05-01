@@ -203,6 +203,20 @@ SmartCore::Types::Value::Time.refine_caster do |value, original_caster|
 end
 ```
 
+- options for type casters
+
+```ruby
+SmartCore::Types::Value.define_type(:Date) do |type|
+  type.define_caster do |value, options = {}| # options goes here
+    iso = options.fetch(:iso, nil)
+    iso ? ::Date.pasre(value, iso) : ::Date.parse(value)
+  end
+end
+
+# usage:
+SmartCore::Types::Value::Date.cast('2020-01-01', { iso: :rfc3339 })
+```
+
 ## Contributing
 
 - Fork it ( https://github.com/smart-rb/smart_types )
