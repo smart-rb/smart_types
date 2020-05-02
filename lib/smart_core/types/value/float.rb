@@ -9,12 +9,15 @@ SmartCore::Types::Value.define_type(:Float) do |type|
 
   type.define_caster do |value|
     begin
-      Float(value)
+      ::Kernel.Float(value)
     rescue ::TypeError, ::ArgumentError
       begin
-        value.to_f
-      rescue ::NoMethodError
-        raise(SmartCore::Types::TypeCastingError, 'Non-castable value')
+        # NOTE: for cases like this:
+        # => ::Kernel.Float(nil) # => ::TypeError
+        # => ::Kernel.Float(nil.to_f) # => 0.0 (with a layer of the core validation mechanism)
+        ::Kernel.Float(value.to_f)
+      rescue ::NoMethodError, ::TypeError
+        raise(SmartCore::Types::TypeCastingError, 'Non-castable to Float')
       end
     end
   end

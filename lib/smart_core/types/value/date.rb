@@ -13,7 +13,7 @@ SmartCore::Types::Value.define_type(:Date) do |type|
     begin
       ::Date.parse(value)
     rescue ::Date::Error, ::TypeError
-      raise(SmartCore::Types::TypeCastingError, 'Invalid date')
+      raise(SmartCore::Types::TypeCastingError, 'Non-castable to Date')
     end
   end
 end

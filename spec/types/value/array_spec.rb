@@ -9,8 +9,18 @@ RSpec.describe 'SmartCore::Types::Value::Array' do
       expect(type.cast([])).to eq([])
       expect(type.cast([123, '456', :test])).to eq([123, '456', :test])
       expect(type.cast({})).to eq([])
-      expect(type.cast({ a: 1, b: '2', 'c' => :test})).to eq([[:a, 1], [:b, '2'], ['c', :test]])
+      expect(type.cast({ a: 1, b: '2', 'c' => :test })).to eq([[:a, 1], [:b, '2'], ['c', :test]])
       expect(type.cast(nil)).to eq([])
+
+      as_array_1 = Class.new { def to_a; [123]; end }.new
+      as_array_2 = Class.new { def to_ary; ['456']; end }.new
+      non_array_1 = Class.new { def to_a; :test; end }.new
+      non_array_2 = Class.new { def to_ary; 'test'; end }.new
+
+      expect(type.cast(as_array_1)).to eq([123])
+      expect(type.cast(as_array_2)).to eq(['456'])
+      expect(type.cast(non_array_1)).to eq([non_array_1])
+      expect(type.cast(non_array_2)).to eq([non_array_2])
     end
   end
 

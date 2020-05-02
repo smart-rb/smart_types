@@ -11,7 +11,14 @@ SmartCore::Types::Value.define_type(:Hash) do |type|
     begin
       ::Kernel.Hash(value)
     rescue ::TypeError
-      {}
+      begin
+        # NOTE:
+        # - ::Kernel.Hash does not invoke `#to_h` under the hood (it invokes `#to_hash`)
+        # - ::Kernel.Hash is used to validate the returned value from `#to_h`
+        ::Kernel.Hash(value.to_h)
+      rescue ::TypeError, ::NoMethodError
+        raise(SmartCore::Types::TypeCastingError, 'Non-castable to Hash')
+      end
     end
   end
 end

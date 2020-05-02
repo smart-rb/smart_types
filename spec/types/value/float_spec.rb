@@ -11,7 +11,16 @@ RSpec.describe 'SmartCore::Types::Value::Float' do
       expect(type.cast(Float::INFINITY)).to eq(Float::INFINITY)
 
       expect { type.cast(Object.new) }.to raise_error(SmartCore::Types::TypeCastingError)
-      expect { type.cast(Object.new) }.to raise_error(SmartCore::Types::TypeCastingError)
+      expect { type.cast([]) }.to raise_error(SmartCore::Types::TypeCastingError)
+      expect { type.cast({}) }.to raise_error(SmartCore::Types::TypeCastingError)
+
+      floatable_1 = Class.new { def to_f; 107.52; end }.new
+      floatable_2 = Class.new { def to_f; 53.0721; end }.new
+      non_floatable = Class.new { def to_f; :test; end }.new
+
+      expect(type.cast(floatable_1)).to eq(107.52)
+      expect(type.cast(floatable_2)).to eq(53.0721)
+      expect { type.cast(non_floatable) }.to raise_error(SmartCore::Types::TypeCastingError)
     end
   end
 
@@ -32,6 +41,7 @@ RSpec.describe 'SmartCore::Types::Value::Float' do
       expect(type.valid?(123)).to eq(false)
       expect(type.valid?(-123)).to eq(false)
       expect(type.valid?(0)).to eq(false)
+      expect(type.valid?(Object.new)).to eq(false)
     end
 
     specify 'type-validation' do
@@ -46,6 +56,7 @@ RSpec.describe 'SmartCore::Types::Value::Float' do
       expect { type.validate!(123) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(-123) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(0) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!(Object.new) }.to raise_error(SmartCore::Types::TypeError)
     end
   end
 
@@ -66,6 +77,7 @@ RSpec.describe 'SmartCore::Types::Value::Float' do
       expect(type.valid?(123)).to eq(false)
       expect(type.valid?(-123)).to eq(false)
       expect(type.valid?(0)).to eq(false)
+      expect(type.valid?(Object.new)).to eq(false)
     end
 
     specify 'type-validation' do
@@ -80,6 +92,7 @@ RSpec.describe 'SmartCore::Types::Value::Float' do
       expect { type.validate!(123) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(-123) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(0) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!(Object.new) }.to raise_error(SmartCore::Types::TypeError)
     end
   end
 end
