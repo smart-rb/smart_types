@@ -6,8 +6,12 @@ RSpec.describe 'SmartCore::Types::Value::Float' do
       expect(type.cast('123.456')).to eq(123.456)
       expect(type.cast('0')).to eq(0.0)
       expect(type.cast(nil)).to eq(0.0)
+      expect(type.cast(123.456)).to eq(123.456)
       expect(type.cast(-Float::INFINITY)).to eq(-Float::INFINITY)
       expect(type.cast(Float::INFINITY)).to eq(Float::INFINITY)
+
+      expect { type.cast(Object.new) }.to raise_error(SmartCore::Types::TypeCastingError)
+      expect { type.cast(Object.new) }.to raise_error(SmartCore::Types::TypeCastingError)
     end
   end
 

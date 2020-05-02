@@ -11,9 +11,11 @@ SmartCore::Types::Value.define_type(:Float) do |type|
     begin
       Float(value)
     rescue ::TypeError, ::ArgumentError
-      value.to_f
-    rescue ::NoMethodError
-      raise(SmartCore::Types::TypeCastingError, 'Non-castable value')
+      begin
+        value.to_f
+      rescue ::NoMethodError
+        raise(SmartCore::Types::TypeCastingError, 'Non-castable value')
+      end
     end
   end
 end
