@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# @api public
+# @since 0.1.0
 SmartCore::Types::Value.define_type(:TimeLike) do |type|
   type.define_checker do |value|
     value.is_a?(::Time) || value.is_a?(::DateTime) || value.is_a?(::Date)
