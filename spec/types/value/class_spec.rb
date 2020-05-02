@@ -1,4 +1,4 @@
-  # frozen_string_literal: true
+# frozen_string_literal: true
 
 RSpec.describe 'SmartCore::Types::Value::Class' do
   shared_examples 'type casting' do
