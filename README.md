@@ -233,6 +233,7 @@ SmartCore::Types::Protocol::InstanceOf
 SmartCore::Types::Protocol::Interface
 SmartCore::Types::Protocol::Ancestors
 SmartCore::Types::Protocol::Enumerable
+SmartCore::Types::Protocol::Forwardable
 ```
 
 ## Contributing
