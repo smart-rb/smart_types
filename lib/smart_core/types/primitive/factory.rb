@@ -37,7 +37,7 @@ class SmartCore::Types::Primitive::Factory
       end.tap do |context|
         raise(
           SmartCore::Types::NoCheckerDefinitionError,
-          'Type checker is not provided (use .define_checker for it)'
+          'Type checker is not provided. You should define it via .define_checker(&block)'
         ) if context.type_checker.nil?
       end
     end
