@@ -23,6 +23,10 @@ module SmartCore::Types
 
   # @api public
   # @since 0.1.0
+  TypeCastingUnsupportedError = Class.new(TypeCastingError)
+
+  # @api public
+  # @since 0.1.0
   NoCheckerDefinitionError = Class.new(Error)
 
   # @api public
