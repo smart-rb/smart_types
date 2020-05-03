@@ -37,9 +37,33 @@ RSpec.describe 'SmartCore::Types::Value::Integer' do
     let(:type) { SmartCore::Types::Value::Integer }
 
     specify 'type-checking' do
+      expect(type.valid?(7)).to eq(true)
+
+      expect(type.valid?(nil)).to eq(false)
+      expect(type.valid?(-Float::INFINITY)).to eq(false)
+      expect(type.valid?(Float::INFINITY)).to eq(false)
+      expect(type.valid?(2.7)).to eq(false)
+      expect(type.valid?([])).to eq(false)
+      expect(type.valid?({})).to eq(false)
+      expect(type.valid?('55')).to eq(false)
+      expect(type.valid?('55test')).to eq(false)
+      expect(type.valid?(:test)).to eq(false)
+      expect(type.valid?(Object.new)).to eq(false)
     end
 
     specify 'type-validation' do
+      expect { type.validate!(7) }.not_to raise_error
+
+      expect { type.validate!(nil) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!(2.7) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!([]) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!({}) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!('55') }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!('55test') }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!(:test) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!(Object.new) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!(-Float::INFINITY) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!(Float::INFINITY) }.to raise_error(SmartCore::Types::TypeError)
     end
   end
 
@@ -49,9 +73,33 @@ RSpec.describe 'SmartCore::Types::Value::Integer' do
     let(:type) { SmartCore::Types::Value::Integer.nilable }
 
     specify 'type-checking' do
+      expect(type.valid?(7)).to eq(true)
+      expect(type.valid?(nil)).to eq(true)
+
+      expect(type.valid?(-Float::INFINITY)).to eq(false)
+      expect(type.valid?(Float::INFINITY)).to eq(false)
+      expect(type.valid?(2.7)).to eq(false)
+      expect(type.valid?([])).to eq(false)
+      expect(type.valid?({})).to eq(false)
+      expect(type.valid?('55')).to eq(false)
+      expect(type.valid?('55test')).to eq(false)
+      expect(type.valid?(:test)).to eq(false)
+      expect(type.valid?(Object.new)).to eq(false)
     end
 
     specify 'type-validation' do
+      expect { type.validate!(7) }.not_to raise_error
+      expect { type.validate!(nil) }.not_to raise_error
+
+      expect { type.validate!(2.7) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!([]) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!({}) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!('55') }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!('55test') }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!(:test) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!(Object.new) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!(-Float::INFINITY) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!(Float::INFINITY) }.to raise_error(SmartCore::Types::TypeError)
     end
   end
 end
