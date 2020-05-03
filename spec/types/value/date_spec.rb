@@ -3,6 +3,8 @@
 RSpec.describe 'SmartCore::Types::Value::Date' do
   shared_examples 'type casting' do
     specify 'type casting' do
+      # TODO: be_a
+
       expect(type.cast('2020-05-01')).to eq(Date.new(2020, 5, 1))
       expect(type.cast('20210417')).to eq(Date.new(2021, 4, 17))
       expect(type.cast('3rd Feb 2019')).to eq(Date.new(2019, 2, 3))

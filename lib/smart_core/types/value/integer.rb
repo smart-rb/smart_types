@@ -8,15 +8,16 @@ SmartCore::Types::Value.define_type(:Integer) do |type|
   end
 
   type.define_caster do |value|
+    # TODO: покрыть этот каст: Integer(Float::NAN) (валится с FloatDomainError)
     begin
       ::Kernel.Integer(value)
-    rescue ::TypeError, ::ArgumentError
+    rescue ::TypeError, ::ArgumentError, ::FloatDomainError
       begin
         # NOTE: for cases like this:
         # => ::Kernel.Integer(nil) # => ::TypeError
         # => ::Kernel.Integer(nil.to_i) # => 0 (::Kernel.Integer used as validation layer)
         ::Kernel.Integer(value.to_i)
-      rescue ::TypeError, ::NoMethodError, ::ArgumentError
+      rescue ::TypeError, ::NoMethodError, ::ArgumentError, ::FloatDomainError
         raise(SmartCore::Types::TypeCastingError, 'Non-castable to Integer')
       end
     end

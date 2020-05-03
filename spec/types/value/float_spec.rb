@@ -3,12 +3,15 @@
 RSpec.describe 'SmartCore::Types::Value::Float' do
   shared_examples 'type casting' do
     specify 'type-casting' do
+      # TOOD: be_a
+
       expect(type.cast('123.456')).to eq(123.456)
       expect(type.cast('0')).to eq(0.0)
       expect(type.cast(nil)).to eq(0.0)
       expect(type.cast(123.456)).to eq(123.456)
       expect(type.cast(-Float::INFINITY)).to eq(-Float::INFINITY)
       expect(type.cast(Float::INFINITY)).to eq(Float::INFINITY)
+      expect(type.cast(Float::NAN).object_id).to eq(Float::NAN.object_id)
 
       expect { type.cast(Object.new) }.to raise_error(SmartCore::Types::TypeCastingError)
       expect { type.cast([]) }.to raise_error(SmartCore::Types::TypeCastingError)
@@ -34,6 +37,7 @@ RSpec.describe 'SmartCore::Types::Value::Float' do
       expect(type.valid?(1234.567)).to eq(true)
       expect(type.valid?(Float::INFINITY)).to eq(true)
       expect(type.valid?(-Float::INFINITY)).to eq(true)
+      expect(type.valid?(Float::NAN)).to eq(true)
 
       expect(type.valid?(nil)).to eq(false)
       expect(type.valid?('123.456')).to eq(false)
@@ -49,6 +53,7 @@ RSpec.describe 'SmartCore::Types::Value::Float' do
       expect { type.validate!(1234.567) }.not_to raise_error
       expect { type.validate!(Float::INFINITY) }.not_to raise_error
       expect { type.validate!(-Float::INFINITY) }.not_to raise_error
+      expect { type.validate!(Float::NAN) }.not_to raise_error
 
       expect { type.validate!(nil) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!('123.456') }.to raise_error(SmartCore::Types::TypeError)
@@ -70,6 +75,7 @@ RSpec.describe 'SmartCore::Types::Value::Float' do
       expect(type.valid?(1234.567)).to eq(true)
       expect(type.valid?(Float::INFINITY)).to eq(true)
       expect(type.valid?(-Float::INFINITY)).to eq(true)
+      expect(type.valid?(Float::NAN)).to eq(true)
       expect(type.valid?(nil)).to eq(true)
 
       expect(type.valid?('123.456')).to eq(false)
@@ -85,6 +91,7 @@ RSpec.describe 'SmartCore::Types::Value::Float' do
       expect { type.validate!(1234.567) }.not_to raise_error
       expect { type.validate!(Float::INFINITY) }.not_to raise_error
       expect { type.validate!(-Float::INFINITY) }.not_to raise_error
+      expect { type.validate!(Float::NAN) }.not_to raise_error
       expect { type.validate!(nil) }.not_to raise_error
 
       expect { type.validate!('123.456') }.to raise_error(SmartCore::Types::TypeError)

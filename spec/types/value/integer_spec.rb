@@ -3,6 +3,8 @@
 RSpec.describe 'SmartCore::Types::Value::Integer' do
   shared_examples 'type casting' do
     specify 'type-casting' do
+      # TODO: be_a
+
       expect(type.cast('0')).to eq(0)
       expect(type.cast('0.0')).to eq(0)
       expect(type.cast('0.1')).to eq(0)
@@ -14,6 +16,9 @@ RSpec.describe 'SmartCore::Types::Value::Integer' do
       expect(type.cast('test')).to eq(0)
 
       expect { type.cast(Object.new) }.to raise_error(SmartCore::Types::TypeCastingError)
+      expect { type.cast(Float::NAN) }.to raise_error(SmartCore::Types::TypeCastingError)
+      expect { type.cast(Float::INFINITY) }.to raise_error(SmartCore::Types::TypeCastingError)
+      expect { type.cast(-Float::INFINITY) }.to raise_error(SmartCore::Types::TypeCastingError)
 
       as_integer_1 = Class.new { def to_i; 7.12; end; }.new
       as_integer_2 = Class.new { def to_i; '555'; end; }.new

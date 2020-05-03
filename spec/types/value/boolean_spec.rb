@@ -3,6 +3,8 @@
 RSpec.describe 'SmartCore::Types::Value::Boolean' do
   shared_examples 'type casting' do
     specify 'type-casting' do
+      # TODO: be_a
+
       # NOTE: true
       expect(type.cast('test')).to eq(true)
       expect(type.cast(:test)).to eq(true)

@@ -3,6 +3,8 @@
 RSpec.describe 'SmartCore::Types::Value::Array' do
   shared_examples 'type casting' do
     specify 'type-casting' do
+      # TODO: be_a
+
       expect(type.cast(123)).to eq([123])
       expect(type.cast('test')).to eq(['test'])
       expect(type.cast(:test)).to eq([:test])

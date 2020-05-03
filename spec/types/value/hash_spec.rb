@@ -3,6 +3,8 @@
 RSpec.describe 'SmartCore::Types::Value::Hash' do
   shared_examples 'type casting' do
     specify 'type-casting' do
+      # TODO: be_a
+
       expect(type.cast(nil)).to eq({})
       expect(type.cast({})).to eq({})
       expect(type.cast([])).to eq({})

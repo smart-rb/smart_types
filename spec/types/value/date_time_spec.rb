@@ -3,6 +3,8 @@
 RSpec.describe 'SmartCore::Types::Value::DateTime' do
   shared_examples 'type casting' do
     specify 'type casting' do
+      # TODO: be_a
+
       expect(type.cast('2001-02-03T04:05:06+07:00')).to eq(DateTime.new(2001, 2, 3, 4, 5, 6, '+7'))
       expect(type.cast('20010203T040506+0700')).to eq(DateTime.new(2001, 2, 3, 4, 5, 6, '+7'))
       expect(type.cast('3rd Feb 2001 04:05:06 PM')).to eq(DateTime.new(2001, 2, 3, 16, 5, 6))
