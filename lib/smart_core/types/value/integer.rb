@@ -11,12 +11,12 @@ SmartCore::Types::Value.define_type(:Integer) do |type|
     begin
       ::Kernel.Integer(value)
     rescue ::TypeError, ::ArgumentError
-      # NOTE: for cases like this:
-      # => ::Kernel.Float(nil) # => ::TypeError
-      # => ::Kernel.Float(nil.to_f) # => 0.0 (with a layer of the core validation mechanism)
       begin
+        # NOTE: for cases like this:
+        # => ::Kernel.Integer(nil) # => ::TypeError
+        # => ::Kernel.Integer(nil.to_i) # => 0 (::Kernel.Integer used as validation layer)
         ::Kernel.Integer(value.to_i)
-      rescue ::TypeError, ::NoMethodError
+      rescue ::TypeError, ::NoMethodError, ::ArgumentError
         raise(SmartCore::Types::TypeCastingError, 'Non-castable to Integer')
       end
     end
