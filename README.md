@@ -220,6 +220,7 @@ SmartCore::Types::Value::Date.cast('2020-01-01', { iso: :rfc3339 })
 - new types
 
 ```ruby
+SmartCore::Types::Value::BigDecimal
 SmartCore::Types::Value::Method
 SmartCore::Types::Value::UnboundMethod
 SmartCore::Types::Value::Enumerable
