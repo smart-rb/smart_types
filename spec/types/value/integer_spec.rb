@@ -32,9 +32,9 @@ RSpec.describe 'SmartCore::Types::Value::Integer' do
   end
 
   context 'non-nilable type' do
-    include_examples 'type casting'
-
     let(:type) { SmartCore::Types::Value::Integer }
+
+    include_examples 'type casting'
 
     specify 'type-checking' do
       expect(type.valid?(7)).to eq(true)
@@ -68,9 +68,9 @@ RSpec.describe 'SmartCore::Types::Value::Integer' do
   end
 
   context 'nilable type' do
-    include_examples 'type casting'
-
     let(:type) { SmartCore::Types::Value::Integer.nilable }
+
+    include_examples 'type casting'
 
     specify 'type-checking' do
       expect(type.valid?(7)).to eq(true)
