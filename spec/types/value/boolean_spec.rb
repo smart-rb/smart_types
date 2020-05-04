@@ -3,16 +3,12 @@
 RSpec.describe 'SmartCore::Types::Value::Boolean' do
   shared_examples 'type casting' do
     specify 'type-casting' do
-      # TODO: be_a
-
-      # NOTE: true
       expect(type.cast('test')).to eq(true)
       expect(type.cast(:test)).to eq(true)
       expect(type.cast([])).to eq(true)
       expect(type.cast({})).to eq(true)
       expect(type.cast(123.456)).to eq(true)
 
-      # NOTE: false
       expect(type.cast(nil)).to eq(false)
       expect(type.cast(false)).to eq(false)
     end

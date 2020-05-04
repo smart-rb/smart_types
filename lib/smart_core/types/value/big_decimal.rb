@@ -11,6 +11,10 @@ SmartCore::Types::Value.define_type(:BigDecimal) do |type|
   end
 
   type.define_caster do |value|
+    if SmartCore::Types::Value::Float.valid?(value)
+      value = SmartCore::Types::Value::String.cast(value)
+    end
+
     begin
       ::Kernel.BigDecimal(value)
     rescue ::ArgumentError, ::TypeError
