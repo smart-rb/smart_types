@@ -43,6 +43,7 @@ type4 = type1 & type2
 
 ```ruby
 SmartCore::Types::Value::Any
+SmartCore::Types::Value::Nil
 SmartCore::Types::Value::String
 SmartCore::Types::Value::Symbol
 SmartCore::Types::Value::Text
@@ -68,6 +69,7 @@ SmartCore::Types::Value::TimeBased
 
 ```ruby
 SmartCore::Types::Value::Any.nilable
+SmartCore::Types::Value::Nil.nilable
 SmartCore::Types::Value::String.nilable
 SmartCore::Types::Value::Symbol.nilable
 SmartCore::Types::Value::Text.nilable
