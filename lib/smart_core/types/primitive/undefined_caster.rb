@@ -20,9 +20,8 @@ class SmartCore::Types::Primitive::UndefinedCaster < SmartCore::Types::Primitive
   # @pai private
   # @since 0.1.0
   def call(value)
-    raise(
-      SmartCore::Types::TypeCastingUnsupportedError,
+    raise(SmartCore::Types::TypeCastingUnsupportedError, <<~ERROR_MESSAGE)
       'This type has no support for type casting'
-    )
+    ERROR_MESSAGE
   end
 end

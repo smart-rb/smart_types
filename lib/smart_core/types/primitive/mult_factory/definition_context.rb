@@ -3,7 +3,7 @@
 # @api private
 # @since 0.1.0
 class SmartCore::Types::Primitive::Factory::DefinitionContext
-  # @return [Proc]
+  # @return [Proc, NilClass]
   #
   # @api private
   # @since 0.1.0
@@ -23,7 +23,7 @@ class SmartCore::Types::Primitive::Factory::DefinitionContext
   # @api public
   # @since 0.1.0
   def define_caster(&caster)
-    raise 'No caster definition block' unless block_given?
+    raise(SmartCore::ArgumentError, 'No caster definition block') unless block_given?
     @type_caster = caster
   end
 end

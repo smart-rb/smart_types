@@ -233,6 +233,7 @@ SmartCore::Types::Value::Date.cast('2020-01-01', { iso: :rfc3339 })
 SmartCore::Types::Value::Method
 SmartCore::Types::Value::UnboundMethod
 SmartCore::Types::Value::Enumerable
+SmartCore::Types::Value::Comparable
 SmartCore::Types::Struct::Schema
 SmartCore::Types::Struct::StrictArray
 SmartCore::Types::Struct::StrictHash
@@ -243,6 +244,7 @@ SmartCore::Types::Protocol::InstanceOf
 SmartCore::Types::Protocol::Interface
 SmartCore::Types::Protocol::Ancestors
 SmartCore::Types::Protocol::Enumerable
+SmartCore::Types::Protocol::Comparable
 SmartCore::Types::Protocol::Forwardable
 ```
 
