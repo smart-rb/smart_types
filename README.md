@@ -2,7 +2,7 @@
 
 > A set of objects that acts like types (type checking and type casting) with a support for basic type algebra.
 
-Full-featured type system for any ruby project. Supports custom type definitioning,
+Minimalistic type system for any ruby project. Supports custom type definitioning,
 type validation, type casting and type categorizing. Provides a set of commonly used type
 categories and general purpose types. Has a flexible and simplest type definition toolchain.
 
