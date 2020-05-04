@@ -12,11 +12,8 @@ SmartCore::Types::Value.define_type(:Float) do |type|
       ::Kernel.Float(value)
     rescue ::TypeError, ::ArgumentError
       begin
-        # NOTE: for cases like this:
-        # => ::Kernel.Float(nil) # => ::TypeError
-        # => ::Kernel.Float(nil.to_f) # => 0.0 (::Kernel.Float used as validation layer)
         ::Kernel.Float(value.to_f)
-      rescue ::NoMethodError, ::TypeError
+      rescue ::NoMethodError, ::TypeError, ::ArgumentError
         raise(SmartCore::Types::TypeCastingError, 'Non-castable to Float')
       end
     end

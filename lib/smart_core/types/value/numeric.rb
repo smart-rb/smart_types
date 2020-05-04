@@ -8,16 +8,20 @@ SmartCore::Types::Value.define_type(:Numeric) do |type|
   end
 
   type.define_caster do |value|
-    # TODO: think about dryification
     next value if value.is_a?(::Numeric)
 
-    SmartCore::Engine::RescueExt.inline_rescue_pipe(
-      -> { SmartCore::Types::Value::Float.cast(value) },
-      -> { SmartCore::Types::Value::Integer.cast(value) },
-      -> { SmartCore::Types::Value::BigDecimal.cast(value) }
-    ) do |error|
-      raise(error) unless error.is_a?(SmartCore::Types::TypeCastingError)
-      raise(SmartCore::Types::TypeCastingError, 'Non-castable to Numeric')
+    begin
+      SmartCore::Types::Value::Float.cast(value)
+    rescue SmartCore::Types::TypeCastingError
+      begin
+        SmartCore::Types::Value::Integer.cast(value)
+      rescue SmartCore::Types::TypeCastingError
+        begin
+          SmartCore::Types::Value::BigDecimal.cast(value)
+        rescue SmartCore::Types::TypeCastingError
+          raise(SmartCore::Types::TypeCastingError, 'Non-castable to Numeric')
+        end
+      end
     end
   end
 end

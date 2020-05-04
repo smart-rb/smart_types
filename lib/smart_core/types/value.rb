@@ -20,7 +20,7 @@ class SmartCore::Types::Value < SmartCore::Types::Primitive
   require_relative 'value/time'
   require_relative 'value/date'
   require_relative 'value/date_time'
-  require_relative 'value/time_like'
+  require_relative 'value/time_based'
   require_relative 'value/enumerable'
   require_relative 'value/big_decimal'
 end

@@ -8,7 +8,6 @@ SmartCore::Types::Value.define_type(:Integer) do |type|
   end
 
   type.define_caster do |value|
-    # TODO: покрыть этот каст: Integer(Float::NAN) (валится с FloatDomainError)
     begin
       ::Kernel.Integer(value)
     rescue ::TypeError, ::ArgumentError, ::FloatDomainError

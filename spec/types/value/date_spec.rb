@@ -3,11 +3,12 @@
 RSpec.describe 'SmartCore::Types::Value::Date' do
   shared_examples 'type casting' do
     specify 'type casting' do
-      # TODO: be_a
-
-      expect(type.cast('2020-05-01')).to eq(Date.new(2020, 5, 1))
-      expect(type.cast('20210417')).to eq(Date.new(2021, 4, 17))
-      expect(type.cast('3rd Feb 2019')).to eq(Date.new(2019, 2, 3))
+      expect(type.cast('2020-05-01')).to eq(Date.new(2020, 5, 1)).and be_a(::Date)
+      expect(type.cast('20210417')).to eq(Date.new(2021, 4, 17)).and be_a(::Date)
+      expect(type.cast('3rd Feb 2019')).to eq(Date.new(2019, 2, 3)).and be_a(::Date)
+      expect(type.cast(Date.new(2021, 1, 7))).to eq(DateTime.new(2021, 1, 7)).and be_a(::Date)
+      expect(type.cast(Date::Infinity)).to eq(Date::Infinity)
+      expect(type.cast(DateTime::Infinity)).to eq(DateTime::Infinity)
 
       expect { type.cast('2020') }.to raise_error(SmartCore::Types::TypeCastingError)
       expect { type.cast(nil) }.to raise_error(SmartCore::Types::TypeCastingError)
@@ -22,6 +23,8 @@ RSpec.describe 'SmartCore::Types::Value::Date' do
     specify 'type-checking' do
       expect(type.valid?(Date.new)).to eq(true)
       expect(type.valid?(DateTime.new)).to eq(true)
+      expect(type.valid?(Date::Infinity)).to eq(true)
+      expect(type.valid?(DateTime::Infinity)).to eq(true)
 
       expect(type.valid?(nil)).to eq(false)
       expect(type.valid?(Time.new)).to eq(false)
@@ -36,6 +39,8 @@ RSpec.describe 'SmartCore::Types::Value::Date' do
     specify 'type-validation' do
       expect { type.validate!(Date.new) }.not_to raise_error
       expect { type.validate!(DateTime.new) }.not_to raise_error
+      expect { type.validate!(Date::Infinity) }.not_to raise_error
+      expect { type.validate!(DateTime::Infinity) }.not_to raise_error
 
       expect { type.validate!(nil) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(Time.new) }.to raise_error(SmartCore::Types::TypeError)
@@ -56,6 +61,8 @@ RSpec.describe 'SmartCore::Types::Value::Date' do
     specify 'type-checking' do
       expect(type.valid?(Date.new)).to eq(true)
       expect(type.valid?(DateTime.new)).to eq(true)
+      expect(type.valid?(Date::Infinity)).to eq(true)
+      expect(type.valid?(DateTime::Infinity)).to eq(true)
       expect(type.valid?(nil)).to eq(true)
 
       expect(type.valid?(Time.new)).to eq(false)
@@ -70,6 +77,8 @@ RSpec.describe 'SmartCore::Types::Value::Date' do
     specify 'type-validation' do
       expect { type.validate!(Date.new) }.not_to raise_error
       expect { type.validate!(DateTime.new) }.not_to raise_error
+      expect { type.validate!(Date::Infinity) }.not_to raise_error
+      expect { type.validate!(DateTime::Infinity) }.not_to raise_error
       expect { type.validate!(nil) }.not_to raise_error
 
       expect { type.validate!(Time.new) }.to raise_error(SmartCore::Types::TypeError)

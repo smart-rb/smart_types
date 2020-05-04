@@ -3,14 +3,12 @@
 RSpec.describe 'SmartCore::Types::Value::Float' do
   shared_examples 'type casting' do
     specify 'type-casting' do
-      # TOOD: be_a
-
-      expect(type.cast('123.456')).to eq(123.456)
-      expect(type.cast('0')).to eq(0.0)
-      expect(type.cast(nil)).to eq(0.0)
-      expect(type.cast(123.456)).to eq(123.456)
-      expect(type.cast(-Float::INFINITY)).to eq(-Float::INFINITY)
-      expect(type.cast(Float::INFINITY)).to eq(Float::INFINITY)
+      expect(type.cast('123.456')).to eq(123.456).and be_a(::Float)
+      expect(type.cast('0')).to eq(0.0).and be_a(::Float)
+      expect(type.cast(nil)).to eq(0.0).and be_a(::Float)
+      expect(type.cast(123.456)).to eq(123.456).and be_a(::Float)
+      expect(type.cast(-Float::INFINITY)).to eq(-Float::INFINITY).and be_a(::Float)
+      expect(type.cast(Float::INFINITY)).to eq(Float::INFINITY).and be_a(::Float)
       expect(type.cast(Float::NAN).object_id).to eq(Float::NAN.object_id)
 
       expect { type.cast(Object.new) }.to raise_error(SmartCore::Types::TypeCastingError)
@@ -19,10 +17,10 @@ RSpec.describe 'SmartCore::Types::Value::Float' do
 
       floatable_1 = Class.new { def to_f; 107.52; end }.new
       floatable_2 = Class.new { def to_f; 53.0721; end }.new
-      non_floatable = Class.new { def to_f; :test; end }.new
+      expect(type.cast(floatable_1)).to eq(107.52).and be_a(::Float)
+      expect(type.cast(floatable_2)).to eq(53.0721).and be_a(::Float)
 
-      expect(type.cast(floatable_1)).to eq(107.52)
-      expect(type.cast(floatable_2)).to eq(53.0721)
+      non_floatable = Class.new { def to_f; :test; end }.new
       expect { type.cast(non_floatable) }.to raise_error(SmartCore::Types::TypeCastingError)
     end
   end

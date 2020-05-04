@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'time'
+
 # @api public
 # @since 0.1.0
 SmartCore::Types::Value.define_type(:Time) do |type|
@@ -8,6 +10,12 @@ SmartCore::Types::Value.define_type(:Time) do |type|
   end
 
   type.define_caster do |value|
-    ::Time.parse(value)
+    next value if value.is_a?(::Time)
+
+    begin
+      SmartCore::Types::Value::Integer.valid?(value) ? ::Time.at(value) : ::Time.parse(value)
+    rescue ::TypeError, ::ArgumentError
+      raise(SmartCore::Types::TypeCastingError, 'Non-castable to Time')
+    end
   end
 end

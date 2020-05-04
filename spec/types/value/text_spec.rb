@@ -1,21 +1,52 @@
 # frozen_string_literal: true
 
 RSpec.describe 'SmartCore::Types::Value::Text' do
-  shared_examples 'type casting' do
-    specify 'type-casting' do
-      # TODO: be_a
-
+  shared_examples 'type-casting' do
+    specify 'string => string' do
       expect(type.cast('test')).to eq('test')
-      expect(type.cast(:test)).to eq('test')
       expect(type.cast([])).to eq('[]')
       expect(type.cast({})).to eq('{}')
+    end
+
+    specify 'symbol => symbol' do
+      expect(type.cast(:test)).to eq(:test)
+      expect(type.cast(:notest)).to eq(:notest)
+    end
+
+    specify 'castable => string/symbol' do
+      castable = Class.new { def to_s; 'kekpek'; end }.new
+      expect(type.cast(castable)).to eq('kekpek')
+
+      castable = Class.new do
+        undef_method :to_s
+        def to_sym; :middle; end
+      end.new
+      expect(type.cast(castable)).to eq(:middle)
+    end
+
+    specify 'invalid casting' do
+      non_castable = Class.new { undef_method :to_s; }.new
+      expect { type.cast(non_castable) }.to raise_error(SmartCore::Types::TypeCastingError)
+
+      non_castable = Class.new { def to_s; 123; end; }.new
+      expect { type.cast(non_castable) }.to raise_error(SmartCore::Types::TypeCastingError)
+    end
+
+    specify 'cast priority (string > symbol)' do
+      castable = Class.new do
+        # rubocop:disable Layout/EmptyLineBetweenDefs
+        def to_s; 'as_string'; end
+        def to_sym; :as_sym; end
+        # rubocop:enable Layout/EmptyLineBetweenDefs
+      end.new
+      expect(type.cast(castable)).to eq('as_string')
     end
   end
 
   context 'non-nilable type' do
     let(:type) { SmartCore::Types::Value::Text }
 
-    include_examples 'type casting'
+    it_behaves_like 'type-casting'
 
     specify 'type-checking' do
       expect(type.valid?('test')).to eq(true)
@@ -38,7 +69,7 @@ RSpec.describe 'SmartCore::Types::Value::Text' do
   context 'nilable type' do
     let(:type) { SmartCore::Types::Value::Text.nilable }
 
-    include_examples 'type casting'
+    it_behaves_like 'type-casting'
 
     specify 'type-checking' do
       expect(type.valid?('test')).to eq(true)

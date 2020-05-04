@@ -7,5 +7,11 @@ SmartCore::Types::Value.define_type(:Symbol) do |type|
     value.is_a?(::Symbol)
   end
 
-  type.define_caster(&:to_sym)
+  type.define_caster do |value|
+    begin
+      value.to_sym
+    rescue ::NoMethodError, ::ArgumentError
+      raise(SmartCore::Types::TypeCastingError, 'Non-castable to Symbol')
+    end
+  end
 end

@@ -7,5 +7,11 @@ SmartCore::Types::Value.define_type(:String) do |type|
     value.is_a?(::String)
   end
 
-  type.define_caster(&:to_s)
+  type.define_caster do |value|
+    begin
+      ::Kernel.String(value)
+    rescue ::TypeError, ::ArgumentError
+      raise(SmartCore::Types::TypeCastingError, 'Non-castable to String')
+    end
+  end
 end
