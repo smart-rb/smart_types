@@ -49,6 +49,7 @@ SmartCore::Types::Value::Text
 SmartCore::Types::Value::Integer
 SmartCore::Types::Value::Float
 SmartCore::Types::Value::Numeric
+SmartCore::Types::Value::BigDecimal
 SmartCore::Types::Value::Boolean
 SmartCore::Types::Value::Array
 SmartCore::Types::Value::Hash
@@ -58,6 +59,7 @@ SmartCore::Types::Value::Module
 SmartCore::Types::Value::Time
 SmartCore::Types::Value::DateTime
 SmartCore::Types::Value::Date
+SmartCore::Types::Value::TimeBased
 ```
 
 ---
@@ -72,15 +74,17 @@ SmartCore::Types::Value::Text.nilable
 SmartCore::Types::Value::Integer.nilable
 SmartCore::Types::Value::Float.nilable
 SmartCore::Types::Value::Numeric.nilable
+SmartCore::Types::Value::BigDecimal.nilable
 SmartCore::Types::Value::Boolean.nilable
 SmartCore::Types::Value::Array.nilable
 SmartCore::Types::Value::Hash.nilable
 SmartCore::Types::Value::Proc.nilable
 SmartCore::Types::Value::Class.nilable
 SmartCore::Types::Value::Module.nilable
-SmartCore::Types::Value::Time.nilable
+SmartCore::Types::Value::Time.nilable.nilable
 SmartCore::Types::Value::DateTime.nilable
 SmartCore::Types::Value::Date.nilable
+SmartCore::Types::Value::TimeBased
 ```
 
 ---
