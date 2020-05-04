@@ -64,7 +64,7 @@ class SmartCore::Types::Primitive
 
   # @return [void]
   #
-  # @raise [SmartCore::TypeError]
+  # @raise [SmartCore::Tyoes::TypeError]
   #
   # @api public
   # @since 0.1.0
