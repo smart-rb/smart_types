@@ -91,14 +91,6 @@ SmartCore::Types::Value::TimeBased
 
 ---
 
-## Constrained types
-
-```ruby
-# documentation is coming
-```
-
----
-
 ## Type validation and type casting
 
 ```ruby
@@ -140,17 +132,9 @@ end
 
 ---
 
-## Type system integration
-
-```ruby
-# documentation is coming
-```
-
----
-
 ## Roadmap
 
-- type configuration
+- type configuration:
 
 ```ruby
 SmartCore::Types::Value.type(:Time) do |type|
@@ -182,7 +166,7 @@ SmartCore::Types::Value::TimeLike = SmartCore::Types::System.type_sum(
 end
 ```
 
-- namespaced type errors
+- namespaced type errors:
 
 ```ruby
 # before:
@@ -201,7 +185,7 @@ SmartCore::Types::Value::Class.cast(123)
 # (inheritance tree: the same as above)
 ```
 
-- type refinements
+- type refinements:
 
 ```ruby
 SmartCore::Types::Value::Time.refine_checker do |value, original_checker|
@@ -213,7 +197,7 @@ SmartCore::Types::Value::Time.refine_caster do |value, original_caster|
 end
 ```
 
-- options for type casters
+- options for type casters:
 
 ```ruby
 SmartCore::Types::Value.define_type(:Date) do |type|
@@ -227,7 +211,7 @@ end
 SmartCore::Types::Value::Date.cast('2020-01-01', { iso: :rfc3339 })
 ```
 
-- new types
+- new types:
 
 ```ruby
 SmartCore::Types::Value::Method
@@ -247,6 +231,10 @@ SmartCore::Types::Protocol::Enumerable
 SmartCore::Types::Protocol::Comparable
 SmartCore::Types::Protocol::Forwardable
 ```
+
+- constrained types;
+
+- module-based integration;
 
 ## Contributing
 
