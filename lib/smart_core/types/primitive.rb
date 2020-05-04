@@ -38,10 +38,8 @@ class SmartCore::Types::Primitive
   # @since 0.1.0
   attr_reader :caster
 
-  # @param name [String, Symbol]
   # @param checker [SmartCore::Types::Primitive::Checker]
   # @param caster [SmartCore::Types::Primitive::Caster]
-  # @param name [String]
   # @return [void]
   #
   # @api private
