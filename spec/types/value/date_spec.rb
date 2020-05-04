@@ -6,12 +6,15 @@ RSpec.describe 'SmartCore::Types::Value::Date' do
       expect(type.cast('2020-05-01')).to eq(Date.new(2020, 5, 1)).and be_a(::Date)
       expect(type.cast('20210417')).to eq(Date.new(2021, 4, 17)).and be_a(::Date)
       expect(type.cast('3rd Feb 2019')).to eq(Date.new(2019, 2, 3)).and be_a(::Date)
-      expect(type.cast(Date.new(2021, 1, 7))).to eq(DateTime.new(2021, 1, 7)).and be_a(::Date)
+      expect(type.cast(Date.new(2021, 1, 7))).to eq(Date.new(2021, 1, 7)).and be_a(::Date)
       expect(type.cast(Date::Infinity)).to eq(Date::Infinity)
       expect(type.cast(DateTime::Infinity)).to eq(DateTime::Infinity)
 
-      expect { type.cast('2020') }.to raise_error(SmartCore::Types::TypeCastingError)
+      expect { type.cast('2001') }.to raise_error(SmartCore::Types::TypeCastingError)
       expect { type.cast(nil) }.to raise_error(SmartCore::Types::TypeCastingError)
+      expect { type.cast(Object.new) }.to raise_error(SmartCore::Types::TypeCastingError)
+      expect { type.cast({}) }.to raise_error(SmartCore::Types::TypeCastingError)
+      expect { type.cast([]) }.to raise_error(SmartCore::Types::TypeCastingError)
     end
   end
 

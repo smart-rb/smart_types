@@ -13,15 +13,15 @@ SmartCore::Types::Value::TimeBased = SmartCore::Types::System.type_sum(
     next value if SmartCore::Types::Value::Date.valid?(value)
 
     begin
-      SmartCore::Types::Value::Time.parse(value)
+      SmartCore::Types::Value::Time.cast(value)
     rescue SmartCore::Types::TypeCastingError
       begin
-        SmartCore::Types::Value::DateTime.parse(value)
+        SmartCore::Types::Value::DateTime.cast(value)
       rescue SmartCore::Types::TypeCastingError
         begin
-          SmartCore::Types::Value::Date.parse(value)
+          SmartCore::Types::Value::Date.cast(value)
         rescue SmartCore::Types::TypeCastingError
-          raise(SmartCore::Type::TypeCastingError, 'Non-castable to time-based type')
+          raise(SmartCore::Types::TypeCastingError, 'Non-castable to time-based type')
         end
       end
     end

@@ -13,8 +13,11 @@ RSpec.describe 'SmartCore::Types::Value::Time' do
       current_day   = current_time.day
       expect(type.cast('12:00')).to eq(Time.new(current_year, current_month, current_day, 12))
 
+      expect { type.cast('2001') }.to raise_error(SmartCore::Types::TypeCastingError)
       expect { type.cast(nil) }.to raise_error(SmartCore::Types::TypeCastingError)
-      expect { type.cast('2021') }.to raise_error(SmartCore::Types::TypeCastingError)
+      expect { type.cast(Object.new) }.to raise_error(SmartCore::Types::TypeCastingError)
+      expect { type.cast({}) }.to raise_error(SmartCore::Types::TypeCastingError)
+      expect { type.cast([]) }.to raise_error(SmartCore::Types::TypeCastingError)
     end
   end
 
