@@ -6,8 +6,6 @@ Minimalistic type system for any ruby project. Supports custom type definitionin
 type validation, type casting and type categorizing. Provides a set of commonly used type
 categories and general purpose types. Has a flexible and simplest type definition toolchain.
 
-Just add and use :) Enjoy! :)
-
 ## Installation
 
 ```ruby
