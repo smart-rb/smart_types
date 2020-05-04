@@ -3,10 +3,53 @@
 RSpec.describe 'SmartCore::Types::Value::Any' do
   shared_examples 'type casting' do
     specify 'type-casting' do
+      integer = 1
+      float = 2.5
+      null = nil
+      symbol = :test
+      string = 'test'
+      mod = Module
+      mod_instance = Module.new
+      klass = Class
+      klass_instance = Class.new
+      object = Object.new
+      hash_instance = {}
+      arr_instance = []
+      time = Time.new
+      date = Date.new
+      date_time = DateTime.new
+      minus_infinity = -Float::INFINITY
+      plus_infinity = Float::INFINITY
+      nan = Float::NAN
+      date_infinity = Date::Infinity
+      date_time_infinity = DateTime::Infinity
+      big_decimal = BigDecimal('123.456')
+
+      expect(type.cast(integer)).to eq(integer).and be_a(::Integer)
+      expect(type.cast(float)).to eq(float).and be_a(::Float)
+      expect(type.cast(null)).to eq(null).and be_a(::NilClass)
+      expect(type.cast(symbol)).to eq(symbol).and be_a(::Symbol)
+      expect(type.cast(string)).to eq(string).and be_a(::String)
+      expect(type.cast(mod)).to eq(mod).and be_a(::Class)
+      expect(type.cast(mod_instance)).to eq(mod_instance).and be_a(::Module)
+      expect(type.cast(klass)).to eq(klass).and be_a(::Class)
+      expect(type.cast(klass_instance)).to eq(klass_instance).and be_a(::Class)
+      expect(type.cast(object)).to eq(object).and be_a(::Object)
+      expect(type.cast(hash_instance)).to eq(hash_instance).and be_a(::Hash)
+      expect(type.cast(arr_instance)).to eq(arr_instance).and be_a(::Array)
+      expect(type.cast(time)).to eq(time).and be_a(::Time)
+      expect(type.cast(date)).to eq(date).and be_a(::Date)
+      expect(type.cast(date_time)).to eq(date_time).and be_a(::DateTime)
+      expect(type.cast(minus_infinity)).to eq(minus_infinity).and be_a(::Float)
+      expect(type.cast(plus_infinity)).to eq(plus_infinity).and be_a(::Float)
+      expect(type.cast(nan).object_id).to eq(nan.object_id)
+      expect(type.cast(date_infinity)).to eq(date_infinity).and be_a(::Class)
+      expect(type.cast(date_time_infinity)).to eq(date_time_infinity).and be_a(::Class)
+      expect(type.cast(big_decimal)).to eq(big_decimal).and be_a(::BigDecimal)
     end
   end
 
-  shared_exmaples 'type checking' do
+  shared_examples 'type checking' do
     specify 'type-checking' do
       expect(type.valid?(1)).to eq(true)
       expect(type.valid?(2.3)).to eq(true)
@@ -28,6 +71,7 @@ RSpec.describe 'SmartCore::Types::Value::Any' do
       expect(type.valid?(Float::NAN)).to eq(true)
       expect(type.valid?(Date::Infinity)).to eq(true)
       expect(type.valid?(DateTime::Infinity)).to eq(true)
+      expect(type.valid?(BigDecimal('123.456'))).to eq(true)
     end
   end
 
@@ -53,6 +97,7 @@ RSpec.describe 'SmartCore::Types::Value::Any' do
       expect { type.validate!(Float::NAN) }.not_to raise_error
       expect { type.validate!(Date::Infinity) }.not_to raise_error
       expect { type.validate!(DateTime::Infinity) }.not_to raise_error
+      expect { type.validate!(BigDecimal('123.456')) }.not_to raise_error
     end
   end
 
