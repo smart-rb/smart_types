@@ -60,6 +60,7 @@ class SmartCore::Types::Primitive
     checker.call(value)
   end
 
+  # @param value [Any]
   # @return [void]
   #
   # @raise [SmartCore::Tyoes::TypeError]
