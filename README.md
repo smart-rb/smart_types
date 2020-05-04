@@ -97,6 +97,12 @@ SmartCore::Types::Value::Date.nilable
 
 ```ruby
 # documentation is coming
+
+SmartCore::Types::Value::String.valid?('test') # => true
+SmartCore::Types::Value::String.valid?(123.45) # => false
+
+SmartCore::Types::Value::String.cast(123) # => "123"
+SmartCore::Types::Value::Float.cast('55') # => 55.0
 ```
 
 ---
