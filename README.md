@@ -218,6 +218,7 @@ SmartCore::Types::Value::Method
 SmartCore::Types::Value::UnboundMethod
 SmartCore::Types::Value::Enumerable
 SmartCore::Types::Value::Comparable
+SmartCore::Types::Value::Range
 SmartCore::Types::Struct::Schema
 SmartCore::Types::Struct::StrictArray
 SmartCore::Types::Struct::StrictHash
