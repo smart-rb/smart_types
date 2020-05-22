@@ -2,7 +2,7 @@
 
 # @api public
 # @since 0.2.0
-SmartCore::Types::Value.define_type(:StringIO) do |type|
+SmartCore::Types::Value.define_type(:Rational) do |type|
   type.define_checker do |value|
     # TODO: realize
   end
