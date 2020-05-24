@@ -218,7 +218,13 @@ SmartCore::Types::Value::Method
 SmartCore::Types::Value::UnboundMethod
 SmartCore::Types::Value::Enumerable
 SmartCore::Types::Value::Comparable
+SmartCore::Types::Value::Enumerator
+SmartCore::Types::Value::EnumeratorChain
 SmartCore::Types::Value::Range
+SmartCore::Types::Value::Rational
+SmartCore::Types::Value::Set
+SmartCore::Types::Value::IO
+SmartCore::Types::Value::StringIO
 SmartCore::Types::Struct::Schema
 SmartCore::Types::Struct::StrictArray
 SmartCore::Types::Struct::StrictHash
@@ -231,6 +237,7 @@ SmartCore::Types::Protocol::Ancestors
 SmartCore::Types::Protocol::Enumerable
 SmartCore::Types::Protocol::Comparable
 SmartCore::Types::Protocol::Forwardable
+SmartCore::Types::Protocol::Callable
 ```
 
 - constrained types;
