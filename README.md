@@ -86,7 +86,7 @@ SmartCore::Types::Value::Module.nilable
 SmartCore::Types::Value::Time.nilable.nilable
 SmartCore::Types::Value::DateTime.nilable
 SmartCore::Types::Value::Date.nilable
-SmartCore::Types::Value::TimeBased
+SmartCore::Types::Value::TimeBased.nilable
 ```
 
 ---
@@ -223,6 +223,7 @@ SmartCore::Types::Value::EnumeratorChain
 SmartCore::Types::Value::Range
 SmartCore::Types::Value::Rational
 SmartCore::Types::Value::Set
+SmartCore::Types::Value::SortedSet
 SmartCore::Types::Value::IO
 SmartCore::Types::Value::StringIO
 SmartCore::Types::Struct::Schema
