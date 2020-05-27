@@ -39,7 +39,7 @@ type4 = type1 & type2
 
 ## Supported types
 
-- Primitive Value Types:
+- Primitives
 
 ```ruby
 SmartCore::Types::Value::Any
@@ -67,26 +67,13 @@ SmartCore::Types::Value::TimeBased
 
 ## Nilable types
 
+- invoke `.nilable` on any type object:
+
 ```ruby
-SmartCore::Types::Value::Any.nilable
-SmartCore::Types::Value::Nil.nilable
 SmartCore::Types::Value::String.nilable
-SmartCore::Types::Value::Symbol.nilable
-SmartCore::Types::Value::Text.nilable
-SmartCore::Types::Value::Integer.nilable
-SmartCore::Types::Value::Float.nilable
-SmartCore::Types::Value::Numeric.nilable
-SmartCore::Types::Value::BigDecimal.nilable
-SmartCore::Types::Value::Boolean.nilable
-SmartCore::Types::Value::Array.nilable
-SmartCore::Types::Value::Hash.nilable
-SmartCore::Types::Value::Proc.nilable
-SmartCore::Types::Value::Class.nilable
-SmartCore::Types::Value::Module.nilable
-SmartCore::Types::Value::Time.nilable.nilable
-SmartCore::Types::Value::DateTime.nilable
-SmartCore::Types::Value::Date.nilable
-SmartCore::Types::Value::TimeBased.nilable
+# -- or --
+SmartCore::Types::Value::Time.nilable
+# and etc.
 ```
 
 ---
