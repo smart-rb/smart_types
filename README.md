@@ -244,6 +244,8 @@ SmartCore::Types::Protocol::Callable
 
 - module-based integration;
 
+- constructor implementation and support;
+
 ## Contributing
 
 - Fork it ( https://github.com/smart-rb/smart_types )
