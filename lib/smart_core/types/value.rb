@@ -13,6 +13,7 @@ class SmartCore::Types::Value < SmartCore::Types::Primitive
   require_relative 'value/boolean'
   require_relative 'value/array'
   require_relative 'value/hash'
+  require_relative 'value/io'
   require_relative 'value/proc'
   require_relative 'value/class'
   require_relative 'value/module'
