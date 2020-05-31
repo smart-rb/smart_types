@@ -27,4 +27,5 @@ class SmartCore::Types::Value < SmartCore::Types::Primitive
   require_relative 'value/enumerator_chain'
   require_relative 'value/comparable'
   require_relative 'value/big_decimal'
+  require_relative 'value/range'
 end
