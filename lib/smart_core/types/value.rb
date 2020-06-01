@@ -5,6 +5,7 @@
 class SmartCore::Types::Value < SmartCore::Types::Primitive
   require_relative 'value/nil'
   require_relative 'value/string'
+  require_relative 'value/string_io'
   require_relative 'value/symbol'
   require_relative 'value/text'
   require_relative 'value/integer'
