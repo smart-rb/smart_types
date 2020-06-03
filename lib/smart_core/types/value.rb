@@ -30,4 +30,5 @@ class SmartCore::Types::Value < SmartCore::Types::Primitive
   require_relative 'value/big_decimal'
   require_relative 'value/range'
   require_relative 'value/method'
+  require_relative 'value/unbound_method'
 end
