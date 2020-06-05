@@ -31,4 +31,6 @@ class SmartCore::Types::Value < SmartCore::Types::Primitive
   require_relative 'value/range'
   require_relative 'value/method'
   require_relative 'value/unbound_method'
+  require_relative 'value/set'
+  require_relative 'value/rational'
 end
