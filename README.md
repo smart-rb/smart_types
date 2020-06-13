@@ -231,7 +231,7 @@ SmartCore::Types::Protocol::Callable
 
 - constrained types;
 
-- module-based integration;
+- moudle-based type system integration;
 
 - constructor implementation and support;
 
