@@ -229,6 +229,8 @@ SmartCore::Types::Protocol::Forwardable
 SmartCore::Types::Protocol::Callable
 ```
 
+- support for type of empty non-defined type (`SmartCore::Types::Primitive::Undefined`);
+
 - constrained types;
 
 - moudle-based type system integration;
