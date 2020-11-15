@@ -2,6 +2,7 @@
 
 # @api private
 # @since 0.1.0
+# @version 0.3.0
 class SmartCore::Types::Primitive::Factory
   require_relative 'factory/definition_context'
 
@@ -13,12 +14,17 @@ class SmartCore::Types::Primitive::Factory
     #
     # @api private
     # @since 0.1.0
+    # @version 0.3.0
     def create_type(type_category, type_name, type_definition)
       type_definitions = build_type_definitions(type_definition)
       type_checker = build_type_checker(type_definitions)
       type_caster = build_type_caster(type_definitions)
-      type = build_type(type_category, type_name, type_checker, type_caster)
-      type.tap { register_new_type(type_category, type_name, type) }
+      type_invariant_control = build_type_invariant_control(type_definitions)
+      type_validator = build_type_validator(type_checker, type_invariant_control)
+      build_type(type_category, type_name, type_validator, type_caster).tap do |type|
+        assign_type_validator(type, type_validator)
+        register_new_type(type_category, type_name, type)
+      end
     end
 
     private
@@ -38,8 +44,20 @@ class SmartCore::Types::Primitive::Factory
         raise(
           SmartCore::Types::NoCheckerDefinitionError,
           'Type checker is not provided. You should define it via .define_checker(&block)'
-        ) if context.type_checker.nil?
+        ) if context.type_checker == nil
       end
+    end
+
+    # @param type_definitions [SmartCore::Types::Primitive::Factory::DefinitionContext]
+    # @return [SmartCore::Types::Primitive::InvariantControl]
+    #
+    # @api private
+    # @since 0.3.0
+    def build_type_invariant_control(type_definitions)
+      SmartCore::Types::Primitive::InvariantControl.create(
+        type_definitions.type_invariant_chains,
+        type_definitions.type_invariants
+      )
     end
 
     # @param type_definitions [SmartCore::Types::Primitive::Factory::DefinitionContext]
@@ -57,23 +75,44 @@ class SmartCore::Types::Primitive::Factory
     # @api private
     # @since 0.1.0
     def build_type_caster(type_definitions)
-      if type_definitions.type_caster.nil?
+      if type_definitions.type_caster == nil
         SmartCore::Types::Primitive::UndefinedCaster.new
       else
         SmartCore::Types::Primitive::Caster.new(type_definitions.type_caster)
       end
     end
 
+    # @param checker [SmartCore::Types::Primitive::Checker]
+    # @param invariant_control [SmartCore::Types::Primitive::InvariantControl]
+    # @return [void]
+    #
+    # @api private
+    # @since 0.3.0
+    def build_type_validator(type_checker, type_invariant_control)
+      SmartCore::Types::Primitive::Validator.new(type_checker, type_invariant_control)
+    end
+
     # @param type_klass [Class<SmartCore::Types::Primitive>]
     # @param type_name [String, Symbol]
-    # @param type_checker [SmartCore::Types::Primitive::Checker]
+    # @param type_validator [SmartCore::Types::Primitive::Validator]
     # @param type_caster [SmartCore::Types::Primitive::Caster]
     # @return [SmartCore::Types::Primitive]
     #
     # @api private
     # @since 0.1.0
-    def build_type(type_category, type_name, type_checker, type_caster)
-      Class.new(type_category).new(type_checker, type_caster)
+    # @version 0.3.0
+    def build_type(type_category, type_name, type_validator, type_caster)
+      Class.new(type_category).new(type_validator, type_caster)
+    end
+
+    # @param type [SmartCore::Types::Primitive]
+    # @param type_validator [SmartCore::Types::Primitive::Validator]
+    # @return [void]
+    #
+    # @api private
+    # @since 0.3.0
+    def assign_type_validator(type, type_validator)
+      type_validator.___assign_type___(type)
     end
 
     # @param type_category [Class<SmartCore::Types::Primitive>]

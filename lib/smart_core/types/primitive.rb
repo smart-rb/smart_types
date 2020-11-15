@@ -3,15 +3,17 @@
 # @api private
 # @since 0.1.0
 class SmartCore::Types::Primitive
+  require_relative 'primitive/checker'
   require_relative 'primitive/caster'
   require_relative 'primitive/undefined_caster'
-  require_relative 'primitive/checker'
-  require_relative 'primitive/nilable_checker'
-  require_relative 'primitive/sum_checker'
-  require_relative 'primitive/mult_checker'
+  require_relative 'primitive/invariant_control'
+  require_relative 'primitive/validator'
   require_relative 'primitive/factory'
+  require_relative 'primitive/sum_validator'
   require_relative 'primitive/sum_factory'
+  require_relative 'primitive/mult_validator'
   require_relative 'primitive/mult_factory'
+  require_relative 'primitive/nilable_validator'
   require_relative 'primitive/nilable_factory'
 
   class << self
@@ -26,27 +28,28 @@ class SmartCore::Types::Primitive
     end
   end
 
-  # @return [SmartCore::Types::Primitive::Checker]
-  #
-  # @api private
-  # @since 0.1.0
-  attr_reader :checker
-
   # @return [SmartCore::Types::Primitive::Caster]
   #
   # @api private
   # @since 0.1.0
   attr_reader :caster
 
-  # @param checker [SmartCore::Types::Primitive::Checker]
+  # @return [SmartCore::Types::Primitive::Validator]
+  #
+  # @api private
+  # @since 0.3.0
+  attr_reader :validator
+
+  # @param validator [SmartCore::Types::Primitive::Validator]
   # @param caster [SmartCore::Types::Primitive::Caster]
   # @return [void]
   #
   # @api private
   # @since 0.1.0
-  def initialize(checker, caster)
+  # @version 0.3.0
+  def initialize(validator, caster)
     @lock = SmartCore::Engine::Lock.new
-    @checker = checker
+    @validator = validator
     @caster = caster
     @nilable = nil
   end
@@ -56,20 +59,30 @@ class SmartCore::Types::Primitive
   #
   # @api public
   # @since 0.1.0
+  # @since 0.3.0
   def valid?(value)
-    checker.call(value)
+    validator.valid?(value)
   end
 
   # @param value [Any]
   # @return [void]
   #
   # @raise [SmartCore::Types::TypeError]
+  # @see SmartCore::Types::Primitive::Validator
   #
   # @api public
   # @since 0.1.0
+  # @version 0.3.0
   def validate!(value)
-    return if valid?(value)
-    raise(SmartCore::Types::TypeError, 'Invalid type')
+    validator.validate!(value)
+  end
+
+  # @return [SmartCore::Types::Primitive::Validator::Result]
+  #
+  # @api public
+  # @since 0.3.0
+  def validate(value)
+    validator.validate(value)
   end
 
   # @param value [Any]

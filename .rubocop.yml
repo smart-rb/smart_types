@@ -17,3 +17,10 @@ AllCops:
 # NOTE: support for old ruby versions
 Style/RedundantBegin:
   Enabled: false
+
+# NOTE: used only in specs and it is ok in specs
+Lint/EmptyBlock:
+  Enabled: false
+
+Layout/EmptyLines:
+  AutoCorrect: true

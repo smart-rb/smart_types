@@ -2,7 +2,7 @@
 
 # @api private
 # @since 0.1.0
-class SmartCore::Types::Primitive::Factory::DefinitionContext
+class SmartCore::Types::Primitive::MultFactory::DefinitionContext
   # @return [Proc, NilClass]
   #
   # @api private
@@ -26,4 +26,6 @@ class SmartCore::Types::Primitive::Factory::DefinitionContext
     raise(SmartCore::ArgumentError, 'No caster definition block') unless block_given?
     @type_caster = caster
   end
+
+  # TODO: support for invariants
 end

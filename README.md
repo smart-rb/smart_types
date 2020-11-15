@@ -182,6 +182,9 @@ end
 SmartCore::Types::Value::Time.refine_caster do |value, original_caster|
   # new type caster
 end
+
+# .refine_invariant
+# .refine_invariant_chain
 ```
 
 - options for type casters:
@@ -229,13 +232,13 @@ SmartCore::Types::Protocol::Forwardable
 SmartCore::Types::Protocol::Callable
 ```
 
+- type name prefix (as a code part) in invariant error codes;
 - support for type of empty non-defined type (`SmartCore::Types::Primitive::Undefined`);
-
 - constrained types;
-
 - moudle-based type system integration;
-
 - constructor implementation and support;
+- support for invariant definitioning in mult-types;
+- support for invariant definitioning in sum-types;
 
 ## Contributing
 

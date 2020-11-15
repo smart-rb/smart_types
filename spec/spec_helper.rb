@@ -10,6 +10,7 @@ SimpleCov.start do
 end
 
 require 'bundler/setup'
+require 'pry'
 require 'smart_core/types'
 
 RSpec.configure do |config|

@@ -26,4 +26,6 @@ class SmartCore::Types::Primitive::SumFactory::DefinitionContext
     raise(SmartCore::ArgumentError, 'No caster definition block') unless block_given?
     @type_caster = caster
   end
+
+  # TODO: support for invariants
 end
