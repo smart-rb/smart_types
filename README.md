@@ -93,8 +93,14 @@ SmartCore::Types::Value.define_type(:String) do |type|
     value.to_s
   end
 
+  # NOTE:
+  #    invariant defined out from chain does not depends on other invariants
   type.invariant(:uncensored_content) do |value|
     !value.include?('uncensored_word')
+  end
+
+  type.invariant(:filled) do |value|
+    value != ''
   end
 
   type.invariant_chain(:password) do
@@ -104,7 +110,6 @@ SmartCore::Types::Value.define_type(:String) do |type|
     #   inside a chain each next invariant invokation
     #   depends on previous successful invariant check
   end
-
 end
 ```
 
