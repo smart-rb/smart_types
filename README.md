@@ -100,7 +100,11 @@ SmartCore::Types::Value.define_type(:String) do |type|
   type.invariant_chain(:password) do
     invariant(:should_present) { |value| value != '' }
     invariant(:should_have_numbers) { |value| v.match?(/[0-9]+/) }
+    # NOTE:
+    #   inside a chain each next invariant invokation
+    #   depends on previous successful invariant check
   end
+
 end
 ```
 
