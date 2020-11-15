@@ -78,20 +78,6 @@ SmartCore::Types::Value::Time.nilable
 
 ---
 
-## Type validation and type casting
-
-```ruby
-# documentation is coming
-
-SmartCore::Types::Value::String.valid?('test') # => true
-SmartCore::Types::Value::String.valid?(123.45) # => false
-
-SmartCore::Types::Value::String.cast(123) # => "123"
-SmartCore::Types::Value::Float.cast('55') # => 55.0
-```
-
----
-
 ## Custom type definition
 
 ```ruby
@@ -106,7 +92,46 @@ SmartCore::Types::Value.define_type(:String) do |type|
   type.define_caster do |value|
     value.to_s
   end
+
+  type.invariant(:uncensored_content) do |value|
+    !value.include?('uncensored_word')
+  end
+
+  type.invariant_chain(:password) do
+    invariant(:should_present) { |value| value != '' }
+    invariant(:should_have_numbers) { |value| v.match?(/[0-9]+/) }
+  end
 end
+```
+
+---
+
+## Type validation
+
+```ruby
+# documentation is coming
+
+SmartCore::Types::Value::String.valid?('test123') # => true
+SmartCore::Types::Value::String.valid?(123.45) # => false
+
+result = SmartCore::Types::Value::String.validate('test')
+
+result.success? # => false
+result.failure? # => true
+
+result.valid_check? # => true
+result.valid_invariants? # => false
+
+result.errors # => ['password.should_have_numbers']
+```
+
+---
+
+## Type casting
+
+```
+SmartCore::Types::Value::String.cast(123) # => "123"
+SmartCore::Types::Value::Float.cast('55') # => 55.0
 ```
 
 ---
