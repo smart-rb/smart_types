@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # @api private
-# @since 0.3.0
+# @since 0.2.0
 class SmartCore::Types::Primitive::Validator
   require_relative 'validator/result'
 
@@ -14,7 +14,7 @@ class SmartCore::Types::Primitive::Validator
   # @return [void]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   def initialize(type_checker, invariant_control)
     @type = nil
     @type_checker = type_checker
@@ -25,7 +25,7 @@ class SmartCore::Types::Primitive::Validator
   # @return [void]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   def ___assign_type___(type)
     @type = type
   end
@@ -34,7 +34,7 @@ class SmartCore::Types::Primitive::Validator
   # @return [Boolean]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   def valid?(value)
     validate(value).success?
   end
@@ -43,7 +43,7 @@ class SmartCore::Types::Primitive::Validator
   # @return [SmartCore::Types::Primitive::Validator::Result]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   def validate(value)
     checker_result = type_checker.call(value) # => Boolean
     return Result.new(type, value, checker_result) unless checker_result
@@ -57,7 +57,7 @@ class SmartCore::Types::Primitive::Validator
   # @raise [SmartCore::Types::TypeError]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   def validate!(value)
     return if validate(value).success?
     raise(SmartCore::Types::TypeError, 'Invalid type')
@@ -68,18 +68,18 @@ class SmartCore::Types::Primitive::Validator
   # @return [SmartCore::Type::Primitive]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   attr_reader :type
 
   # @return [SmartCore::Types::Primitive::Checker]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   attr_reader :type_checker
 
   # @return [SmartCore::Types::Primitive::InvariantControl]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   attr_reader :invariant_control
 end

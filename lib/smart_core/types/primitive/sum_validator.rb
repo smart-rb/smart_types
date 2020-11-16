@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # @api private
-# @since 0.3.0
+# @since 0.2.0
 class SmartCore::Types::Primitive::SumValidator
   require_relative 'sum_validator/result'
 
@@ -9,7 +9,7 @@ class SmartCore::Types::Primitive::SumValidator
   # @return [void]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   def initialize(*validators)
     @type = nil
     @validators = validators
@@ -19,7 +19,7 @@ class SmartCore::Types::Primitive::SumValidator
   # @return [void]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   def ___assign_type___(type)
     @type = type
   end
@@ -27,7 +27,7 @@ class SmartCore::Types::Primitive::SumValidator
   # @return [Boolean]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   def valid?(value)
     validators.any? { |validator| validator.valid?(value) }
   end
@@ -36,7 +36,7 @@ class SmartCore::Types::Primitive::SumValidator
   # @return [SmartCore::Types::Primitive::SumValidator::Result]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   def validate(value)
     result = validators.each_with_object(SmartCore::Engine::Atom.new) do |validator, final_result|
       final_result.swap { validator.validate(value) }
@@ -54,7 +54,7 @@ class SmartCore::Types::Primitive::SumValidator
   # @raise [SmartCore::Types::TypeError]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   def validate!(value)
     return if valid?(value)
     raise(SmartCore::Types::TypeError, 'Invalid type')
@@ -65,12 +65,12 @@ class SmartCore::Types::Primitive::SumValidator
   # @return [SmartCore::Types::Primitive]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   attr_reader :type
 
   # @return [Array<SmartCore::Types::Primitive::Validator>]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   attr_reader :validators
 end

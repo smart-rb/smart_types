@@ -18,13 +18,13 @@ class SmartCore::Types::Primitive::Factory::DefinitionContext
   # @return [Hash<String,Array<Proc>>]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   attr_reader :type_invariant_chains
 
   # @return [Hash<String,Proc>]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   attr_reader :type_invariants
 
   # @return [void]
@@ -68,7 +68,7 @@ class SmartCore::Types::Primitive::Factory::DefinitionContext
   # @return [void]
   #
   # @api public
-  # @since 0.3.0
+  # @since 0.2.0
   def invariant_chain(chain_name, &invariant_chain)
     thread_safe do
       unless block_given?
@@ -88,7 +88,7 @@ class SmartCore::Types::Primitive::Factory::DefinitionContext
   # @return [void]
   #
   # @api public
-  # @since 0.3.0
+  # @since 0.2.0
   def invariant(name, &invariant)
     thread_safe do
       unless block_given?
@@ -109,7 +109,7 @@ class SmartCore::Types::Primitive::Factory::DefinitionContext
   # @return [Any]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   def thread_safe(&block)
     @definition_lock.synchronize(&block)
   end

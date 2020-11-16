@@ -2,7 +2,7 @@
 
 # @api private
 # @since 0.1.0
-# @version 0.3.0
+# @version 0.2.0
 module SmartCore::Types::Primitive::MultFactory
   require_relative 'mult_factory/definition_context'
 
@@ -13,7 +13,7 @@ module SmartCore::Types::Primitive::MultFactory
     #
     # @api private
     # @since 0.1.0
-    # @version 0.3.0
+    # @version 0.2.0
     def create_type(types, type_definition)
       type_definitions = build_type_definitions(type_definition)
       type_validator = build_type_validator(types, type_definitions)
@@ -65,7 +65,7 @@ module SmartCore::Types::Primitive::MultFactory
     # @return [void]
     #
     # @api private
-    # @since 0.3.0
+    # @since 0.2.0
     def assign_type_validator(type, type_validator)
       type_validator.___assign_type___(type)
     end
@@ -76,7 +76,7 @@ module SmartCore::Types::Primitive::MultFactory
     #
     # @api private
     # @since 0.1.0
-    # @version 0.3.0
+    # @version 0.2.0
     def build_type(type_validator, type_caster)
       SmartCore::Types::Primitive.new(type_validator, type_caster)
     end

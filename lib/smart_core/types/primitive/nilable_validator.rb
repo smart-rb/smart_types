@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # @api private
-# @since 0.3.0
+# @since 0.2.0
 class SmartCore::Types::Primitive::NilableValidator
   require_relative 'nilable_validator/result'
 
@@ -14,7 +14,7 @@ class SmartCore::Types::Primitive::NilableValidator
   # @return [void]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   def initialize(validator)
     @type = nil
     @validator = validator
@@ -24,7 +24,7 @@ class SmartCore::Types::Primitive::NilableValidator
   # @return [void]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   def ___assign_type___(type)
     @type = type
   end
@@ -32,7 +32,7 @@ class SmartCore::Types::Primitive::NilableValidator
   # @return [Boolean]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   def valid?(value)
     value == nil ? true : validator.valid?(value)
   end
@@ -44,7 +44,7 @@ class SmartCore::Types::Primitive::NilableValidator
   # @return [SmartCore::Types::Primitive::NilableValidator::Result]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   def validate(value)
     return Result.new(type, value) if value == nil
     validator.validate(value)
@@ -56,7 +56,7 @@ class SmartCore::Types::Primitive::NilableValidator
   # @raise [SmartCore::Types::TypeError]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   def validate!(value)
     return if valid?(value)
     raise(SmartCore::Types::TypeError, 'Invalid type')
@@ -67,7 +67,7 @@ class SmartCore::Types::Primitive::NilableValidator
   # @return [SmartCore::Types::Primitive]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   attr_reader :type
 
   # @return [
@@ -78,6 +78,6 @@ class SmartCore::Types::Primitive::NilableValidator
   # ]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   attr_reader :validator
 end

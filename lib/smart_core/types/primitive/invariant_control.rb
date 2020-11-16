@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # @api private
-# @since 0.3.0
+# @since 0.2.0
 class SmartCore::Types::Primitive::InvariantControl
   require_relative 'invariant_control/result'
   require_relative 'invariant_control/single'
@@ -14,7 +14,7 @@ class SmartCore::Types::Primitive::InvariantControl
     # @return [SmartCore::Types::Primitive::InvariantControl]
     #
     # @api private
-    # @since 0.3.0
+    # @since 0.2.0
     def create(invariant_chains, invariants)
       Factory.create(invariant_chains, invariants)
     end
@@ -25,7 +25,7 @@ class SmartCore::Types::Primitive::InvariantControl
   # @return [void]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   def initialize(invariant_chains, invariants)
     @invariant_chains = invariant_chains
     @invariants = invariants
@@ -35,7 +35,7 @@ class SmartCore::Types::Primitive::InvariantControl
   # @return [SmartCore::Types::Primitive::InvariantControl::Result]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   def check(value)
     Result.new(self, value).tap do |result|
       invariant_chains.each do |chain|
@@ -53,12 +53,12 @@ class SmartCore::Types::Primitive::InvariantControl
   # @return [Array<SmartCore::Types::Primitive::InvariantControl::Chain>]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   attr_reader :invariant_chains
 
   # @return [Array<SmartCore::Types::Primitive::InvariantControl::Single>]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   attr_reader :invariants
 end

@@ -1,18 +1,18 @@
 # frozen_string_literal: true
 
 # @api private
-# @since 0.3.0
+# @since 0.2.0
 class SmartCore::Types::Primitive::InvariantControl::Chain::Result
   # @return [SmartCore::Types::Primitive::invariantControl::Chain]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   attr_reader :invariant_chain
 
   # @return [Any]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   attr_reader :checked_value
 
   # @param invariant_chain [SmartCore::Types::Primitive::invariantControl::Chain]
@@ -21,7 +21,7 @@ class SmartCore::Types::Primitive::InvariantControl::Chain::Result
   # @return [void]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   def initialize(invariant_chain, checked_value, invariant_results)
     @invariant_chain = invariant_chain
     @checked_value = checked_value
@@ -31,7 +31,7 @@ class SmartCore::Types::Primitive::InvariantControl::Chain::Result
   # @return [Boolean]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   def success?
     invariant_results.all?(&:success?)
   end
@@ -39,7 +39,7 @@ class SmartCore::Types::Primitive::InvariantControl::Chain::Result
   # @return [Boolean]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   def failure?
     invariant_results.any?(&:failure?)
   end
@@ -59,6 +59,6 @@ class SmartCore::Types::Primitive::InvariantControl::Chain::Result
   # @return [Array<SmartCore::Types::Primitive::InvariantControl::Single::Result>]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   attr_reader :invariant_results
 end

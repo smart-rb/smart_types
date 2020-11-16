@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 # @api private
-# @since 0.3.0
+# @since 0.2.0
 class SmartCore::Types::Primitive::InvariantControl::Chain
   require_relative 'chain/result'
 
   # @return [String]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   attr_reader :name
 
   # @param name [String]
@@ -25,7 +25,7 @@ class SmartCore::Types::Primitive::InvariantControl::Chain
   # @return [void]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   def add_invariant(invariant)
     invariants << invariant
   end
@@ -34,7 +34,7 @@ class SmartCore::Types::Primitive::InvariantControl::Chain
   # @return [SmartCore::Types::Primitive::InvariantControl::Chain::Result]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   def check(value)
     invariant_results = [].tap do |results|
       invariants.each do |invariant|
@@ -53,6 +53,6 @@ class SmartCore::Types::Primitive::InvariantControl::Chain
   # @return [Array<SmartCore::Types::Primitive::InvariantControl::Single>]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   attr_reader :invariants
 end

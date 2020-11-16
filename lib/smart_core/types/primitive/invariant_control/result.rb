@@ -1,18 +1,18 @@
 # frozen_string_literal: true
 
 # @api private
-# @since 0.3.0
+# @since 0.2.0
 class SmartCore::Types::Primitive::InvariantControl::Result
   # @return [Array<SmartCore::Types::Primitive::InvariantControl::Chain::Result>]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   attr_reader :chain_results
 
   # @return [Array<SmartCore::Types::Primitive::InvariantControl::Single::Result>]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   attr_reader :single_results
 
   # @param invariant_control [SmartCore::Types::Primitive::InvariantControl]
@@ -20,7 +20,7 @@ class SmartCore::Types::Primitive::InvariantControl::Result
   # @return [void]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   def initialize(invariant_control, checked_value)
     @invariant_control = invariant_control
     @checked_value = checked_value
@@ -31,7 +31,7 @@ class SmartCore::Types::Primitive::InvariantControl::Result
   # @return [Array<String>]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   def invariant_errors
     collect_invariant_errors
   end
@@ -39,7 +39,7 @@ class SmartCore::Types::Primitive::InvariantControl::Result
   # @return [Boolean]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   def success?
     chain_results.all(&:success?) && single_results.all?(&:success?)
   end
@@ -47,7 +47,7 @@ class SmartCore::Types::Primitive::InvariantControl::Result
   # @return [Boolean]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   def failure?
     !success?
   end
@@ -56,7 +56,7 @@ class SmartCore::Types::Primitive::InvariantControl::Result
   # @return [void]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   def add_chain_result(result)
     chain_results << result
   end
@@ -65,7 +65,7 @@ class SmartCore::Types::Primitive::InvariantControl::Result
   # @return [void]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   def add_single_result(result)
     single_results << result
   end
@@ -75,19 +75,19 @@ class SmartCore::Types::Primitive::InvariantControl::Result
   # @return [SmartCore::Types::Primitive::InvariantControl]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   attr_reader :invariant_control
 
   # @return [Any]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   attr_reader :checked_value
 
   # @return [Array<String>]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   def collect_invariant_errors
     [].tap do |invariant_errors|
       # collect invariant errors from invariant chains

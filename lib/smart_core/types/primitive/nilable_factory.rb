@@ -2,7 +2,7 @@
 
 # @api private
 # @since 0.1.0
-# @version 0.3.0
+# @version 0.2.0
 module SmartCore::Types::Primitive::NilableFactory
   class << self
     # @param type [SmartCore::Types::Primitive]
@@ -10,7 +10,7 @@ module SmartCore::Types::Primitive::NilableFactory
     #
     # @api private
     # @since 0.1.0
-    # @version 0.3.0
+    # @version 0.2.0
     def create_type(type)
       type_validator = build_type_validator(type)
       type_caster = build_type_caster(type)
@@ -25,7 +25,7 @@ module SmartCore::Types::Primitive::NilableFactory
     # @return [SmartCore::Types::Primitive::NilableValidator]
     #
     # @api private
-    # @since 0.3.0
+    # @since 0.2.0
     def build_type_validator(type)
       SmartCore::Types::Primitive::NilableValidator.new(type.validator)
     end
@@ -44,7 +44,7 @@ module SmartCore::Types::Primitive::NilableFactory
     # @return [void]
     #
     # @api private
-    # @since 0.3.0
+    # @since 0.2.0
     def assign_type_validator(type, type_validator)
       type_validator.___assign_type___(type)
     end
@@ -56,7 +56,7 @@ module SmartCore::Types::Primitive::NilableFactory
     #
     # @api private
     # @since 0.1.0
-    # @version 0.3.0
+    # @version 0.2.0
     def build_type(type, type_validator, type_caster)
       Class.new(type.class).new(type_validator, type_caster)
     end

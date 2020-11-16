@@ -37,7 +37,7 @@ class SmartCore::Types::Primitive
   # @return [SmartCore::Types::Primitive::Validator]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   attr_reader :validator
 
   # @param validator [SmartCore::Types::Primitive::Validator]
@@ -46,7 +46,7 @@ class SmartCore::Types::Primitive
   #
   # @api private
   # @since 0.1.0
-  # @version 0.3.0
+  # @version 0.2.0
   def initialize(validator, caster)
     @lock = SmartCore::Engine::Lock.new
     @validator = validator
@@ -59,7 +59,7 @@ class SmartCore::Types::Primitive
   #
   # @api public
   # @since 0.1.0
-  # @since 0.3.0
+  # @since 0.2.0
   def valid?(value)
     validator.valid?(value)
   end
@@ -72,7 +72,7 @@ class SmartCore::Types::Primitive
   #
   # @api public
   # @since 0.1.0
-  # @version 0.3.0
+  # @version 0.2.0
   def validate!(value)
     validator.validate!(value)
   end
@@ -80,7 +80,7 @@ class SmartCore::Types::Primitive
   # @return [SmartCore::Types::Primitive::Validator::Result]
   #
   # @api public
-  # @since 0.3.0
+  # @since 0.2.0
   def validate(value)
     validator.validate(value)
   end

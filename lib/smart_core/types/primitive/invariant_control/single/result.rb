@@ -1,18 +1,18 @@
 # frozen_string_literal: true
 
 # @api private
-# @since 0.3.0
+# @since 0.2.0
 class SmartCore::Types::Primitive::InvariantControl::Single::Result
   # @return [SmartCore::Types::Primitive::InvariantControl::Single]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   attr_reader :invariant
 
   # @return [Any]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   attr_reader :checked_value
 
   # @param invariant [SmartCore::Types::Primitive::InvariantControl::Single]
@@ -21,7 +21,7 @@ class SmartCore::Types::Primitive::InvariantControl::Single::Result
   # @return [void]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   def initialize(invariant, checked_value, is_valid_check)
     @invariant = invariant
     @checked_value = checked_value
@@ -31,7 +31,7 @@ class SmartCore::Types::Primitive::InvariantControl::Single::Result
   # @return [Boolean]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   def success?
     is_valid_check
   end
@@ -39,7 +39,7 @@ class SmartCore::Types::Primitive::InvariantControl::Single::Result
   # @return [Boolean]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   def failure?
     !success?
   end
@@ -47,7 +47,7 @@ class SmartCore::Types::Primitive::InvariantControl::Single::Result
   # @return [Array<String>]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   def error_codes
     success? ? [] : [invariant.name]
   end
@@ -57,7 +57,7 @@ class SmartCore::Types::Primitive::InvariantControl::Single::Result
   # @return [Boolean]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   attr_reader :is_valid_check
   alias_method :valid_check?, :is_valid_check
 end

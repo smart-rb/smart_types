@@ -2,7 +2,7 @@
 
 # @api private
 # @since 0.1.0
-# @version 0.3.0
+# @version 0.2.0
 class SmartCore::Types::Primitive::Factory
   require_relative 'factory/definition_context'
 
@@ -14,7 +14,7 @@ class SmartCore::Types::Primitive::Factory
     #
     # @api private
     # @since 0.1.0
-    # @version 0.3.0
+    # @version 0.2.0
     def create_type(type_category, type_name, type_definition)
       type_definitions = build_type_definitions(type_definition)
       type_checker = build_type_checker(type_definitions)
@@ -52,7 +52,7 @@ class SmartCore::Types::Primitive::Factory
     # @return [SmartCore::Types::Primitive::InvariantControl]
     #
     # @api private
-    # @since 0.3.0
+    # @since 0.2.0
     def build_type_invariant_control(type_definitions)
       SmartCore::Types::Primitive::InvariantControl.create(
         type_definitions.type_invariant_chains,
@@ -87,7 +87,7 @@ class SmartCore::Types::Primitive::Factory
     # @return [void]
     #
     # @api private
-    # @since 0.3.0
+    # @since 0.2.0
     def build_type_validator(type_checker, type_invariant_control)
       SmartCore::Types::Primitive::Validator.new(type_checker, type_invariant_control)
     end
@@ -100,7 +100,7 @@ class SmartCore::Types::Primitive::Factory
     #
     # @api private
     # @since 0.1.0
-    # @version 0.3.0
+    # @version 0.2.0
     def build_type(type_category, type_name, type_validator, type_caster)
       Class.new(type_category).new(type_validator, type_caster)
     end
@@ -110,7 +110,7 @@ class SmartCore::Types::Primitive::Factory
     # @return [void]
     #
     # @api private
-    # @since 0.3.0
+    # @since 0.2.0
     def assign_type_validator(type, type_validator)
       type_validator.___assign_type___(type)
     end

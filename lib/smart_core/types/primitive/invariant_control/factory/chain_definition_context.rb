@@ -1,18 +1,18 @@
 # frozen_string_literal: true
 
 # @api private
-# @since 0.3.0
+# @since 0.2.0
 class SmartCore::Types::Primitive::InvariantControl::Factory::ChainDefinitionContext
   # @return []
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   attr_reader :___chain___
 
   # @return [void]
   #
   # @api privae
-  # @since 0.3.0
+  # @since 0.2.0
   def initialize(chain_name)
     @___chain___ = SmartCore::Types::Primitive::InvariantControl::Chain.new(chain_name)
   end
@@ -22,7 +22,7 @@ class SmartCore::Types::Primitive::InvariantControl::Factory::ChainDefinitionCon
   # @return [void]
   #
   # @api private
-  # @since 0.3.0
+  # @since 0.2.0
   def invariant(invariant_name, &invariant_definition)
     unless invariant_name.is_a?(::String) || invariant_name.is_a?(::Symbol)
       raise(SmartCore::Types::ArgumentError, <<~ERROR_MESSAGE)
