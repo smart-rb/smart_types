@@ -6,6 +6,7 @@ SimpleCov.formatter = SimpleCov::Formatter::HTMLFormatter
 SimpleCov.minimum_coverage(100)
 SimpleCov.start do
   enable_coverage :branch
+  enable_coverage :line
   add_filter 'spec'
 end
 
