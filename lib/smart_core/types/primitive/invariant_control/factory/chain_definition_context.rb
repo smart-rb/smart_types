@@ -24,17 +24,10 @@ class SmartCore::Types::Primitive::InvariantControl::Factory::ChainDefinitionCon
   # @api private
   # @since 0.2.0
   def invariant(invariant_name, &invariant_definition)
-    unless invariant_name.is_a?(::String) || invariant_name.is_a?(::Symbol)
-      raise(SmartCore::Types::ArgumentError, <<~ERROR_MESSAGE)
-        Invariant name should be a type of string or a symbol.
-      ERROR_MESSAGE
-    end
-
-    unless block_given?
-      raise(SmartCore::Types::ArgumentError, <<~ERROR_MESSAGE)
-        Invariant logic is not porvided (you should provide this logic as a block).
-      ERROR_MESSAGE
-    end
+    SmartCore::Types::Primitive::Factory::DefinitionContext.vaildate_invariant_attributes!(
+      invariant_name,
+      &invariant_definition
+    )
 
     ___chain___.add_invariant(
       SmartCore::Types::Primitive::InvariantControl::Single.create(
