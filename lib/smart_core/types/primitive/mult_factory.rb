@@ -78,7 +78,7 @@ module SmartCore::Types::Primitive::MultFactory
     # @since 0.1.0
     # @version 0.2.0
     def build_type(type_validator, type_caster)
-      SmartCore::Types::Primitive.new(type_validator, type_caster)
+      SmartCore::Types::Primitive.new(nil, type_validator, type_caster)
     end
   end
 end

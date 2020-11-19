@@ -48,7 +48,8 @@ class SmartCore::Types::Primitive::Validator
     checker_result = type_checker.call(value) # => Boolean
     return Result.new(type, value, checker_result) unless checker_result
     invariant_result = invariant_control.check(value)
-    Result.new(type, value, checker_result, invariant_result.invariant_errors)
+    invariant_errors = invariant_result.invariant_errors.map { |error| "#{type.name}.#{error}" }
+    Result.new(type, value, checker_result, invariant_errors)
   end
 
   # @param value [Any]

@@ -28,6 +28,13 @@ class SmartCore::Types::Primitive
     end
   end
 
+  # @note NilClass is suitable for type sum and type multiplication
+  # @return [String, NilClass]
+  #
+  # @api public
+  # @since 0.2.0
+  attr_reader :name
+
   # @return [SmartCore::Types::Primitive::Caster]
   #
   # @api private
@@ -40,6 +47,7 @@ class SmartCore::Types::Primitive
   # @since 0.2.0
   attr_reader :validator
 
+  # @param name [String, NilClass] NilClass is suitable for type sum and type multiplication
   # @param validator [SmartCore::Types::Primitive::Validator]
   # @param caster [SmartCore::Types::Primitive::Caster]
   # @return [void]
@@ -47,11 +55,12 @@ class SmartCore::Types::Primitive
   # @api private
   # @since 0.1.0
   # @version 0.2.0
-  def initialize(validator, caster)
-    @lock = SmartCore::Engine::Lock.new
+  def initialize(name, validator, caster)
+    @name = name
     @validator = validator
     @caster = caster
     @nilable = nil
+    @lock = SmartCore::Engine::Lock.new
   end
 
   # @param value [Any]
