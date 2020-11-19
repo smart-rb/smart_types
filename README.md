@@ -131,7 +131,12 @@ result.failure? # => true
 result.valid_check? # => true
 result.valid_invariants? # => false
 
-result.errors # => ['password.should_have_numbers']
+# invariant errors:
+result.errors # => ['String.password.should_have_numbers']
+# -- same as: ---
+result.invariant_errors
+# -- same as: ---
+result.error_codes
 ```
 
 ---
