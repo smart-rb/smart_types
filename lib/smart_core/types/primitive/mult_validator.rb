@@ -20,13 +20,15 @@ class SmartCore::Types::Primitive::MultValidator < SmartCore::Types::Primitive::
   # @api private
   # @since 0.2.0
   def validate(value)
-    result = validators.each_with_object(SmartCore::Engine::Atom.new) do |validator, final_result|
-      final_result.swap { validator.validate(value) }
-      break if final_result.value.failure?
+    final_result = SmartCore::Engine::Atom.new.tap do |result|
+      validators.each do |validator|
+        result.swap { validator.validate(value) }
+        break if result.value.success?
+      end
     end
 
     SmartCore::Types::Primitive::MultValidator::Result.new(
-      type, result.value, result.value.invariant_errors
+      type, final_result.value, final_result.value.invariant_errors
     )
   end
 end

@@ -52,10 +52,11 @@ RSpec.describe 'INVARIANTS: definitioning and logic' do
       end
     end
 
-    describe '#validate(value) with monadic Result objects' do
+    describe '#validate(value)/#validate!(value) with monadic Result objects' do
       specify 'nilable type, nil value => <succcessful result>' do
         aggregate_failures('result_state') do
           result = nilable_type.validate(nil)
+          expect { nilable_type.validate!(nil) }.not_to raise_error
 
           expect(result.success?).to eq(true)
           expect(result.failure?).to eq(false)
@@ -84,6 +85,9 @@ RSpec.describe 'INVARIANTS: definitioning and logic' do
             expect(result.errors).to eq(result.error_codes)
             expect(result.invariant_errors).to eq(result.error_codes)
           end
+
+          expect { type.validate!('TeSt1234_!') }.not_to raise_error
+          expect { nilable_type.validate!('TeSt1234_!') }.not_to raise_error
         end
       end
 
@@ -101,6 +105,13 @@ RSpec.describe 'INVARIANTS: definitioning and logic' do
             expect(result.errors).to eq(result.error_codes)
             expect(result.invariant_errors).to eq(result.error_codes)
           end
+
+          expect { type.validate!(::Object.new) }.to raise_error(
+            SmartCore::Types::TypeError
+          )
+          expect { nilable_type.validate!(::Object.new) }.to raise_error(
+            SmartCore::Types::TypeError
+          )
         end
       end
 
@@ -121,6 +132,9 @@ RSpec.describe 'INVARIANTS: definitioning and logic' do
             expect(result.errors).to eq(result.error_codes)
             expect(result.invariant_errors).to eq(result.error_codes)
           end
+
+          expect { type.validate!('pas wrd') }.to raise_error(SmartCore::Types::TypeError)
+          expect { nilable_type.validate!('pas wrd') }.to raise_error(SmartCore::Types::TypeError)
         end
 
         aggregate_failures('unsecure/danger') do
@@ -139,6 +153,9 @@ RSpec.describe 'INVARIANTS: definitioning and logic' do
             expect(result.errors).to eq(result.error_codes)
             expect(result.invariant_errors).to eq(result.error_codes)
           end
+
+          expect { type.validate!('test123') }.to raise_error(SmartCore::Types::TypeError)
+          expect { nilable_type.validate!('test123') }.to raise_error(SmartCore::Types::TypeError)
         end
 
         aggregate_failures('unsecure/danger') do
@@ -156,6 +173,13 @@ RSpec.describe 'INVARIANTS: definitioning and logic' do
             expect(result.errors).to eq(result.error_codes)
             expect(result.invariant_errors).to eq(result.error_codes)
           end
+
+          expect { type.validate!('testtesttest') }.to raise_error(
+            SmartCore::Types::TypeError
+          )
+          expect { nilable_type.validate!('testtesttest') }.to raise_error(
+            SmartCore::Types::TypeError
+          )
         end
 
         aggregate_failures('empty/unsecure') do
@@ -174,6 +198,9 @@ RSpec.describe 'INVARIANTS: definitioning and logic' do
             expect(result.errors).to eq(result.error_codes)
             expect(result.invariant_errors).to eq(result.error_codes)
           end
+
+          expect { type.validate!('') }.to raise_error(SmartCore::Types::TypeError)
+          expect { nilable_type.validate!('') }.to raise_error(SmartCore::Types::TypeError)
         end
 
         aggregate_failures('incompatible') do
@@ -194,6 +221,13 @@ RSpec.describe 'INVARIANTS: definitioning and logic' do
             expect(result.errors).to eq(result.error_codes)
             expect(result.invariant_errors).to eq(result.error_codes)
           end
+
+          expect { type.validate!("#{'test' * 4}#{'1234' * 4}") }.to raise_error(
+            SmartCore::Types::TypeError
+          )
+          expect { nilable_type.validate!("#{'test' * 4}#{'1234' * 4}") }.to raise_error(
+            SmartCore::Types::TypeError
+          )
         end
 
         aggregate_failures('incompatible(no_spaces)') do
@@ -214,6 +248,13 @@ RSpec.describe 'INVARIANTS: definitioning and logic' do
             expect(result.errors).to eq(result.error_codes)
             expect(result.invariant_errors).to eq(result.error_codes)
           end
+
+          expect { type.validate!('test1234 test1234') }.to raise_error(
+            SmartCore::Types::TypeError
+          )
+          expect { nilable_type.validate!('test1234 test1234') }.to raise_error(
+            SmartCore::Types::TypeError
+          )
         end
       end
     end
