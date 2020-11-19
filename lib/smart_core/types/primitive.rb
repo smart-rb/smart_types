@@ -28,7 +28,7 @@ class SmartCore::Types::Primitive
     end
   end
 
-  # @note NilClass is suitable for type sum and type multiplication
+  # @note NilClass is suitable for sum-types, mult-types and nilable types.
   # @return [String, NilClass]
   #
   # @api public
@@ -47,7 +47,7 @@ class SmartCore::Types::Primitive
   # @since 0.2.0
   attr_reader :validator
 
-  # @param name [String, NilClass] NilClass is suitable for type sum and type multiplication
+  # @param name [String, NilClass] NilClass is suitable for sum-types, mult-types and nilable types.
   # @param validator [SmartCore::Types::Primitive::Validator]
   # @param caster [SmartCore::Types::Primitive::Caster]
   # @return [void]
