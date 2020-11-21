@@ -96,6 +96,9 @@ Invariants inside invariant chains will be invoked in order they was defined and
 **!IMPORTANT!** Type sum and type multiplication does not support invariant checking and custom invariant definitioning at this moment.
 Type sum and type mult ignores type invariants in their validation logic. (currently this functionality in development yet).
 
+Invariant checking is a special validation layer (see [#Type-validation](#type-validation) readme section). Invariant error code pattern:
+  - for invariant chains: **TypeName**.**invariant_chain_name**.**invariant_name**
+  - for single invariant: **TypeName**.**invariant_name**
 
 #### Primitive type definition
 
@@ -152,14 +155,16 @@ end
 
 Type validation reflects on two APIs:
 
-- type checker;
-- type invariants (invariants and invariant chains);
+- type checker ([how to define type checkers](#custom-type-definition));
+- type invariants (invariants and invariant chains) ([how to define type invariants](#custom-type-definition));
 
 Type invariants does not depends on each other (invariant defined out from the chain does not depends on other invariants);
 
 Invariants inside invariant chains will be invoked in order they was defined and each internal invariant depends on the valid previous invairant check.
 
-[How to define type invariants](#custom-type-definition)
+Invariant checking is a special validation layer (see [#Type-validation](#type-validation) readme section). Invariant error code pattern:
+  - for invariant chains: **TypeName**.**invariant_chain_name**.**invariant_name**
+  - for single invariant: **TypeName**.**invariant_name**
 
 Type valdiation interface:
 
