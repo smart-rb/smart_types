@@ -4,6 +4,8 @@ RSpec.describe 'INVARIANTS: Type multiplication composability' do
   SmartCore::Types::Value.define_type(:InvFirstMultTypeSpec) do |type|
     type.define_checker { |value| value.is_a?(::Integer) }
 
+    type.define_caster { |value| ::Kernel::Integer(value) }
+
     type.invariant_chain(:range) do
       invariant(:non_zero) { |value| value != 0 }
       invariant(:not_59) { |value| value != 59 }
@@ -14,6 +16,8 @@ RSpec.describe 'INVARIANTS: Type multiplication composability' do
 
   SmartCore::Types::Value.define_type(:InvSecMultTypeSpec) do |type|
     type.define_checker { |value| value.is_a?(::Float) }
+
+    type.define_caster { |value| ::Kernel::Float(value) }
 
     type.invariant_chain(:range) do
       invariant(:less_than_100) { |value| value < 100 }
