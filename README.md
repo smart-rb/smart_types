@@ -27,6 +27,7 @@ require 'smart_core/types'
 ## Usage
 
 - [Type interface](#type-interface)
+- [Basic type algebra](#basic-type-algebra)
 - [Supported types](#supported-types)
 - [Nilable types](#nilable-types)
 - [Custom type definition](#custom-type-definition)
