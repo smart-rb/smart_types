@@ -97,8 +97,8 @@ Invariants inside invariant chains will be invoked in order they was defined and
 Type sum and type mult ignores type invariants in their validation logic (currently this functionality in development yet).
 
 Invariant checking is a special validation layer (see [#type validation](#type-validation) readme section). Invariant error code pattern:
-  - for invariant chains: **TypeName**.**invariant_chain_name**.**invariant_name**
-  - for single invariant: **TypeName**.**invariant_name**
+  - for invariant chains: `TypeName.invariant_chain_name.invariant_name`;
+  - for single invariant: `TypeName.invariant_name`;
 
 #### Primitive type definition
 
@@ -186,8 +186,8 @@ Validation result object interface:
 - `#valid_invariants?` (`false` if at least one invariant is invalid);
 - `#errors` (the same as `#invariant_errors` and the same as `#error_codes`) - an array of failed invariant names;
   - error code patterns:
-    - for invariant chains: **TypeName**.**invariant_chain_name**.**invariant_name**
-    - for single invariant: **TypeName**.**invariant_name**
+    - for invariant chains: `TypeName.invariant_chain_name.invariant_name`;
+    - for single invariant: `TypeName.invariant_name`;
 - `#checked_value` (the same as `#value`) - checked value :)
 
 
