@@ -31,10 +31,15 @@ RSpec.describe 'INVARIANTS: Type multiplication composability' do
   let!(:mult_type) { SmartCore::Types::Value::InvMultTypeSpec }
   let!(:nilable_mult_type) { SmartCore::Types::Value::InvMultTypeSpec.nilable }
 
-  specify do
-    mult_type.validate(55.0)
-    nilable_mult_type.validate(55.0)
-    mult_type.valid?(55.0)
-    nilable_mult_type.valid?(55.0)
+  specify('TODO: support for invariant checking in type mult') {}
+
+  # rubocop:disable Layout/LineLength
+  specify 'result type' do
+    expect(mult_type.validate('123')).to be_a(::SmartCore::Types::Primitive::MultValidator::Result)
+    expect(mult_type.validate(123)).to be_a(::SmartCore::Types::Primitive::MultValidator::Result)
+    expect(mult_type.validate(123.0)).to be_a(::SmartCore::Types::Primitive::MultValidator::Result)
+    expect(mult_type.validate(nil)).to be_a(::SmartCore::Types::Primitive::MultValidator::Result)
+    expect(nilable_mult_type.validate(nil)).to be_a(::SmartCore::Types::Primitive::NilableValidator::Result)
   end
+  # rubocop:enable Layout/LineLength
 end

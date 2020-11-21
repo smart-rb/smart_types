@@ -36,6 +36,7 @@ class SmartCore::Types::Primitive::SumValidator::Result
 
   # @param type [SmartCore::Types::Primitive]
   # @param concrete_validation_result [
+  #   Boolean, (TEMPORARY)
   #   SmartCore::Types::Primitive::Validator::Result,
   #   SmartCore::Types::Primitive::SumValidator::Result,
   #   SmartCore::Types::Primitive::MultValidator::Result,
@@ -74,7 +75,10 @@ class SmartCore::Types::Primitive::SumValidator::Result
   # @api public
   # @since 0.2.0
   def success?
-    concrete_validation_result.success?
+    # NOTE: at this moment type sum does not support invariant checking
+    # TODO (0.3.0):
+    #   concrete_validation_result.success?
+    concrete_validation_result
   end
 
   # @return [Boolean]
@@ -82,6 +86,9 @@ class SmartCore::Types::Primitive::SumValidator::Result
   # @api public
   # @since 0.2.0
   def failure?
-    concrete_validation_result.failure?
+    # NOTE: at this moment type sum does not support invariant checking
+    # TODO (0.3.0):
+    #   concrete_validation_result.failure?
+    !success?
   end
 end
