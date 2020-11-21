@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## [0.2.0] - 2020-11-21
 ### Added
 - Brand new **Type invariant API**:
   - globally refactored validation logic (with backward compatability for `#valid?(value)` method);
