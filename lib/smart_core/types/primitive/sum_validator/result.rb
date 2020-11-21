@@ -58,7 +58,10 @@ class SmartCore::Types::Primitive::SumValidator::Result
   # @api public
   # @since 0.2.0
   def valid_invariants?
-    concrete_validation_result.valid_invariants?
+    # NOTE: at this moment type sum does not support invariant checking
+    # TODO (0.x.0):
+    #   concrete_validation_result.valid_invariants?
+    true
   end
 
   # @return [Boolean]
@@ -66,7 +69,10 @@ class SmartCore::Types::Primitive::SumValidator::Result
   # @api public
   # @since 0.2.0
   def is_valid_check
-    concrete_validation_result.is_valid_check
+    # NOTE: at this moment type sum does not support invariant checking
+    # TODO (0.x.0):
+    #   concrete_validation_result.is_valid_check
+    concrete_validation_result
   end
   alias_method :valid_check?, :is_valid_check
 

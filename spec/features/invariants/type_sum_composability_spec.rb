@@ -38,36 +38,48 @@ RSpec.describe 'INVARIANTS: Type sum composability' do
       expect(result.success?).to eq(true)
       expect(result.failure?).to eq(false)
       expect(result.errors).to eq([]) # invariant checks does not supported at this moment
+      expect(result.valid_check?).to eq(true)
+      expect(result.valid_invariants?).to eq(true)
 
       # (integer) nilable type (value check)
       result = nilable_sum_type.validate(0)
       expect(result.success?).to eq(true)
       expect(result.failure?).to eq(false)
       expect(result.errors).to eq([]) # invariant checks does not supported at this moment
+      expect(result.valid_check?).to eq(true)
+      expect(result.valid_invariants?).to eq(true)
 
       # (integer) nilable type (nil check)
       result = nilable_sum_type.validate(nil)
       expect(result.success?).to eq(true)
       expect(result.failure?).to eq(false)
       expect(result.errors).to eq([]) # invariant checks does not supported at this moment
+      expect(result.valid_check?).to eq(true)
+      expect(result.valid_invariants?).to eq(true)
 
       # (float) common type
       result = sum_type.validate(70.0)
       expect(result.success?).to eq(true)
       expect(result.failure?).to eq(false)
       expect(result.errors).to eq([]) # invariant checks does not supported at this moment
+      expect(result.valid_check?).to eq(true)
+      expect(result.valid_invariants?).to eq(true)
 
       # (float) nilable type (value check)
       result = nilable_sum_type.validate(70.0)
       expect(result.success?).to eq(true)
       expect(result.failure?).to eq(false)
       expect(result.errors).to eq([]) # invariant checks does not supported at this moment
+      expect(result.valid_check?).to eq(true)
+      expect(result.valid_invariants?).to eq(true)
 
       # (float) nilable type (nil check)
       result = nilable_sum_type.validate(nil)
       expect(result.success?).to eq(true)
       expect(result.failure?).to eq(false)
       expect(result.errors).to eq([]) # invariant checks does not supported at this moment
+      expect(result.valid_check?).to eq(true)
+      expect(result.valid_invariants?).to eq(true)
     end
 
     aggregate_failures 'false-checks' do
@@ -76,12 +88,16 @@ RSpec.describe 'INVARIANTS: Type sum composability' do
       expect(result.success?).to eq(false)
       expect(result.failure?).to eq(true)
       expect(result.errors).to eq([]) # invariant checks does not supported at this moment
+      expect(result.valid_check?).to eq(false)
+      expect(result.valid_invariants?).to eq(true)
 
       # (integer) nilable type (value check)
       result = nilable_sum_type.validate('123')
       expect(result.success?).to eq(false)
       expect(result.failure?).to eq(true)
       expect(result.errors).to eq([]) # invariant checks does not supported at this moment
+      expect(result.valid_check?).to eq(false)
+      expect(result.valid_invariants?).to eq(true)
     end
   end
 
