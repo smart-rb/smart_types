@@ -355,14 +355,16 @@ SmartCore::Types::Protocol::Callable
 - constrained types;
 - moudle-based type system integration;
 - constructor implementation and support;
-- support for invariant checking (and definitioning) in mult-types;
-  - to provide a type comparability and compatability between all passed types
-    you should provide `type.reconcilable { |value, *types| .... }`  setting;
-  - `type.reconcilable` should be accesible for type sum and type mult definitions;
 - support for invariant checking (and custom definitioning) in sum-types;
   - to provide a type comparability and compatability between all passed types
     you should provide `type.reconcilable { |value, *types| .... }`  setting;
   - `type.reconcilable` should be accesible for type sum and type mult definitions;
+  - (**preliminarily**) invariants of the concrete passed type should be valid for sucessful invariant check;
+- support for invariant checking (and definitioning) in mult-types;
+  - to provide a type comparability and compatability between all passed types
+    you should provide `type.reconcilable { |value, *types| .... }`  setting;
+  - `type.reconcilable` should be accesible for type sum and type mult definitions;
+  - (**preliminarily**) all invariants of all types should be valid for sucessful invariant check;
 
 ## Contributing
 
