@@ -24,6 +24,23 @@ require 'smart_core/types'
 
 ---
 
+## Usage
+
+- [Type interface](#type-interface)
+- [Supported types](#supported-types)
+- [Nilable types](#nilable-types)
+- [Custom type definition](#custom-type-definition)
+  - [Primitive type definition](#primitive-type-definition)
+  - [With type invariants](#with-type-invariants)
+- [Type validation](#type-validation)
+- [Type casting](#type-casting)
+- [Roadmap](#roadmap)
+- [Contributing](#contributing)
+- [License](#license)
+- [Authors](#authors)
+
+---
+
 ## Type Interface
 
 ```ruby
@@ -261,7 +278,7 @@ SmartCore::Types::Value::String.validate!('test') # => SmartCore::Types::TypeErr
 
 ## Type casting
 
-```
+```ruby
 SmartCore::Types::Value::String.cast(123) # => "123"
 SmartCore::Types::Value::Float.cast('55') # => 55.0
 ```
