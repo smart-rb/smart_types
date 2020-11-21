@@ -5,7 +5,7 @@ RSpec.describe 'SmartCore::Types::Value::BigDecimal' do
     specify 'type-casting' do
       expect(type.cast('18491.1823')).to eq(BigDecimal('18491.1823')).and be_a(::BigDecimal)
       expect(type.cast('71')).to eq(BigDecimal('71')).and be_a(::BigDecimal)
-      expect(type.cast(9301)).to eq(BigDecimal(9301)).and be_a(::BigDecimal)
+      expect(type.cast(9301)).to eq(BigDecimal('9301')).and be_a(::BigDecimal)
       expect(type.cast(81.29)).to eq(BigDecimal('81.29')).and be_a(::BigDecimal)
       expect(type.cast('test')).to eq(BigDecimal('0.0')).and be_a(::BigDecimal)
 

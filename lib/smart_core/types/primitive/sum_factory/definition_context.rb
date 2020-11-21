@@ -23,7 +23,9 @@ class SmartCore::Types::Primitive::SumFactory::DefinitionContext
   # @api public
   # @since 0.1.0
   def define_caster(&caster)
-    raise(SmartCore::ArgumentError, 'No caster definition block') unless block_given?
+    raise(SmartCore::Types::ArgumentError, 'No caster definition block') unless block_given?
     @type_caster = caster
   end
+
+  # TODO (0.x.0): invariant API
 end
