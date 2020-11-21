@@ -80,10 +80,43 @@ SmartCore::Types::Value::Time.nilable
 
 ## Custom type definition
 
+Type definition is a composition of:
+
+- type checker (required);
+- type caster (optional);
+- type invariants (optional);
+- type invariant chains (optional);
+
+Invariant is a custom validation block that will work as a logical value checker. You can have as much invariants as you want.
+
+Type invariants does not depends on each other (invariant defined out from chain does not depends on other invariants);
+
+Invariants inside invariant chains will be invoked in order they was defined and each internal invariant depends on the valid previous invairant check.
+
+**!IMPORTANT!** Type sum and type multiplication does not support invariant checking and custom invariant definitioning at this moment.
+Type sum and type mult ignores type invariants in their validation logic. (currently this functionality in development yet).
+
+
+#### Primitive type definition
+
 ```ruby
 # documentation is coming
 
 # example:
+SmartCore::Types::Value.define_type(:String) do |type|
+  type.define_checker do |value|
+    value.is_a?(::String)
+  end
+
+  type.define_caster do |value|
+    value.to_s
+  end
+end
+```
+
+#### With type invariants
+
+```ruby
 SmartCore::Types::Value.define_type(:String) do |type|
   type.define_checker do |value|
     value.is_a?(::String)
@@ -117,15 +150,38 @@ end
 
 ## Type validation
 
-```ruby
-# documentation is coming
+Type validation reflects on two APIs:
 
+- type checker;
+- type invariants (invariants and invariant chains);
+
+Type invariants does not depends on each other (invariant defined out from the chain does not depends on other invariants);
+
+Invariants inside invariant chains will be invoked in order they was defined and each internal invariant depends on the valid previous invairant check.
+
+[How to define type invariants](#custom-type-definition)
+
+Type valdiation interface:
+
+- `valid?(value)` - validates value and returns `true` or `false`;
+  - returns `ture` only if the type checker returns `true` and all invariants are valid;
+- `validate(value)` - validates value and returns the monadic result object:
+  - `SmartCore::Types::Primitive::Validator::Result` for primitive types;
+  - `SmartCore::Types::Primitive::SumValidator::Result` for sum-based types;
+  - `SmartCore::Types::Primitive::MultValidator::Result` for mult-based types;
+  - `SmartCore::Types::Primitive::NilableValidator::Result` for nilable types;
+- `validate!(value)` - validates value and returns nothing (for successful validation) or
+  raises an exception (`SmartCore::Types::TypeError`) (for unsuccessful validation);
+
+```ruby
 SmartCore::Types::Value::String.valid?('test123') # => true
 SmartCore::Types::Value::String.valid?(123.45) # => false
+```
 
+```ruby
 result = SmartCore::Types::Value::String.validate('test')
 
-result.success? # => false
+result.success? # => false (valid_check? && valid_invariants?)
 result.failure? # => true
 
 result.valid_check? # => true
@@ -137,6 +193,16 @@ result.errors # => ['String.password.should_have_numbers']
 result.invariant_errors
 # -- same as: ---
 result.error_codes
+```
+
+```ruby
+result = SmartCore::Types::Value::String.validate('test1234')
+result.success? # => true
+result.errors # => []
+```
+
+```ruby
+SmartCore::Types::Value::String.validate!('test') # => SmartCore::Types::TypeError
 ```
 
 ---
@@ -152,8 +218,17 @@ SmartCore::Types::Value::Float.cast('55') # => 55.0
 
 ## Basic type algebra
 
+> (type sum and type multiplication does not support invariants at this moment (in development yet));
+
 ```ruby
 # documentation is coming
+
+# how to define primitive type sum:
+SmartCore::Types::Value::Text = SmartCore::Types::Value::String | SmartCore::Types::Value::Symbol
+SmartCore::Types::Value::Numeric = SmartCore::Types::Value::Float | SmartCore::Types::Value::Integer
+
+# how to define primitive type multiplication:
+SmartCore::Types::Value::CryptoString = SmartCore::Types::Value::NumberdString & SmartCore::Types::Value::SymbolicString
 ```
 
 ---
@@ -271,17 +346,18 @@ SmartCore::Types::Protocol::Forwardable
 SmartCore::Types::Protocol::Callable
 ```
 
-- type name prefix (as a code part) in invariant error codes;
 - support for type of empty non-defined type (`SmartCore::Types::Primitive::Undefined`);
 - constrained types;
 - moudle-based type system integration;
 - constructor implementation and support;
 - support for invariant checking (and definitioning) in mult-types;
   - to provide a type comparability and compatability between all passed types
-    you should provide `type.invariant_compatible { |value, *types| .... }`  setting;
+    you should provide `type.reconcilable { |value, *types| .... }`  setting;
+  - `type.reconcilable` should be accesible for type sum and type mult definitions;
 - support for invariant checking (and custom definitioning) in sum-types;
   - to provide a type comparability and compatability between all passed types
-    you should provide `type.invariant_compatible { |value, *types| .... }`  setting;
+    you should provide `type.reconcilable { |value, *types| .... }`  setting;
+  - `type.reconcilable` should be accesible for type sum and type mult definitions;
 
 ## Contributing
 
