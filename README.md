@@ -204,8 +204,6 @@ SmartCore::Types::Value.define_type(:String) do |type|
     value.to_s
   end
 
-  # NOTE:
-  #    invariant defined out from chain does not depends on other invariants
   type.invariant(:uncensored_content) do |value|
     !value.include?('uncensored_word')
   end
@@ -217,14 +215,11 @@ SmartCore::Types::Value.define_type(:String) do |type|
   type.invariant_chain(:password) do
     invariant(:should_present) { |value| value != '' }
     invariant(:should_have_numbers) { |value| v.match?(/[0-9]+/) }
-    # NOTE:
-    #   inside a chain each next invariant invokation
-    #   depends on previous successful invariant check
   end
 end
 ```
 
-Validation interface:
+Validation interface and usage:
 
 ```ruby
 SmartCore::Types::Value::String.valid?('test123') # => true
