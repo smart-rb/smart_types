@@ -190,6 +190,41 @@ Validation result object interface:
     - for single invariant: `TypeName.invariant_name`;
 - `#checked_value` (the same as `#value`) - checked value :)
 
+---
+
+Imagine that we have `String` type like this:
+
+```ruby
+SmartCore::Types::Value.define_type(:String) do |type|
+  type.define_checker do |value|
+    value.is_a?(::String)
+  end
+
+  type.define_caster do |value|
+    value.to_s
+  end
+
+  # NOTE:
+  #    invariant defined out from chain does not depends on other invariants
+  type.invariant(:uncensored_content) do |value|
+    !value.include?('uncensored_word')
+  end
+
+  type.invariant(:filled) do |value|
+    value != ''
+  end
+
+  type.invariant_chain(:password) do
+    invariant(:should_present) { |value| value != '' }
+    invariant(:should_have_numbers) { |value| v.match?(/[0-9]+/) }
+    # NOTE:
+    #   inside a chain each next invariant invokation
+    #   depends on previous successful invariant check
+  end
+end
+```
+
+Validation interface:
 
 ```ruby
 SmartCore::Types::Value::String.valid?('test123') # => true
