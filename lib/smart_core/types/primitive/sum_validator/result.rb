@@ -3,6 +3,12 @@
 # @api private
 # @since 0.2.0
 class SmartCore::Types::Primitive::SumValidator::Result
+  # @return [Array]
+  #
+  # @api private
+  # @since 0.2.0
+  NO_INVARIANT_ERRORS = [].freeze
+
   # @return [SmartCore::Types::Primitive]
   #
   # @api public
@@ -35,14 +41,15 @@ class SmartCore::Types::Primitive::SumValidator::Result
   #   SmartCore::Types::Primitive::MultValidator::Result,
   #   SmartCore::Types::Primitive::NilableValidator::Result
   # ]
+  # @param invariant_errors [Array<String>]
   # @return [void]
   #
   # @api private
   # @since 0.2.0
-  def initialize(type, concrete_validation_result, invariant_errors)
+  def initialize(type, concrete_validation_result, invariant_errors = NO_INVARIANT_ERRORS)
     @type = type
     @concrete_validation_result = concrete_validation_result
-    @invariant_errors = invariant_errors
+    @invariant_errors = invariant_errors.dup.tap(&:freeze)
   end
 
   # @return [Boolean]

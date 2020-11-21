@@ -29,7 +29,10 @@ class SmartCore::Types::Primitive::SumValidator
   # @api private
   # @since 0.2.0
   def valid?(value)
-    validators.any? { |validator| validator.valid?(value) }
+    # NOTE: at this moment type sum does not support invariant checking
+    # TODO (0.3.0):
+    #   validators.any? { |validator| validator.valid?(value) }
+    validators.any? { |validator| validator.type_checker.call(value) }
   end
 
   # @param value [Any]
@@ -38,16 +41,18 @@ class SmartCore::Types::Primitive::SumValidator
   # @api private
   # @since 0.2.0
   def validate(value)
-    final_result = SmartCore::Engine::Atom.new.tap do |result|
-      validators.each do |validator|
-        result.swap { validator.validate(value) }
-        break if result.value.success?
+    compile_validation_result do
+      SmartCore::Engine::Atom.new.tap do |result|
+        validators.each do |validator|
+          # NOTE: at this moment type sum does not support invariant checking
+          # TODO (0.3.0):
+          #   result.swap { validator.validate(value) }
+          #   break if result.value.success?
+          result.swap { validator.type_checker.call(value) }
+          break if result.value # => boolean
+        end
       end
     end
-
-    SmartCore::Types::Primitive::SumValidator::Result.new(
-      type, final_result.value, final_result.value.invariant_errors
-    )
   end
 
   # @param value [Any]
@@ -75,4 +80,22 @@ class SmartCore::Types::Primitive::SumValidator
   # @api private
   # @since 0.2.0
   attr_reader :validators
+
+  # @param validation [Block]
+  # @yieldparam [void]
+  # @yieldreturn [SmartCore::Engine::Atom]
+  # @return [SmartCore::Types::Primitive::SumValidator::Result]
+  #
+  # @api private
+  # @since 0.2.0
+  def compile_validation_result(&validation)
+    # NOTE: at this moment type sum does not support invariant checking
+    # TODO (0.3.0):
+    #   @yieldreturn [SmartCore::Types::Primitive::Validator::Result]
+    #   => and:
+    #   SmartCore::Types::Primitive::SumValidator::Result.new(
+    #     type, final_result.value, final_result.value.invariant_errors
+    #   )
+    SmartCore::Types::Primitive::SumValidator::Result.new(type, yield.value)
+  end
 end

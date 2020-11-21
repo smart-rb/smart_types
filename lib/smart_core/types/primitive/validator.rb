@@ -5,6 +5,24 @@
 class SmartCore::Types::Primitive::Validator
   require_relative 'validator/result'
 
+  # @return [SmartCore::Type::Primitive]
+  #
+  # @api private
+  # @since 0.2.0
+  attr_reader :type
+
+  # @return [SmartCore::Types::Primitive::Checker]
+  #
+  # @api private
+  # @since 0.2.0
+  attr_reader :type_checker
+
+  # @return [SmartCore::Types::Primitive::InvariantControl]
+  #
+  # @api private
+  # @since 0.2.0
+  attr_reader :invariant_control
+
   # @param type_checker [
   #   SmartCore::Types::Primitive::Checker,
   #   SmartCore::Types::Primitive::MultChecker,
@@ -63,24 +81,4 @@ class SmartCore::Types::Primitive::Validator
     return if validate(value).success?
     raise(SmartCore::Types::TypeError, 'Invalid type')
   end
-
-  private
-
-  # @return [SmartCore::Type::Primitive]
-  #
-  # @api private
-  # @since 0.2.0
-  attr_reader :type
-
-  # @return [SmartCore::Types::Primitive::Checker]
-  #
-  # @api private
-  # @since 0.2.0
-  attr_reader :type_checker
-
-  # @return [SmartCore::Types::Primitive::InvariantControl]
-  #
-  # @api private
-  # @since 0.2.0
-  attr_reader :invariant_control
 end

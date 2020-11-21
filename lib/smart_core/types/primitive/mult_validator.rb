@@ -5,30 +5,30 @@
 class SmartCore::Types::Primitive::MultValidator < SmartCore::Types::Primitive::SumValidator
   require_relative 'mult_validator/result'
 
-  # @param value [Any]
-  # @return [Boolean]
+  # @overload valudate(value)
+  #   @param value [Any]
+  #   @return [SmartCore::Types::Primitive::MultValidator::Result]
   #
   # @api private
   # @since 0.2.0
-  def valid?(value)
-    validators.all? { |validator| validator.valid?(value) }
-  end
 
-  # @param value [Any]
+  private
+
+  # @param validation [Block]
+  # @yieldparam [void]
+  # @yieldreturn [SmartCore::Engine::Atom]
   # @return [SmartCore::Types::Primitive::MultValidator::Result]
   #
   # @api private
   # @since 0.2.0
-  def validate(value)
-    final_result = SmartCore::Engine::Atom.new.tap do |result|
-      validators.each do |validator|
-        result.swap { validator.validate(value) }
-        break if result.value.success?
-      end
-    end
-
-    SmartCore::Types::Primitive::MultValidator::Result.new(
-      type, final_result.value, final_result.value.invariant_errors
-    )
+  def compile_validation_result(&validation)
+    # NOTE: at this moment type sum does not support invariant checking
+    # TODO (0.3.0):
+    #   @yieldreturn [SmartCore::Types::Primitive::Validator::Result]
+    #   => and:
+    #   SmartCore::Types::Primitive::MultValidator::Result.new(
+    #     type, final_result.value, final_result.value.invariant_errors
+    #   )
+    SmartCore::Types::Primitive::MultValidator::Result.new(type, yield.value)
   end
 end
