@@ -27,5 +27,5 @@ class SmartCore::Types::Primitive::SumFactory::DefinitionContext
     @type_caster = caster
   end
 
-  # TODO: support for invariants
+  # TODO (0.x.0): invariant API
 end

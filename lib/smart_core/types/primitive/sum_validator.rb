@@ -30,7 +30,7 @@ class SmartCore::Types::Primitive::SumValidator
   # @since 0.2.0
   def valid?(value)
     # NOTE: at this moment type sum does not support invariant checking
-    # TODO (0.3.0):
+    # TODO (0.x.0):
     #   validators.any? { |validator| validator.valid?(value) }
     validators.any? { |validator| validator.type_checker.call(value) }
   end
@@ -45,7 +45,7 @@ class SmartCore::Types::Primitive::SumValidator
       SmartCore::Engine::Atom.new.tap do |result|
         validators.each do |validator|
           # NOTE: at this moment type sum does not support invariant checking
-          # TODO (0.3.0):
+          # TODO (0.x.0):
           #   result.swap { validator.validate(value) }
           #   break if result.value.success?
           result.swap { validator.type_checker.call(value) }
@@ -90,7 +90,7 @@ class SmartCore::Types::Primitive::SumValidator
   # @since 0.2.0
   def compile_validation_result(&validation)
     # NOTE: at this moment type sum does not support invariant checking
-    # TODO (0.3.0):
+    # TODO (0.x.0):
     #   @yieldreturn [SmartCore::Types::Primitive::Validator::Result]
     #   => and:
     #   SmartCore::Types::Primitive::SumValidator::Result.new(

@@ -2,6 +2,7 @@
 
 # @api private
 # @since 0.1.0
+# @version 0.2.0
 class SmartCore::Types::Primitive::Factory::DefinitionContext
   class << self
     # @param name [String, Symbol]
@@ -81,6 +82,7 @@ class SmartCore::Types::Primitive::Factory::DefinitionContext
   #
   # @api private
   # @since 0.1.0
+  # @version 0.2.0
   def initialize
     @type_invariant_chains = Hash.new { |h, k| h[k] = [] }
     @type_invariants = {}
@@ -94,6 +96,7 @@ class SmartCore::Types::Primitive::Factory::DefinitionContext
   #
   # @api public
   # @since 0.1.0
+  # @version 0.2.0
   def define_checker(&checker)
     thread_safe do
       raise(SmartCore::Types::ArgumentError, 'No checker definition block') unless block_given?
@@ -106,6 +109,7 @@ class SmartCore::Types::Primitive::Factory::DefinitionContext
   #
   # @api public
   # @since 0.1.0
+  # @version 0.2.0
   def define_caster(&caster)
     thread_safe do
       raise(SmartCore::Types::ArgumentError, 'No caster definition block') unless block_given?

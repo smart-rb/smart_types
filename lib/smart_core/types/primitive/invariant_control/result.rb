@@ -95,6 +95,7 @@ class SmartCore::Types::Primitive::InvariantControl::Result
         invariant_errors.concat(chain_result.error_codes)
       end
 
+      # collect invariant errors from single invariants
       single_results.select(&:failure?).each do |single_result|
         invariant_errors.concat(single_result.error_codes)
       end

@@ -2,6 +2,7 @@
 
 # @api private
 # @since 0.1.0
+# @version 0.2.0
 class SmartCore::Types::Primitive
   require_relative 'primitive/checker'
   require_relative 'primitive/caster'
@@ -42,13 +43,21 @@ class SmartCore::Types::Primitive
   attr_reader :caster
 
   # @return [SmartCore::Types::Primitive::Validator]
+  # @return [SmartCore::Types::Primitive::SumValidator]
+  # @return [SmartCore::Types::Primitive::MultValidator]
+  # @return [SmartCore::Types::primitive::NilableValidator]
   #
   # @api private
   # @since 0.2.0
   attr_reader :validator
 
   # @param name [String, NilClass] NilClass is suitable for sum-types, mult-types and nilable types.
-  # @param validator [SmartCore::Types::Primitive::Validator]
+  # @param validator [
+  #   SmartCore::Types::Primitive::Validator,
+  #   SmartCore::Types::Primitive::SumValidator,
+  #   SmartCore::Types::Primitive::MultValidator,
+  #   SmartCore::Types::Primitive::NilableValidator
+  # ]
   # @param caster [SmartCore::Types::Primitive::Caster]
   # @return [void]
   #
@@ -77,7 +86,10 @@ class SmartCore::Types::Primitive
   # @return [void]
   #
   # @raise [SmartCore::Types::TypeError]
-  # @see SmartCore::Types::Primitive::Validator
+  # @see SmartCore::Primitive::Validator
+  # @see SmartCore::Primitive::MultValidator
+  # @see SmartCore::Primitive::SumValidator
+  # @see SmartCore::Primitive::NilableValidator
   #
   # @api public
   # @since 0.1.0
@@ -87,6 +99,11 @@ class SmartCore::Types::Primitive
   end
 
   # @return [SmartCore::Types::Primitive::Validator::Result]
+  #
+  # @see SmartCore::Primitive::Validator
+  # @see SmartCore::Primitive::MultValidator
+  # @see SmartCore::Primitive::SumValidator
+  # @see SmartCore::Primitive::NilableValidator
   #
   # @api public
   # @since 0.2.0

@@ -3,12 +3,13 @@
 # @api private
 # @since 0.2.0
 class SmartCore::Types::Primitive::InvariantControl::Factory::ChainDefinitionContext
-  # @return []
+  # @return [SmartCore::Types::Primitive::InvariantControl::Chain]
   #
   # @api private
   # @since 0.2.0
   attr_reader :___chain___
 
+  # @param chain_name [String]
   # @return [void]
   #
   # @api privae

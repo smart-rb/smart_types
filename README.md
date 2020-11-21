@@ -94,9 +94,9 @@ Type invariants does not depends on each other (invariant defined out from chain
 Invariants inside invariant chains will be invoked in order they was defined and each internal invariant depends on the valid previous invairant check.
 
 **!IMPORTANT!** Type sum and type multiplication does not support invariant checking and custom invariant definitioning at this moment.
-Type sum and type mult ignores type invariants in their validation logic. (currently this functionality in development yet).
+Type sum and type mult ignores type invariants in their validation logic (currently this functionality in development yet).
 
-Invariant checking is a special validation layer (see [#Type-validation](#type-validation) readme section). Invariant error code pattern:
+Invariant checking is a special validation layer (see [#type validation](#type-validation) readme section). Invariant error code pattern:
   - for invariant chains: **TypeName**.**invariant_chain_name**.**invariant_name**
   - for single invariant: **TypeName**.**invariant_name**
 
@@ -162,9 +162,10 @@ Type invariants does not depends on each other (invariant defined out from the c
 
 Invariants inside invariant chains will be invoked in order they was defined and each internal invariant depends on the valid previous invairant check.
 
-Invariant checking is a special validation layer (see [#Type-validation](#type-validation) readme section). Invariant error code pattern:
-  - for invariant chains: **TypeName**.**invariant_chain_name**.**invariant_name**
-  - for single invariant: **TypeName**.**invariant_name**
+**!IMPORTANT!** Type sum and type multiplication does not support invariant checking and custom invariant definitioning at this moment.
+Type sum and type mult ignores type invariants in their validation logic (currently this functionality in development yet).
+
+Invariant checking is a special validation layer (see [#type validation](#type-validation) readme section) and represents a set of error codes in result object;
 
 Type valdiation interface:
 
@@ -178,6 +179,18 @@ Type valdiation interface:
 - `validate!(value)` - validates value and returns nothing (for successful validation) or
   raises an exception (`SmartCore::Types::TypeError`) (for unsuccessful validation);
 
+Validation result object interface:
+
+- `#success?` / `#failure?` (`#success?` is a combination of `valid_check? && valid_invariants?`; `#failure?` - is an opposite of `#success?`);
+- `#valid_check?` (valid type checker or not);
+- `#valid_invariants?` (`false` if at least one invariant is invalid);
+- `#errors` (the same as `#invariant_errors` and the same as `#error_codes`) - an array of failed invariant names;
+  - error code patterns:
+    - for invariant chains: **TypeName**.**invariant_chain_name**.**invariant_name**
+    - for single invariant: **TypeName**.**invariant_name**
+- `#checked_value` (the same as `#value`) - checked value :)
+
+
 ```ruby
 SmartCore::Types::Value::String.valid?('test123') # => true
 SmartCore::Types::Value::String.valid?(123.45) # => false
@@ -185,6 +198,10 @@ SmartCore::Types::Value::String.valid?(123.45) # => false
 
 ```ruby
 result = SmartCore::Types::Value::String.validate('test')
+
+result.checked_value # => 'test'
+# --- same as: ---
+result.value
 
 result.success? # => false (valid_check? && valid_invariants?)
 result.failure? # => true

@@ -41,7 +41,7 @@ module SmartCore::Types::Primitive::MultFactory
     # @return [SmartCore::Types::Primitive::MultValidator]
     #
     # @api private
-    # @since 0.1.0
+    # @since 0.2.0
     def build_type_validator(types, type_definitions)
       SmartCore::Types::Primitive::MultValidator.new(*types.map(&:validator))
     end

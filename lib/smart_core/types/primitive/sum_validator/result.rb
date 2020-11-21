@@ -47,7 +47,7 @@ class SmartCore::Types::Primitive::SumValidator::Result
   #
   # @api private
   # @since 0.2.0
-  def initialize(type, concrete_validation_result, invariant_errors = NO_INVARIANT_ERRORS)
+  def initialize(type, concrete_validation_result, invariant_errors = NO_INVARIANT_ERRORS.dup)
     @type = type
     @concrete_validation_result = concrete_validation_result
     @invariant_errors = invariant_errors.dup.tap(&:freeze)
@@ -76,7 +76,7 @@ class SmartCore::Types::Primitive::SumValidator::Result
   # @since 0.2.0
   def success?
     # NOTE: at this moment type sum does not support invariant checking
-    # TODO (0.3.0):
+    # TODO (0.x.0):
     #   concrete_validation_result.success?
     concrete_validation_result
   end
@@ -87,7 +87,7 @@ class SmartCore::Types::Primitive::SumValidator::Result
   # @since 0.2.0
   def failure?
     # NOTE: at this moment type sum does not support invariant checking
-    # TODO (0.3.0):
+    # TODO (0.x.0):
     #   concrete_validation_result.failure?
     !success?
   end
