@@ -405,8 +405,8 @@ SmartCore::Types::Struct::JSONSchema
 SmartCore::Types::Struct::StrictArray
 SmartCore::Types::Struct::StrictHash
 SmartCore::Types::Struct::Map
-SmartCore::Types::Variative::Enum
-SmartCore::Types::Variative::Variant
+SmartCore::Types::Varied::Enum
+SmartCore::Types::Varied::Variant
 SmartCore::Types::Protocol::InstanceOf
 SmartCore::Types::Protocol::Interface
 SmartCore::Types::Protocol::Ancestors
