@@ -11,6 +11,7 @@ class SmartCore::Types::Primitive::Factory::DefinitionContext
     #
     # @api private
     # @since 0.2.0
+    # @version 0.3.0
     def validate_invariant_attributes!(name, &definition)
       unless block_given?
         raise(SmartCore::Types::ArgumentError, 'No invariant block')
@@ -123,6 +124,7 @@ class SmartCore::Types::Primitive::Factory::DefinitionContext
   #
   # @api public
   # @since 0.2.0
+  # @version 0.3.0
   def invariant_chain(chain_name, &definitions)
     thread_safe do
       self.class.validate_invariant_chain_attributes!(chain_name, &definitions)
@@ -136,6 +138,7 @@ class SmartCore::Types::Primitive::Factory::DefinitionContext
   #
   # @api public
   # @since 0.2.0
+  # @version 0.3.0
   def invariant(name, &definition)
     thread_safe do
       self.class.validate_invariant_attributes!(name, &definition)

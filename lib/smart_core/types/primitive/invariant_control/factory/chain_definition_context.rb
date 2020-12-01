@@ -24,6 +24,7 @@ class SmartCore::Types::Primitive::InvariantControl::Factory::ChainDefinitionCon
   #
   # @api private
   # @since 0.2.0
+  # @version 0.3.0
   def invariant(invariant_name, &invariant_definition)
     SmartCore::Types::Primitive::Factory::DefinitionContext.validate_invariant_attributes!(
       invariant_name,
