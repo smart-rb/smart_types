@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-RSpec.describe 'SmartCore::Types::Varied::TypedHash' do
+RSpec.describe 'SmartCore::Types::Struct::StrictHash' do
   let(:correct_value) { Hash[int: 10, str: '20', bool: false] }
 
   context 'non-nilable type' do
     let(:type) do
-      SmartCore::Types::Varied::TypedHash[
+      SmartCore::Types::Struct::StrictHash[
         int: SmartCore::Types::Value::Integer,
         str: SmartCore::Types::Value::String,
         bool: SmartCore::Types::Value::Boolean
@@ -41,7 +41,7 @@ RSpec.describe 'SmartCore::Types::Varied::TypedHash' do
 
   context 'nilable type' do
     let(:type) do
-      SmartCore::Types::Varied::TypedHash[
+      SmartCore::Types::Struct::StrictHash[
         int: SmartCore::Types::Value::Integer,
         str: SmartCore::Types::Value::String,
         bool: SmartCore::Types::Value::Boolean

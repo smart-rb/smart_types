@@ -2,7 +2,7 @@
 
 # @api public
 # @since 0.3.0
-SmartCore::Types::Varied.define_type(:TypedHash) do |type|
+SmartCore::Types::Struct.define_type(:StrictHash) do |type|
   # TODO: recursively check all nested hashes too
   type.define_checker do |hash, schema|
     hash.is_a?(::Hash) &&
