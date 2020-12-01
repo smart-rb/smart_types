@@ -7,7 +7,7 @@ module SmartCore::Types::Primitive::MultFactory
   require_relative 'mult_factory/definition_context'
 
   class << self
-    # @param types [Array<SmartCore::Types::Primtive>]
+    # @param types [Array<SmartCore::Types::Primitive>]
     # @param type_definition [NilClass, Proc]
     # @return [SmartCore::Types::Primitive]
     #
@@ -36,7 +36,7 @@ module SmartCore::Types::Primitive::MultFactory
       end
     end
 
-    # @param types [Array<SmartCore::Types::Primtive>]
+    # @param types [Array<SmartCore::Types::Primitive>]
     # @param type_definitions [SmartCore::Types::Primitive::MultFactory::DefinitionContext]
     # @return [SmartCore::Types::Primitive::MultValidator]
     #
@@ -46,7 +46,7 @@ module SmartCore::Types::Primitive::MultFactory
       SmartCore::Types::Primitive::MultValidator.new(*types.map(&:validator))
     end
 
-    # @param types [Array<SmartCore::Types::Primtive>]
+    # @param types [Array<SmartCore::Types::Primitive>]
     # @param type_definition [SmartCore::Types::Primitive::MultFactory::DefinitionContext]
     # @return [SmartCore::Types::Primitive::Caster]
     #

@@ -37,7 +37,7 @@ class SmartCore::Types::Primitive::Factory
     # @api private
     # @since 0.1.0
     def build_type_definitions(type_definition)
-      raise 'Type definition is not provied' unless type_definition.is_a?(Proc)
+      raise 'Type definition is not provided' unless type_definition.is_a?(Proc)
       SmartCore::Types::Primitive::Factory::DefinitionContext.new.tap do |context|
         context.instance_eval(&type_definition)
       end.tap do |context|
@@ -82,8 +82,8 @@ class SmartCore::Types::Primitive::Factory
       end
     end
 
-    # @param checker [SmartCore::Types::Primitive::Checker]
-    # @param invariant_control [SmartCore::Types::Primitive::InvariantControl]
+    # @param type_checker [SmartCore::Types::Primitive::Checker]
+    # @param type_invariant_control [SmartCore::Types::Primitive::InvariantControl]
     # @return [void]
     #
     # @api private
@@ -92,7 +92,7 @@ class SmartCore::Types::Primitive::Factory
       SmartCore::Types::Primitive::Validator.new(type_checker, type_invariant_control)
     end
 
-    # @param type_klass [Class<SmartCore::Types::Primitive>]
+    # @param type_category [Class<SmartCore::Types::Primitive>]
     # @param type_name [String, Symbol]
     # @param type_validator [SmartCore::Types::Primitive::Validator]
     # @param type_caster [SmartCore::Types::Primitive::Caster]

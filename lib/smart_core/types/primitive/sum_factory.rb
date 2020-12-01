@@ -7,7 +7,7 @@ module SmartCore::Types::Primitive::SumFactory
   require_relative 'sum_factory/definition_context'
 
   class << self
-    # @param types [Array<SmartCore::Types::Primtive>]
+    # @param types [Array<SmartCore::Types::Primitive>]
     # @param type_definition [NilClass, Proc]
     # @return [SmartCore::Types::Primitive]
     #
@@ -36,7 +36,7 @@ module SmartCore::Types::Primitive::SumFactory
       end
     end
 
-    # @param types [Array<SmartCore::Types::Primtive>]
+    # @param types [Array<SmartCore::Types::Primitive>]
     # @param type_definitions [SmartCore::Types::Primitive::SumFactory::DefinitionContext]
     # @return [SmartCore::Types::Primitive::SumValidator]
     #
@@ -46,7 +46,7 @@ module SmartCore::Types::Primitive::SumFactory
       SmartCore::Types::Primitive::SumValidator.new(*types.map(&:validator))
     end
 
-    # @param types [Array<SmartCore::Types::Primtive>]
+    # @param types [Array<SmartCore::Types::Primitive>]
     # @param type_definition [SmartCore::Types::Primitive::SumFactory::DefinitionContext]
     # @return [SmartCore::Types::Primitive::Caster]
     #

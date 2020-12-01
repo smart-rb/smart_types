@@ -4,7 +4,7 @@
 # @since 0.1.0
 module SmartCore::Types::System
   class << self
-    # @param types [Array<SmartCore::Types::Pirmitive>]
+    # @param types [Array<SmartCore::Types::Primitive>]
     # @param type_definition [Block]
     # @return [SmartCore::Types::Primitive]
     #
@@ -14,7 +14,7 @@ module SmartCore::Types::System
       SmartCore::Types::Primitive::SumFactory.create_type(types, type_definition)
     end
 
-    # @param types [Array<SmartCore::Types::Pirmitive>]
+    # @param types [Array<SmartCore::Types::Primitive>]
     # @param type_definition [Block]
     # @return [SmartCore::Types::Primitive]
     #

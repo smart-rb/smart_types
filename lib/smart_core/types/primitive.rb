@@ -16,6 +16,7 @@ class SmartCore::Types::Primitive
   require_relative 'primitive/mult_factory'
   require_relative 'primitive/nilable_validator'
   require_relative 'primitive/nilable_factory'
+  require_relative 'primitive/parametrized_factory'
 
   class << self
     # @param type_name [String, Symbol]
@@ -127,6 +128,15 @@ class SmartCore::Types::Primitive
   def nilable
     lock.synchronize { @nilable ||= self.class::NilableFactory.create_type(self) }
   end
+
+  # @return [SmartCore::Types::Primitive]
+  #
+  # @api public
+  # @since 0.3.0
+  def of(*params)
+    self.class::ParametrizedFactory.create_type(self, params)
+  end
+  alias_method :[], :of
 
   # @param another_primitive [SmartCore::Types::Primitive]
   # @return [SmartCore::Types::Primitive]
