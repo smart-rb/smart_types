@@ -6,7 +6,7 @@ RSpec.describe 'SmartCore::Types::Value::TimeBased' do
       expect(type.cast('2020-05-01')).to eq(Time.new(2020, 5, 1))
       expect(type.cast('20210417')).to eq(Time.new(2021, 4, 17))
       expect(type.cast('3rd Feb 2019')).to eq(Time.new(2019, 2, 3))
-      expect(type.cast(946702800)).to eq(Time.new(2000, 1, 1, 8))
+      expect(type.cast(946702800)).to eq(Time.utc(2000, 1, 1, 5))
       expect(type.cast(Time.new(2010, 10, 31))).to eq(Time.new(2010, 10, 31))
       expect(type.cast(Date.new(2021, 1, 7))).to eq(Date.new(2021, 1, 7)).and be_a(::Date)
 

@@ -40,5 +40,4 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'armitage-rubocop', '~> 1.3'
   spec.add_development_dependency 'simplecov',        '~> 0.19'
   spec.add_development_dependency 'pry',              '~> 0.13'
-  spec.add_development_dependency 'tzinfo-data',      '~> 1.2020'
 end
