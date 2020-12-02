@@ -84,6 +84,8 @@ GEM
     thread_safe (0.3.6)
     tzinfo (1.2.8)
       thread_safe (~> 0.1)
+    tzinfo-data (1.2020.4)
+      tzinfo (>= 1.0.0)
     unicode-display_width (1.7.0)
     zeitwerk (2.4.1)
 
@@ -98,6 +100,7 @@ DEPENDENCIES
   rspec (~> 3.10)
   simplecov (~> 0.19)
   smart_types!
+  tzinfo-data (~> 1.2020)
 
 BUNDLED WITH
    2.1.4
