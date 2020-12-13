@@ -71,6 +71,7 @@ SmartCore::Types::Value::Numeric
 SmartCore::Types::Value::BigDecimal
 SmartCore::Types::Value::Boolean
 SmartCore::Types::Value::Array
+SmartCore::Types::Value::Set
 SmartCore::Types::Value::Hash
 SmartCore::Types::Value::Proc
 SmartCore::Types::Value::Class
@@ -412,7 +413,6 @@ SmartCore::Types::Value::Enumerator
 SmartCore::Types::Value::EnumeratorChain
 SmartCore::Types::Value::Range
 SmartCore::Types::Value::Rational
-SmartCore::Types::Value::Set
 SmartCore::Types::Value::SortedSet
 SmartCore::Types::Value::IO
 SmartCore::Types::Value::StringIO

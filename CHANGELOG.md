@@ -8,7 +8,8 @@ All notable changes to this project will be documented in this file.
 - Internal *Type Development API*: all types has a reference to it's type category;
 - Brand new `SmartCore::Types::Protocol` type category;
 - New types:
-  - `SmartCore::Types::Protocol::InstanceOf` runtime-based type;
+  - `SmartCore::Types::Protocol::InstanceOf` (runtime-based type);
+  - `SmartCore::Types::Value::Set`;
 
 ### Changed
 - *Ruby@2.4* is no longer supported;
