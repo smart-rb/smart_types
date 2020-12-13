@@ -55,6 +55,13 @@ type3 = type1 | type2
 type4 = type1 & type2
 ```
 
+```ruby
+# get a type object with a custom runtime (InstanceOf type example):
+type = SmartCore::Types::Protocol::InstanceOf(::String)
+# another type object with a custom runtime (InstanceOf type example):
+type = SmartCore::Types::Protocol::InstanceOf(::Integer)
+```
+
 ## Supported types
 
 - Primitives
@@ -132,41 +139,56 @@ Invariant checking is a special validation layer (see [#type validation](#type-v
 
 # example:
 SmartCore::Types::Value.define_type(:String) do |type|
-  type.define_checker do |value|
+  type.define_checker do |value, runtime_attrs| # runtime attributes are optional
     value.is_a?(::String)
   end
 
-  type.define_caster do |value|
+  type.define_caster do |value, runtime_attrs| # runtime attributes are optional
     value.to_s
   end
 end
+
+# get a type object:
+SmartCore::Types::Value::String
+# --- or ---
+SmartCore::Types::Value::String() # without runtime attributes
+# --- or ---
+SmartCore::Types::Value::String('some_attr', :another_attr) # with runtime attributes
+
+# work with type object: see documentation below
 ```
 
 #### With type invariants
 
 ```ruby
 SmartCore::Types::Value.define_type(:String) do |type|
-  type.define_checker do |value|
+  type.define_checker do |value, runtime_attrs|
     value.is_a?(::String)
   end
 
-  type.define_caster do |value|
+  type.define_caster do |value, runtime_attrs|
     value.to_s
   end
 
   # NOTE:
   #    invariant defined out from chain does not depends on other invariants
-  type.invariant(:uncensored_content) do |value|
+  type.invariant(:uncensored_content) do |value, runtime_attrs|
     !value.include?('uncensored_word')
   end
 
-  type.invariant(:filled) do |value|
+  type.invariant(:filled) do |value, runtime_attrs|
     value != ''
   end
 
   type.invariant_chain(:password) do
-    invariant(:should_present) { |value| value != '' }
-    invariant(:should_have_numbers) { |value| v.match?(/[0-9]+/) }
+    invariant(:should_present) do |value, runtime_attrs|
+      value != ''
+    end
+
+    invariant(:should_have_numbers) do |value, runtime_attrs|
+      v.match?(/[0-9]+/)
+    end
+
     # NOTE:
     #   inside a chain each next invariant invokation
     #   depends on previous successful invariant check
@@ -384,8 +406,17 @@ SmartCore::Types::Value::Time.refine_caster do |value, original_caster|
   # new type caster
 end
 
-# .refine_invariant
-# .refine_invariant_chain
+SmartCore::Types::Value::Time.refine_runtime_attributes_checker do |value, original_checker|
+  # new runtime attribute checker
+end
+
+SmartCore::Types::Value::Time.refine_invariant(:name) do |value|
+  # new invariant
+end
+
+SmartCore::Types::Value::Time.refine_invariant_chain(:chain_name) do
+  # new invariant chain
+end
 ```
 
 - options for type casters:
