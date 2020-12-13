@@ -2,6 +2,10 @@
 
 RSpec.describe 'SmartCore::Types::Protocol::InstanceOf' do
   specify 'smoke (dirty logic check) (this spec will be rewritten)' do
+    expect do
+      SmartCore::Types::Protocol::InstanceOf()
+    end.to raise_error(SmartCore::Types::IncorrectRuntimeAttributesError)
+
     string_type = SmartCore::Types::Protocol::InstanceOf(::String, ::Symbol)
     nilable_string_type = string_type.nilable
 
@@ -46,5 +50,30 @@ RSpec.describe 'SmartCore::Types::Protocol::InstanceOf' do
     expect { nilable_numeric_type.validate!(123) }.not_to raise_error
     expect { nilable_numeric_type.validate!(123.567) }.not_to raise_error
     expect { nilable_numeric_type.validate!(nil) }.not_to raise_error
+
+    no_any_type = SmartCore::Types::Protocol::InstanceOf
+    nillable_no_any_type = no_any_type.nilable
+    expect(no_any_type.valid?('test')).to eq(false)
+    expect(no_any_type.valid?(Object.new)).to eq(false)
+    expect(no_any_type.valid?(nil)).to eq(false)
+    expect(nillable_no_any_type.valid?('test')).to eq(false)
+    expect(nillable_no_any_type.valid?(Object.new)).to eq(false)
+    expect(nillable_no_any_type.valid?(nil)).to eq(true)
+
+    expect do
+      SmartCore::Types::Protocol::InstanceOf(123)
+    end.to raise_error(SmartCore::Types::IncorrectRuntimeAttributesError)
+
+    expect do
+      SmartCore::Types::Protocol::InstanceOf('test', 123)
+    end.to raise_error(SmartCore::Types::IncorrectRuntimeAttributesError)
+
+    expect do
+      SmartCore::Types::Protocol::InstanceOf(::Symbol, 123)
+    end.to raise_error(SmartCore::Types::IncorrectRuntimeAttributesError)
+
+    expect do
+      SmartCore::Types::Protocol::InstanceOf(Module.new, ::String)
+    end.to raise_error(SmartCore::Types::IncorrectRuntimeAttributesError)
   end
 end

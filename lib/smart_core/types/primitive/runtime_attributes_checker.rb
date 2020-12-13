@@ -59,6 +59,12 @@ class SmartCore::Types::Primitive::RuntimeAttributesChecker
 
   private
 
+  # @return [SmartCore::Types::Primitive]
+  #
+  # @api private
+  # @since 0.3.0
+  attr_reader :type
+
   # @return [Proc]
   #
   # @api private
