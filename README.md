@@ -81,6 +81,12 @@ SmartCore::Types::Value::Date
 SmartCore::Types::Value::TimeBased
 ```
 
+- Protocols:
+
+```ruby
+SmartCore::Types::Protocol::InstanceOf
+```
+
 ---
 
 ## Nilable types
@@ -417,7 +423,6 @@ SmartCore::Types::Struct::StrictHash
 SmartCore::Types::Struct::Map
 SmartCore::Types::Variative::Enum
 SmartCore::Types::Variative::Variant
-SmartCore::Types::Variative::InstanceOf
 SmartCore::Types::Protocol::Interface
 SmartCore::Types::Protocol::Ancestors
 SmartCore::Types::Protocol::Enumerable
