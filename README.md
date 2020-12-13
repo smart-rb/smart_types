@@ -422,7 +422,6 @@ SmartCore::Types::Struct::StrictArray
 SmartCore::Types::Struct::StrictHash
 SmartCore::Types::Struct::Map
 SmartCore::Types::Variative::Enum
-SmartCore::Types::Variative::Variant
 SmartCore::Types::Protocol::Interface
 SmartCore::Types::Protocol::Ancestors
 SmartCore::Types::Protocol::Enumerable

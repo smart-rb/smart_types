@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe 'SmartCore::Types::Protocol::InstanceOf' do
-  specify 'smoke (dirty logic check) (this spec will be rewritten)' do
+  fspecify 'smoke (dirty logic check) (this spec will be rewritten)' do
     expect do
       SmartCore::Types::Protocol::InstanceOf()
     end.to raise_error(SmartCore::Types::IncorrectRuntimeAttributesError)

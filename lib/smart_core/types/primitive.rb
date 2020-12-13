@@ -21,6 +21,9 @@ class SmartCore::Types::Primitive
   class << self
     # @param type_name [String, Symbol]
     # @param type_definition [Block]
+    # @yield [type]
+    # @yieldparam type [SmartCore::Types::Primitive::DefinitionContext]
+    # @yieldreturn [void]
     # @return [SmartCore::Types::Primitive]
     #
     # @api public

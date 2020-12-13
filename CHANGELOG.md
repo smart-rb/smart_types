@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Extended *Type Definition API*: support for types with runtime attributes:
   - Type checkers, type casters and type invariants now receives runtime attributes (you can omit these);
+  - Types with incorret runtime attributes will raise `SmartCore::Types::IncorrectRuntimeAttributesError` exception;
+  - Types which has no support for runtime attributes will raise `SmartCore::Types::RuntimeAttributesUnsupportedError` excpetion;
+  - All types by default has a method alias which does not allow runtime attributes (for example: `SmartCore::Types::Value::String` has
+    a runtime-based alias `SmartCore::Types::Value::String()` which does not accept any runtime attribute.
+    `SmartCore::Types::Value::String('test')` will raise `SmartCore::Types::RuntimeAttributesUnsupportedError` respectively);
 - Internal *Type Development API*: all types has a reference to it's type category;
 - Brand new `SmartCore::Types::Protocol` type category;
 - New types:

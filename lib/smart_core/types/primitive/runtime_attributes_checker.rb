@@ -7,7 +7,11 @@ class SmartCore::Types::Primitive::RuntimeAttributesChecker
   #
   # @api private
   # @since 0.3.0
-  ALLOW_ALL_ATTRIBUTES_CHECKER = proc { true }.freeze
+  ATTRIBUTES_IS_NOT_ALLOWED_CHECKER = proc do |attrs|
+    attrs.empty? || raise(SmartCore::Types::RuntimeAttriburtesUnsupportedError, <<~ERROR_MESSAGE)
+      This type has no support for runtime attributes.
+    ERROR_MESSAGE
+  end.freeze
 
   # @param attributes_checker []
   # @return [void]
@@ -16,7 +20,7 @@ class SmartCore::Types::Primitive::RuntimeAttributesChecker
   # @since 0.3.0
   def initialize(attributes_checker)
     @type = nil
-    @attributes_checker = attributes_checker || ALLOW_ALL_ATTRIBUTES_CHECKER
+    @attributes_checker = attributes_checker || ATTRIBUTES_IS_NOT_ALLOWED_CHECKER
   end
 
   # @param type [SmartCore::Types::Primitive]
@@ -52,7 +56,7 @@ class SmartCore::Types::Primitive::RuntimeAttributesChecker
       #   Full type name (with type category; and delegated to the type object).
       #   (main problem: sum and mult types has no type name and type category)
       raise(SmartCore::Types::IncorrectRuntimeAttributesError, <<~ERROR_MESSAGE)
-        Incorrect runtime attributes for #{type.name}
+        Incorrect runtime attributes for #{type.name}.
       ERROR_MESSAGE
     end
   end

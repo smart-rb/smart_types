@@ -22,6 +22,10 @@ module SmartCore::Types
   IncorrectRuntimeAttributesError = Class.new(TypeDefinitionError)
 
   # @api public
+  # @since 0.3.0
+  RuntimeAttriburtesUnsupportedError = Class.new(TypeDefinitionError)
+
+  # @api public
   # @since 0.1.0
   TypeError = Class.new(SmartCore::TypeError)
 
