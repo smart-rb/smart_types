@@ -12,6 +12,13 @@ class SmartCore::Types::Primitive::MultValidator < SmartCore::Types::Primitive::
   # @api private
   # @since 0.2.0
 
+  # @overload ___copy_for___(type)
+  #   @param type [SmartCore::Types::Primitive]
+  #   @return [SmartCore::Types::Primitive::MultValidator]
+  #
+  # @api private
+  # @since 0.3.0
+
   private
 
   # @param validation [Block]

@@ -305,6 +305,16 @@ SmartCore::Types::Value::CryptoString = SmartCore::Types::Value::NumberdString &
 
 ## Roadmap
 
+- runtime-based type objects. example (two different types with different runtimes):
+
+```ruby
+# InstanceOf protocol type with own runtime:
+SmartCore::Types::Protocol::InstanceOf(::String, ::Symbol) # => SmartCore::Types::Protocol::InsatnceOf object
+
+# another InstanceOf protocol type with own runtime:
+SmartCore::Types::Protocol::InstanceOf(::Integer) # => SmartCore::Types::Protocol::InsatnceOf object
+```
+
 - type configuration:
 
 ```ruby
@@ -407,7 +417,7 @@ SmartCore::Types::Struct::StrictHash
 SmartCore::Types::Struct::Map
 SmartCore::Types::Variative::Enum
 SmartCore::Types::Variative::Variant
-SmartCore::Types::Protocol::InstanceOf
+SmartCore::Types::Variative::InstanceOf
 SmartCore::Types::Protocol::Interface
 SmartCore::Types::Protocol::Ancestors
 SmartCore::Types::Protocol::Enumerable

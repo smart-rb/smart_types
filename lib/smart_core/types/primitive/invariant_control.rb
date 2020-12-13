@@ -32,18 +32,19 @@ class SmartCore::Types::Primitive::InvariantControl
   end
 
   # @param value [Any]
+  # @param runtime_attributes [Array<Any>]
   # @return [SmartCore::Types::Primitive::InvariantControl::Result]
   #
   # @api private
   # @since 0.2.0
-  def check(value)
+  def check(value, runtime_attributes)
     Result.new(self, value).tap do |result|
       invariant_chains.each do |chain|
-        result.add_chain_result(chain.check(value))
+        result.add_chain_result(chain.check(value, runtime_attributes))
       end
 
       invariants.each do |invariant|
-        result.add_single_result(invariant.check(value))
+        result.add_single_result(invariant.check(value, runtime_attributes))
       end
     end
   end

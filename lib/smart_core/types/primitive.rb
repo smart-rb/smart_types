@@ -6,6 +6,7 @@
 class SmartCore::Types::Primitive
   require_relative 'primitive/checker'
   require_relative 'primitive/caster'
+  require_relative 'primitive/runtime_attributes_checker'
   require_relative 'primitive/undefined_caster'
   require_relative 'primitive/invariant_control'
   require_relative 'primitive/validator'
@@ -36,6 +37,24 @@ class SmartCore::Types::Primitive
   # @since 0.2.0
   attr_reader :name
 
+  # @return [Class<SmartCore::Types::Primitive>]
+  #
+  # @api private
+  # @since 0.3.0
+  attr_reader :category
+
+  # @return [Array<Any>]
+  #
+  # @api private
+  # @since 0.3.0
+  attr_reader :runtime_attributes
+
+  # @return [SmartCore::Types::Primitive::RuntimeAttributesChecker]
+  #
+  # @api private
+  # @since 0.3.0
+  attr_reader :runtime_attributes_checker
+
   # @return [SmartCore::Types::Primitive::Caster]
   #
   # @api private
@@ -52,6 +71,7 @@ class SmartCore::Types::Primitive
   attr_reader :validator
 
   # @param name [String, NilClass] NilClass is suitable for sum-types, mult-types and nilable types.
+  # @param category [Class<SmartCore::Types::Primitive>, NilClass]
   # @param validator [
   #   SmartCore::Types::Primitive::Validator,
   #   SmartCore::Types::Primitive::SumValidator,
@@ -59,17 +79,35 @@ class SmartCore::Types::Primitive
   #   SmartCore::Types::Primitive::NilableValidator
   # ]
   # @param caster [SmartCore::Types::Primitive::Caster]
+  # @param runtime_attributes_checker [SmartCore::Types::Primitive::RuntimeAttributesChecker]
+  # @param runtime_attributes [Array<Any>]
   # @return [void]
   #
   # @api private
   # @since 0.1.0
-  # @version 0.2.0
-  def initialize(name, validator, caster)
+  # @version 0.3.0
+  # rubocop:disable Metrics/ParameterLists
+  def initialize(name, category, validator, caster, runtime_attributes_checker, *runtime_attributes)
     @name = name
+    @category = category
     @validator = validator
     @caster = caster
     @nilable = nil
+    @runtime_attributes_checker = runtime_attributes_checker
+    @runtime_attributes = runtime_attributes
     @lock = SmartCore::Engine::Lock.new
+  end
+  # rubocop:enable Metrics/ParameterLists
+
+  # @param cloneable_instance [SmartCore::Types::Primitive]
+  # @return [SmartCore::Types::Primitive]
+  #
+  # @api private
+  # @since 0.3.0
+  def initialize_copy(cloneable_instance)
+    lock.synchronize do
+      self.class::Factory::RuntimeTypeBuilder.initialize_clone(self, cloneable_instance)
+    end
   end
 
   # @param value [Any]
@@ -117,7 +155,10 @@ class SmartCore::Types::Primitive
   # @api public
   # @since 0.1.0
   def cast(value)
-    caster.call(value)
+    # TODO (0.x.0):
+    #   refactor with ValueTransformer with internal reference to the type object
+    #   in Validator manner (in order to avoid explicit #runtime_attributes passing)
+    caster.call(value, runtime_attributes)
   end
 
   # @return [SmartCore::Types::Primitive]

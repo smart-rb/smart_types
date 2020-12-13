@@ -14,6 +14,14 @@ module SmartCore::Types
   NameError = Class.new(SmartCore::NameError)
 
   # @api public
+  # @since 0.3.0
+  TypeDefinitionError = Class.new(ArgumentError)
+
+  # @api public
+  # @since 0.3.0
+  IncorrectRuntimeAttributesError = Class.new(TypeDefinitionError)
+
+  # @api public
   # @since 0.1.0
   TypeError = Class.new(SmartCore::TypeError)
 

@@ -1,6 +1,18 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+### Added
+- Extended *Type Definition API*: support for types with runtime attributes:
+  - Type checkers, type casters and type invariants now receives runtime attributes (you can omit these);
+- Internal *Type Development API*: all types has a reference to it's type category;
+- Brand new `SmartCore::Types::Protocol` type category;
+- New types:
+  - `SmartCore::Types::Protocol::InstanceOf` runtime-based type;
+
+### Changed
+- *Ruby@2.4* is no longer supported;
+
 ## [0.2.0] - 2020-11-21
 ### Added
 - Brand new **Type invariant API**:

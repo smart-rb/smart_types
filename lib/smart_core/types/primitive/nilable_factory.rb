@@ -2,7 +2,7 @@
 
 # @api private
 # @since 0.1.0
-# @version 0.2.0
+# @version 0.3.0
 module SmartCore::Types::Primitive::NilableFactory
   class << self
     # @param type [SmartCore::Types::Primitive]
@@ -56,9 +56,16 @@ module SmartCore::Types::Primitive::NilableFactory
     #
     # @api private
     # @since 0.1.0
-    # @version 0.2.0
+    # @version 0.3.0
     def build_type(type, type_validator, type_caster)
-      Class.new(type.class).new(type.name, type_validator, type_caster)
+      Class.new(type.class).new(
+        type.name,
+        type.category,
+        type_validator,
+        type_caster,
+        type.runtime_attributes_checker,
+        *type.runtime_attributes
+      )
     end
   end
 end
