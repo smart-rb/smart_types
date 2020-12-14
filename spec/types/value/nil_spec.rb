@@ -23,8 +23,20 @@ RSpec.describe 'SmartCore::Types::Value::Nil' do
     include_examples 'type operations'
   end
 
+  context 'runtime-based non-nilable type' do
+    let(:type) { SmartCore::Types::Value::Nil() }
+
+    include_examples 'type operations'
+  end
+
   context 'nilable type' do
     let(:type) { SmartCore::Types::Value::Nil.nilable }
+
+    include_examples 'type operations'
+  end
+
+  context 'runtime-based nilable type' do
+    let(:type) { SmartCore::Types::Value::Nil().nilable }
 
     include_examples 'type operations'
   end
