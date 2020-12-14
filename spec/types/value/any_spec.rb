@@ -101,6 +101,14 @@ RSpec.describe 'SmartCore::Types::Value::Any' do
     end
   end
 
+  context 'runtime-based non-nilable type' do
+    let(:type) { SmartCore::Types::Value::Any() }
+
+    include_examples 'type casting'
+    include_examples 'type checking'
+    include_examples 'type validation'
+  end
+
   context 'non-nilable type' do
     let(:type) { SmartCore::Types::Value::Any }
 
@@ -115,5 +123,19 @@ RSpec.describe 'SmartCore::Types::Value::Any' do
     include_examples 'type casting'
     include_examples 'type checking'
     include_examples 'type validation'
+  end
+
+  context 'runtime-based nilable type' do
+    let(:type) { SmartCore::Types::Value::Any().nilable }
+
+    include_examples 'type casting'
+    include_examples 'type checking'
+    include_examples 'type validation'
+  end
+
+  specify 'has no support for runtime attributes' do
+    expect { SmartCore::Types::Value::Any(1) }.to raise_error(
+      SmartCore::Types::RuntimeAttriburtesUnsupportedError
+    )
   end
 end

@@ -24,11 +24,7 @@ RSpec.describe 'SmartCore::Types::Value::Array' do
     end
   end
 
-  context 'non-nilable type' do
-    let(:type) { SmartCore::Types::Value::Array }
-
-    include_examples 'type casting'
-
+  shared_examples 'type-checking / type-validation (non-nilable)' do
     specify 'type-checking' do
       expect(type.valid?([])).to eq(true)
       expect(type.valid?([123, '456', :test])).to eq(true)
@@ -45,11 +41,7 @@ RSpec.describe 'SmartCore::Types::Value::Array' do
     end
   end
 
-  context 'nilable type' do
-    let(:type) { SmartCore::Types::Value::Array.nilable }
-
-    include_examples 'type casting'
-
+  shared_examples 'type-checking / type-validation (nilable)' do
     specify 'type-checking' do
       expect(type.valid?([])).to eq(true)
       expect(type.valid?([123, '456', :test])).to eq(true)
@@ -64,5 +56,39 @@ RSpec.describe 'SmartCore::Types::Value::Array' do
       expect { type.validate!(nil) }.not_to raise_error # NOTE: nil
       expect { type.validate!(123) }.to raise_error(SmartCore::Types::TypeError)
     end
+  end
+
+  context 'runtime-based non-nilable type' do
+    let(:type) { SmartCore::Types::Value::Array() }
+
+    include_examples 'type casting'
+    include_examples 'type-checking / type-validation (non-nilable)'
+  end
+
+  context 'non-nilable type' do
+    let(:type) { SmartCore::Types::Value::Array }
+
+    include_examples 'type casting'
+    include_examples 'type-checking / type-validation (non-nilable)'
+  end
+
+  context 'runtime-based nilable type' do
+    let(:type) { SmartCore::Types::Value::Array().nilable }
+
+    include_examples 'type casting'
+    include_examples 'type-checking / type-validation (nilable)'
+  end
+
+  context 'nilable type' do
+    let(:type) { SmartCore::Types::Value::Array.nilable }
+
+    include_examples 'type casting'
+    include_examples 'type-checking / type-validation (nilable)'
+  end
+
+  specify 'has no support for runtime attributes' do
+    expect { SmartCore::Types::Value::Array(1) }.to raise_error(
+      SmartCore::Types::RuntimeAttriburtesUnsupportedError
+    )
   end
 end
