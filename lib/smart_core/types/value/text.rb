@@ -2,10 +2,12 @@
 
 # @api public
 # @since 0.1.0
-SmartCore::Types::Value::Text = SmartCore::Types::System.type_sum(
-  SmartCore::Types::Value::String,
-  SmartCore::Types::Value::Symbol
-) do |type|
+# @version 0.3.0
+SmartCore::Types::Value.define_type(:Text) do |type|
+  type.define_checker do |value|
+    SmartCore::Types::Value::String.valid?(value) || SmartCore::Types::Value::Symbol.valid?(value)
+  end
+
   type.define_caster do |value|
     next value if SmartCore::Types::Value::String.valid?(value)
     next value if SmartCore::Types::Value::Symbol.valid?(value)

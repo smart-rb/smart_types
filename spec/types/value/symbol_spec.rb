@@ -14,11 +14,7 @@ RSpec.describe 'SmartCore::Types::Value::Symbol' do
     end
   end
 
-  context 'non-nilable type' do
-    let(:type) { SmartCore::Types::Value::Symbol }
-
-    include_examples 'type casting'
-
+  shared_examples 'type-checking / type-validation (non-nilable)' do
     specify 'type-checking' do
       expect(type.valid?(:meta)).to eq(true)
 
@@ -48,11 +44,7 @@ RSpec.describe 'SmartCore::Types::Value::Symbol' do
     end
   end
 
-  context 'nilable type' do
-    let(:type) { SmartCore::Types::Value::Symbol.nilable }
-
-    include_examples 'type casting'
-
+  shared_examples 'type-checking / type-validation (nilable)' do
     specify 'type-checking' do
       expect(type.valid?(:meta)).to eq(true)
       expect(type.valid?(nil)).to eq(true)
@@ -80,5 +72,39 @@ RSpec.describe 'SmartCore::Types::Value::Symbol' do
       expect { type.validate!(123) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(123.456) }.to raise_error(SmartCore::Types::TypeError)
     end
+  end
+
+  context 'non-nilable type' do
+    let(:type) { SmartCore::Types::Value::Symbol }
+
+    include_examples 'type casting'
+    include_examples 'type-checking / type-validation (non-nilable)'
+  end
+
+  context 'runtime-based non-nilable type' do
+    let(:type) { SmartCore::Types::Value::Symbol() }
+
+    include_examples 'type casting'
+    include_examples 'type-checking / type-validation (non-nilable)'
+  end
+
+  context 'nilable type' do
+    let(:type) { SmartCore::Types::Value::Symbol.nilable }
+
+    include_examples 'type casting'
+    include_examples 'type-checking / type-validation (nilable)'
+  end
+
+  context 'runtime-based nilable type' do
+    let(:type) { SmartCore::Types::Value::Symbol().nilable }
+
+    include_examples 'type casting'
+    include_examples 'type-checking / type-validation (nilable)'
+  end
+
+  specify 'has no support for runtime attributes' do
+    expect { SmartCore::Types::Value::Symbol(:test) }.to raise_error(
+      SmartCore::Types::RuntimeAttriburtesUnsupportedError
+    )
   end
 end

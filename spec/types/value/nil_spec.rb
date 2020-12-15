@@ -40,4 +40,10 @@ RSpec.describe 'SmartCore::Types::Value::Nil' do
 
     include_examples 'type operations'
   end
+
+  specify 'has no support for runtime attributes' do
+    expect { SmartCore::Types::Value::Nil(nil) }.to raise_error(
+      SmartCore::Types::RuntimeAttriburtesUnsupportedError
+    )
+  end
 end
