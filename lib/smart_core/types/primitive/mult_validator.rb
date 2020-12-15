@@ -2,6 +2,7 @@
 
 # @api private
 # @since 0.2.0
+# @version 0.3.0
 class SmartCore::Types::Primitive::MultValidator < SmartCore::Types::Primitive::SumValidator
   require_relative 'mult_validator/result'
 

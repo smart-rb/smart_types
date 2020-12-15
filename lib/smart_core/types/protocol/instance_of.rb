@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 # NOTE: BasicObject has no #is_a? instance method. We need to hack this situation :)
+# TODO: move this functionality to smart_engine
 is_a = ::Object.new.method(:is_a?).unbind
 
 # @api public

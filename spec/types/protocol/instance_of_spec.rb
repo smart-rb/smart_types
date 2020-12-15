@@ -2,7 +2,7 @@
 
 RSpec.describe 'SmartCore::Types::Protocol::InstanceOf' do
   describe 'runtime-based behavior' do
-    specify 'fails on non-class objects (should work only with a classes)' do
+    specify 'fails on non-class objects (should work only with classes)' do
       expect do
         SmartCore::Types::Protocol::InstanceOf(123)
       end.to raise_error(SmartCore::Types::IncorrectRuntimeAttributesError)

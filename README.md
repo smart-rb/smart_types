@@ -95,6 +95,25 @@ SmartCore::Types::Value::TimeBased
 SmartCore::Types::Protocol::InstanceOf
 ```
 
+```ruby
+# examples (SmartCore::Types::Protocol::InstanceOf):
+SmartCore::Types::Protocol::InstanceOf(::Integer) # only integer
+SmartCore::Types::Protocol::InstanceOf(::String, ::Symbol) # string or symbol
+SmartCore::Types::Protocol::InstanceOf(::Time, ::DateTime, ::Date) # time or datetime or date
+```
+
+- Variadic:
+
+```ruby
+SmartCore::Types::Variadic::Tuple
+```
+
+```ruby
+# examples (SmartCore::Types::Variadic::Tuple):
+SmartCore::Types::Variadic::Tuple(::String, ::Integer, ::Time) # array with signature [<string>, <integer>, <time>]
+SmartCore::Types::Variadic::Tuple(::Symbol, ::Float) # array with signature [<symbol>, <float>]
+```
+
 ---
 
 ## Nilable types
@@ -452,7 +471,7 @@ SmartCore::Types::Struct::JSONSchema
 SmartCore::Types::Struct::StrictArray
 SmartCore::Types::Struct::StrictHash
 SmartCore::Types::Struct::Map
-SmartCore::Types::Variative::Enum
+SmartCore::Types::Variadic::Enum
 SmartCore::Types::Protocol::Interface
 SmartCore::Types::Protocol::Ancestors
 SmartCore::Types::Protocol::Enumerable

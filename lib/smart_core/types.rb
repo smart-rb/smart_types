@@ -11,4 +11,5 @@ module SmartCore::Types
   require_relative 'types/primitive'
   require_relative 'types/value'
   require_relative 'types/protocol'
+  require_relative 'types/variadic'
 end
