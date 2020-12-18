@@ -34,7 +34,7 @@ RSpec.describe 'SmartCore::Types::Value::Set' do
   end
 
   specify 'has no support for runtime attributes' do
-    expect { SmartCore::Types::Value::Set(Set.new([1,2,3])) }.to raise_error(
+    expect { SmartCore::Types::Value::Set(Set.new([1, 2, 3])) }.to raise_error(
       SmartCore::Types::RuntimeAttriburtesUnsupportedError
     )
   end

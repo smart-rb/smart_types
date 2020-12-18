@@ -31,6 +31,7 @@ RSpec.describe 'SmartCore::Types::Variadic::Tuple' do
       )
     end
 
+    # rubocop:disable Layout/LineLength
     specify 'type-checking / type-validation' do
       tuple_type = SmartCore::Types::Variadic::Tuple(::String, ::Float, ::Time)
       nilable_tuple_type = tuple_type.nilable
@@ -103,5 +104,6 @@ RSpec.describe 'SmartCore::Types::Variadic::Tuple' do
         expect { nilable_simple_tuple_type.validate!(nil) }.not_to raise_error
       end
     end
+    # rubocop:enable Layout/LineLength
   end
 end

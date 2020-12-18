@@ -119,7 +119,7 @@ RSpec.describe 'SmartCore::Types::Value::Proc' do
       SmartCore::Types::RuntimeAttriburtesUnsupportedError
     )
 
-    expect { SmartCore::Types::Value::Proc((lambda {})) }.to raise_error(
+    expect { SmartCore::Types::Value::Proc((-> {})) }.to raise_error(
       SmartCore::Types::RuntimeAttriburtesUnsupportedError
     )
   end

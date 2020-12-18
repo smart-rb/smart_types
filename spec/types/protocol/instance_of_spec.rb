@@ -37,7 +37,7 @@ RSpec.describe 'SmartCore::Types::Protocol::InstanceOf' do
       )
 
       nilable_type = type.nilable
-      expect { type.cast('2020-10-10') }.to raise_error(
+      expect { nilable_type.cast('2020-10-10') }.to raise_error(
         SmartCore::Types::TypeCastingUnsupportedError
       )
     end
@@ -84,6 +84,7 @@ RSpec.describe 'SmartCore::Types::Protocol::InstanceOf' do
         expect { numeric_type.validate!(nil) }.to raise_error(SmartCore::Types::TypeError)
       end
 
+      # rubocop:disable Layout/LineLength
       aggregate_failures 'example of numeric-types collection (nilable)' do
         expect(nilable_numeric_type.valid?(:test)).to eq(false)
         expect(nilable_numeric_type.valid?('test')).to eq(false)
@@ -95,6 +96,7 @@ RSpec.describe 'SmartCore::Types::Protocol::InstanceOf' do
         expect { nilable_numeric_type.validate!(123.567) }.not_to raise_error
         expect { nilable_numeric_type.validate!(nil) }.not_to raise_error
       end
+      # rubocop:enable Layout/LineLength
 
       no_any_type = SmartCore::Types::Protocol::InstanceOf
       nillable_no_any_type = no_any_type.nilable
