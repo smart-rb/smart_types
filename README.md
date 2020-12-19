@@ -361,6 +361,8 @@ SmartCore::Types::Value::CryptoString = SmartCore::Types::Value::NumberdString &
 
 ## Roadmap
 
+- support for `block`-attribute in runtime attributes;
+
 - type configuration:
 
 ```ruby
