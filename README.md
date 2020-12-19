@@ -480,6 +480,7 @@ SmartCore::Types::Protocol::Forwardable
 SmartCore::Types::Protocol::Callable
 ```
 
+- `#sum` alias for `|` and `#mult` alias for `&` (with a support for type name definition and other API);
 - support for type of empty non-defined type (`SmartCore::Types::Primitive::Undefined`);
 - constrained types;
 - moudle-based type system integration;
