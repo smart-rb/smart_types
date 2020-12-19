@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     smart_types (0.2.0)
-      smart_engine (~> 0.7)
+      smart_engine (~> 0.9)
 
 GEM
   remote: https://rubygems.org/
@@ -36,7 +36,7 @@ GEM
       method_source (~> 1.0)
     rack (2.2.3)
     rainbow (3.0.0)
-    rake (13.0.1)
+    rake (13.0.2)
     regexp_parser (2.0.0)
     rexml (3.2.4)
     rspec (3.10.0)
@@ -82,7 +82,7 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.2)
-    smart_engine (0.8.0)
+    smart_engine (0.9.0)
     tzinfo (2.0.3)
       concurrent-ruby (~> 1.0)
     unicode-display_width (1.7.0)

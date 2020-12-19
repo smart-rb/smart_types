@@ -3,6 +3,8 @@
 require 'bigdecimal'
 require 'bigdecimal/util'
 
+using SmartCore::Ext::BasicObjectAsObject
+
 # @api public
 # @since 0.1.0
 SmartCore::Types::Value.define_type(:BigDecimal) do |type|

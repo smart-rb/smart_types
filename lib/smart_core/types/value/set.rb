@@ -2,6 +2,8 @@
 
 require 'set'
 
+using SmartCore::Ext::BasicObjectAsObject
+
 # @api public
 # @since 0.3.0
 SmartCore::Types::Value.define_type(:Set) do |type|

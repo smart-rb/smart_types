@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+using SmartCore::Ext::BasicObjectAsObject
+
 # @api public
 # @since 0.3.0
 SmartCore::Types::Variadic.define_type(:Tuple) do |type|
@@ -10,7 +12,7 @@ SmartCore::Types::Variadic.define_type(:Tuple) do |type|
   end
 
   type.define_checker do |value, tuple_signature|
-    next false unless value.is_a?(::Array)
+    next false unless SmartCore::Types::Value::Array.valid?(value)
     next false if value.size != tuple_signature.size
 
     value.each_with_index.all? do |tuple_val, tuple_val_index|
