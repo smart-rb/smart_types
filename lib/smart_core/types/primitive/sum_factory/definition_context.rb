@@ -2,6 +2,7 @@
 
 # @api private
 # @since 0.1.0
+# @version 0.3.0
 class SmartCore::Types::Primitive::SumFactory::DefinitionContext
   # @return [Proc, NilClass]
   #
@@ -19,6 +20,7 @@ class SmartCore::Types::Primitive::SumFactory::DefinitionContext
   #
   # @api private
   # @since 0.1.0
+  # @version 0.3.0
   def initialize
     @type_caster = nil
     @type_runtime_attributes_checker = nil

@@ -13,7 +13,7 @@ class SmartCore::Types::Primitive::RuntimeAttributesChecker
     ERROR_MESSAGE
   end.freeze
 
-  # @param attributes_checker []
+  # @param attributes_checker [Proc]
   # @return [void]
   #
   # @api private

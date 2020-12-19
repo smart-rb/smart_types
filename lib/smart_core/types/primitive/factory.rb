@@ -122,7 +122,7 @@ class SmartCore::Types::Primitive::Factory
     #
     # @api private
     # @since 0.1.0
-    # @version 0.2.0
+    # @version 0.3.0
     def build_type(
       type_category,
       type_name,
@@ -179,7 +179,6 @@ class SmartCore::Types::Primitive::Factory
 
     # @param type_category [Class<SmartCore::Types::Primitive>]
     # @param type_name [String, Symbol]
-    # @param type [SmartCore::Types::Primitive]
     # @return [void]
     #
     # @raise [SmartCore::Types::IncorrectTypeNameError]

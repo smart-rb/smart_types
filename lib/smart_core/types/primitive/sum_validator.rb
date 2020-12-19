@@ -2,6 +2,7 @@
 
 # @api private
 # @since 0.2.0
+# @version 0.3.0
 class SmartCore::Types::Primitive::SumValidator
   require_relative 'sum_validator/result'
 
@@ -39,6 +40,7 @@ class SmartCore::Types::Primitive::SumValidator
   #
   # @api private
   # @since 0.2.0
+  # @version 0.3.0
   def valid?(value)
     # NOTE: at this moment type sum does not support invariant checking
     # TODO (0.x.0):
@@ -53,6 +55,7 @@ class SmartCore::Types::Primitive::SumValidator
   #
   # @api private
   # @since 0.2.0
+  # @version 0.3.0
   def validate(value)
     compile_validation_result do
       SmartCore::Engine::Atom.new.tap do |result|

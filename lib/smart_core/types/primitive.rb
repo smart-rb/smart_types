@@ -2,7 +2,7 @@
 
 # @api private
 # @since 0.1.0
-# @version 0.2.0
+# @version 0.3.0
 class SmartCore::Types::Primitive
   require_relative 'primitive/checker'
   require_relative 'primitive/caster'
@@ -157,6 +157,7 @@ class SmartCore::Types::Primitive
   #
   # @api public
   # @since 0.1.0
+  # @version 0.3.0
   def cast(value)
     # TODO (0.x.0):
     #   refactor with ValueTransformer with internal reference to the type object

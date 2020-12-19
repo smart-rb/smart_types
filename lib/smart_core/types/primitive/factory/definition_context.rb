@@ -2,7 +2,7 @@
 
 # @api private
 # @since 0.1.0
-# @version 0.2.0
+# @version 0.3.0
 class SmartCore::Types::Primitive::Factory::DefinitionContext
   class << self
     # @param name [String, Symbol]
@@ -11,6 +11,7 @@ class SmartCore::Types::Primitive::Factory::DefinitionContext
     #
     # @api private
     # @since 0.2.0
+    # @version 0.3.0
     def vaildate_invariant_attributes!(name, &definition)
       unless block_given?
         raise(SmartCore::Types::TypeDefinitionError, 'No invariant block')
@@ -103,7 +104,7 @@ class SmartCore::Types::Primitive::Factory::DefinitionContext
   #
   # @api public
   # @since 0.1.0
-  # @version 0.2.0
+  # @version 0.3.0
   def define_checker(&checker)
     thread_safe do
       unless block_given?
@@ -118,7 +119,7 @@ class SmartCore::Types::Primitive::Factory::DefinitionContext
   #
   # @api public
   # @since 0.1.0
-  # @version 0.2.0
+  # @version 0.3.0
   def define_caster(&caster)
     thread_safe do
       unless block_given?

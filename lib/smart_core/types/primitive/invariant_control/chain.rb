@@ -2,6 +2,7 @@
 
 # @api private
 # @since 0.2.0
+# @version 0.3.0
 class SmartCore::Types::Primitive::InvariantControl::Chain
   require_relative 'chain/result'
 
@@ -36,6 +37,7 @@ class SmartCore::Types::Primitive::InvariantControl::Chain
   #
   # @api private
   # @since 0.2.0
+  # @version 0.3.0
   def check(value, runtime_attributes)
     invariant_results = [].tap do |results|
       invariants.each do |invariant|

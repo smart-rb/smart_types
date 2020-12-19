@@ -104,7 +104,7 @@ module SmartCore::Types::Primitive::SumFactory
     #
     # @api private
     # @since 0.1.0
-    # @version 0.2.0
+    # @version 0.3.0
     def build_type(type_validator, type_caster, type_runtime_attributes_checker)
       SmartCore::Types::Primitive.new(
         nil,
