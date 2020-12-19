@@ -55,11 +55,19 @@ type3 = type1 | type2
 type4 = type1 & type2
 ```
 
+Types with runtime:
+
 ```ruby
-# get a type object with a custom runtime (InstanceOf type example):
-type = SmartCore::Types::Protocol::InstanceOf(::String)
-# another type object with a custom runtime (InstanceOf type example):
-type = SmartCore::Types::Protocol::InstanceOf(::Integer)
+# get a type object with a custom runtime (instances of String or Symbol):
+type = SmartCore::Types::Protocol::InstanceOf(::String, ::Symbol)
+type.valid?(:test) # => true
+type.valid?('test') # => true
+type.valid?(123.456) # => false
+
+# another type object with a custom runtime (tuple (String, Integer, Time)):
+type = SmartCore::Types::Variadic::Tuple(::String, ::Integer, ::DateTime)
+type.valid?(['test', 1, DateTime.new]) # => true
+type.valid?([:test, 2]) # => false
 ```
 
 ## Supported types
@@ -352,16 +360,6 @@ SmartCore::Types::Value::CryptoString = SmartCore::Types::Value::NumberdString &
 ---
 
 ## Roadmap
-
-- runtime-based type objects. example (two different types with different runtimes):
-
-```ruby
-# InstanceOf protocol type with own runtime:
-SmartCore::Types::Protocol::InstanceOf(::String, ::Symbol) # => SmartCore::Types::Protocol::InsatnceOf object
-
-# another InstanceOf protocol type with own runtime:
-SmartCore::Types::Protocol::InstanceOf(::Integer) # => SmartCore::Types::Protocol::InsatnceOf object
-```
 
 - type configuration:
 

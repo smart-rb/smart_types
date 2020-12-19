@@ -3,18 +3,25 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 ### Added
-- Extended *Type Definition API*: support for types with runtime attributes:
+- Extended *Type Definition API*: support for runtime attributes:
   - Type checkers, type casters and type invariants now receives runtime attributes (you can omit these);
-  - Types with incorret runtime attributes will raise `SmartCore::Types::IncorrectRuntimeAttributesError` exception;
+  - Type definitioning extended with `runtime_attribute_checker`-checker definition (runtime attributes validator);
+  - Types with incorrect runtime attributes will raise `SmartCore::Types::IncorrectRuntimeAttributesError` exception;
   - Types which has no support for runtime attributes will raise `SmartCore::Types::RuntimeAttributesUnsupportedError` excpetion;
-  - All types by default has a method alias which does not allow runtime attributes (for example: `SmartCore::Types::Value::String` has
-    a runtime-based alias `SmartCore::Types::Value::String()` which does not accept any runtime attribute.
+  - All types by default has a method alias (`()`) which does not allow runtime attributes (for example: `SmartCore::Types::Value::String` has
+    a runtime-based alias `SmartCore::Types::Value::String()` which does not accpt any attribute:
     `SmartCore::Types::Value::String('test')` will raise `SmartCore::Types::RuntimeAttributesUnsupportedError` respectively);
-- Internal *Type Development API*: all types has a reference to it's type category;
-- Brand new `SmartCore::Types::Protocol` type category;
-- New types:
+- Extended Internal *Type Development API*:
+  - all types has a reference to it's type category;
+- Brand new `SmartCore::Types::Protocol` type category and new types:
   - `SmartCore::Types::Protocol::InstanceOf` (runtime-based type);
-  - `SmartCore::Types::Value::Set`;
+- Brand new `SmartCore::Types::Variadic` type category and new types:
+  - `SmartCore::Types::Variadic::Tuple` (runtime-based type);
+- New types of `SmartCore::Types::Value` category:
+  - `SmartCore::Types::Value::Set` (based on `Set` type with a support for type casting);
+
+### Changed
+- Updated development dependencies;
 
 ### Changed
 - *Ruby@2.4* is no longer supported;
