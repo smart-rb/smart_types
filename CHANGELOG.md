@@ -19,8 +19,7 @@ All notable changes to this project will be documented in this file.
   - `SmartCore::Types::Variadic::Tuple` (runtime-based type);
 - New types of `SmartCore::Types::Value` category:
   - `SmartCore::Types::Value::Set` (based on `Set` type with a support for type casting);
-- Support for BasicObject instance type checking via native `is_a?/`kind_of?` Ruby's methods
-  (by BasicObject refinement mechanic provided by `SmartCore::Ext::BasicObjectAsObject`);
+- Support for BasicObject values inside type checkers that can not be checked correctly via `#is_a?/#kind_of?` before;
 
 ### Changed
 - Updated development dependencies;
