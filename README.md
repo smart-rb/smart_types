@@ -37,6 +37,7 @@ require 'smart_core/types'
 - [Type casting](#type-casting)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
+- [Build](#build)
 - [License](#license)
 - [Authors](#authors)
 
@@ -361,6 +362,8 @@ SmartCore::Types::Value::CryptoString = SmartCore::Types::Value::NumberdString &
 
 ## Roadmap
 
+- migrate to `Github Actions`;
+
 - support for `block`-attribute in runtime attributes;
 
 - type configuration:
@@ -513,6 +516,24 @@ SmartCore::Types::Protocol::Callable
 - Commit your changes (`git commit -am '[feature_context] Add some feature'`)
 - Push to the branch (`git push origin feature/my-new-feature`)
 - Create new Pull Request
+
+## Build
+
+- run tests:
+
+```shell
+bundle exec rake rspec
+# --- or ---
+bundle exec rspec
+```
+
+- run code stye linting:
+
+```shell
+bundle exec rake rubocop
+# --- or ---
+bundle exec rubocop
+```
 
 ## License
 
