@@ -481,6 +481,16 @@ SmartCore::Types::Protocol::Callable
 ```
 
 - `#sum` alias for `|` and `#mult` alias for `&` (with a support for type name definition and other API);
+
+- type category in invariant error codes:
+```ruby
+# before:
+'String.password.should_contain_numbers' # `String` type from `Value` category
+
+# after:
+'Value.String.password.should_contain_numbers' # `Value::String`
+```
+
 - support for type of empty non-defined type (`SmartCore::Types::Primitive::Undefined`);
 - constrained types;
 - moudle-based type system integration;
