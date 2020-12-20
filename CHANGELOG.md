@@ -3,15 +3,15 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 ### Added
-- Extended *Type Definition API*: support for runtime attributes:
+- Extended **Type Definition API**: support for **runtime attributes**:
   - Type checkers, type casters and type invariants now receives runtime attributes (you can omit these);
   - Type definitioning extended with `runtime_attribute_checker`-checker definition (runtime attributes validator);
   - Types with incorrect runtime attributes will raise `SmartCore::Types::IncorrectRuntimeAttributesError` exception;
   - Types which has no support for runtime attributes will raise `SmartCore::Types::RuntimeAttributesUnsupportedError` excpetion;
   - All types by default has a method alias (`()`) which does not allow runtime attributes (for example: `SmartCore::Types::Value::String` has
-    a runtime-based alias `SmartCore::Types::Value::String()` which does not accpt any attribute:
-    `SmartCore::Types::Value::String('test')` will raise `SmartCore::Types::RuntimeAttributesUnsupportedError` respectively);
-- Extended Internal *Type Development API*:
+    a runtime-based alias `SmartCore::Types::Value::String()` which does not accept any attribute
+    (`SmartCore::Types::Value::String('test')` will raise `SmartCore::Types::RuntimeAttributesUnsupportedError` respectively));
+- Extended Internal **Type Development API**:
   - all types has a reference to it's type category;
 - Brand new `SmartCore::Types::Protocol` type category and new types:
   - `SmartCore::Types::Protocol::InstanceOf` (runtime-based type);
@@ -25,7 +25,7 @@ All notable changes to this project will be documented in this file.
 - Updated development dependencies;
 
 ### Changed
-- *Ruby@2.4* is no longer supported;
+- **Ruby@2.4** is no longer supported;
 
 ## [0.2.0] - 2020-11-21
 ### Added
