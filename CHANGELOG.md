@@ -24,8 +24,6 @@ All notable changes to this project will be documented in this file.
 ### Changed
 - Updated development dependencies;
 - Drop `Travis CI` (TODO: migrate to `Github Actions`);
-
-### Changed
 - **Ruby@2.4** is no longer supported;
 
 ## [0.2.0] - 2020-11-21
