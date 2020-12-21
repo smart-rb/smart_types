@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [0.3.0] - 2020-12-22
 ### Added
 - Extended **Type Definition API**: support for **runtime attributes**:
   - Type checkers, type casters and type invariants now receives runtime attributes (you can omit these);
