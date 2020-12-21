@@ -26,9 +26,11 @@ require 'smart_core/types'
 
 ## Usage
 
-- [Type interface](#type-interface)
-- [Basic type algebra](#basic-type-algebra)
+- [Type interface and basic type algebra](#type-interface-and-basic-type-algebra)
 - [Supported types](#supported-types)
+  - [Primitives](#primitives)
+  - [Protocols](#protocols)
+  - [Variadic](#variadic)
 - [Nilable types](#nilable-types)
 - [Custom type definition](#custom-type-definition)
   - [Primitive type definition](#primitive-type-definition)
@@ -43,7 +45,7 @@ require 'smart_core/types'
 
 ---
 
-## Type Interface
+## Type Interface and basic type algebra
 
 ```ruby
 # documentation is coming
@@ -73,7 +75,7 @@ type.valid?([:test, 2]) # => false
 
 ## Supported types
 
-- Primitives
+#### Primitives
 
 ```ruby
 SmartCore::Types::Value::Any
@@ -98,7 +100,7 @@ SmartCore::Types::Value::Date
 SmartCore::Types::Value::TimeBased
 ```
 
-- Protocols:
+#### Protocols:
 
 ```ruby
 SmartCore::Types::Protocol::InstanceOf
@@ -111,7 +113,7 @@ SmartCore::Types::Protocol::InstanceOf(::String, ::Symbol) # string or symbol
 SmartCore::Types::Protocol::InstanceOf(::Time, ::DateTime, ::Date) # time or datetime or date
 ```
 
-- Variadic:
+#### Variadic:
 
 ```ruby
 SmartCore::Types::Variadic::Tuple
