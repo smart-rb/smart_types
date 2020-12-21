@@ -28,9 +28,9 @@ require 'smart_core/types'
 
 - [Type interface and basic type algebra](#type-interface-and-basic-type-algebra)
 - [Supported types](#supported-types)
-  - [Primitives](#primitives)(`SmartCore::Types::Value` type category)
-  - [Protocols](#protocols)(`SmartCore::Types::Protocol` type category)
-  - [Variadic](#variadic)(`SmartCore::Types::Variadic` type category)
+  - [Primitives](#primitives) (`SmartCore::Types::Value`)
+  - [Protocols](#protocols) (`SmartCore::Types::Protocol`)
+  - [Variadic](#variadic) (`SmartCore::Types::Variadic`)
 - [Nilable types](#nilable-types)
 - [Custom type definition](#custom-type-definition)
   - [Primitive type definition](#primitive-type-definition)
