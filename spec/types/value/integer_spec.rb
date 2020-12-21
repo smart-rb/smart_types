@@ -14,6 +14,7 @@ RSpec.describe 'SmartCore::Types::Value::Integer' do
       expect(type.cast('test')).to eq(0).and be_a(::Integer)
 
       expect { type.cast(Object.new) }.to raise_error(SmartCore::Types::TypeCastingError)
+      expect { type.cast(BasicObject.new) }.to raise_error(SmartCore::Types::TypeCastingError)
       expect { type.cast(Float::NAN) }.to raise_error(SmartCore::Types::TypeCastingError)
       expect { type.cast(Float::INFINITY) }.to raise_error(SmartCore::Types::TypeCastingError)
       expect { type.cast(-Float::INFINITY) }.to raise_error(SmartCore::Types::TypeCastingError)
@@ -48,6 +49,7 @@ RSpec.describe 'SmartCore::Types::Value::Integer' do
       expect(type.valid?('55test')).to eq(false)
       expect(type.valid?(:test)).to eq(false)
       expect(type.valid?(Object.new)).to eq(false)
+      expect(type.valid?(BasicObject.new)).to eq(false)
     end
 
     specify 'type-validation' do
@@ -61,6 +63,7 @@ RSpec.describe 'SmartCore::Types::Value::Integer' do
       expect { type.validate!('55test') }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(:test) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(Object.new) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!(BasicObject.new) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(-Float::INFINITY) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(Float::INFINITY) }.to raise_error(SmartCore::Types::TypeError)
     end
@@ -80,6 +83,7 @@ RSpec.describe 'SmartCore::Types::Value::Integer' do
       expect(type.valid?('55test')).to eq(false)
       expect(type.valid?(:test)).to eq(false)
       expect(type.valid?(Object.new)).to eq(false)
+      expect(type.valid?(BasicObject.new)).to eq(false)
     end
 
     specify 'type-validation' do
@@ -93,6 +97,7 @@ RSpec.describe 'SmartCore::Types::Value::Integer' do
       expect { type.validate!('55test') }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(:test) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(Object.new) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!(BasicObject.new) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(-Float::INFINITY) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(Float::INFINITY) }.to raise_error(SmartCore::Types::TypeError)
     end

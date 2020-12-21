@@ -12,6 +12,7 @@ RSpec.describe 'SmartCore::Types::Value::Float' do
       expect(type.cast(Float::NAN).object_id).to eq(Float::NAN.object_id)
 
       expect { type.cast(Object.new) }.to raise_error(SmartCore::Types::TypeCastingError)
+      expect { type.cast(BasicObject.new) }.to raise_error(SmartCore::Types::TypeCastingError)
       expect { type.cast([]) }.to raise_error(SmartCore::Types::TypeCastingError)
       expect { type.cast({}) }.to raise_error(SmartCore::Types::TypeCastingError)
 
@@ -40,6 +41,7 @@ RSpec.describe 'SmartCore::Types::Value::Float' do
       expect(type.valid?(-123)).to eq(false)
       expect(type.valid?(0)).to eq(false)
       expect(type.valid?(Object.new)).to eq(false)
+      expect(type.valid?(BasicObject.new)).to eq(false)
     end
 
     specify 'type-validation' do
@@ -56,6 +58,7 @@ RSpec.describe 'SmartCore::Types::Value::Float' do
       expect { type.validate!(-123) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(0) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(Object.new) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!(BasicObject.new) }.to raise_error(SmartCore::Types::TypeError)
     end
   end
 
@@ -74,6 +77,7 @@ RSpec.describe 'SmartCore::Types::Value::Float' do
       expect(type.valid?(-123)).to eq(false)
       expect(type.valid?(0)).to eq(false)
       expect(type.valid?(Object.new)).to eq(false)
+      expect(type.valid?(BasicObject.new)).to eq(false)
     end
 
     specify 'type-validation' do
@@ -90,6 +94,7 @@ RSpec.describe 'SmartCore::Types::Value::Float' do
       expect { type.validate!(-123) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(0) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(Object.new) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!(BasicObject.new) }.to raise_error(SmartCore::Types::TypeError)
     end
   end
 

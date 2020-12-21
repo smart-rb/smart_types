@@ -48,6 +48,7 @@ RSpec.describe 'SmartCore::Types::Variadic::Tuple' do
         expect(tuple_type.valid?(nil)).to eq(false)
         expect(tuple_type.valid?(Set.new([]))).to eq(false)
         expect(tuple_type.valid?(Object.new)).to eq(false)
+        expect(tuple_type.valid?(BasicObject.new)).to eq(false)
         expect(tuple_type.valid?('test')).to eq(false)
 
         expect { tuple_type.validate!([]) }.to raise_error(SmartCore::Types::TypeError)
@@ -55,7 +56,7 @@ RSpec.describe 'SmartCore::Types::Variadic::Tuple' do
         expect { tuple_type.validate!([123, 456]) }.to raise_error(SmartCore::Types::TypeError)
         expect { tuple_type.validate!(nil) }.to raise_error(SmartCore::Types::TypeError)
         expect { tuple_type.validate!(Set.new([])) }.to raise_error(SmartCore::Types::TypeError)
-        expect { tuple_type.validate!(Object.new) }.to raise_error(SmartCore::Types::TypeError)
+        expect { tuple_type.validate!(BasicObject.new) }.to raise_error(SmartCore::Types::TypeError)
         expect { tuple_type.validate!('test') }.to raise_error(SmartCore::Types::TypeError)
       end
 
@@ -70,14 +71,14 @@ RSpec.describe 'SmartCore::Types::Variadic::Tuple' do
         expect(nilable_tuple_type.valid?([:test, 5, Date.new])).to eq(false)
         expect(nilable_tuple_type.valid?([123, 456])).to eq(false)
         expect(nilable_tuple_type.valid?(Set.new([]))).to eq(false)
-        expect(nilable_tuple_type.valid?(Object.new)).to eq(false)
+        expect(nilable_tuple_type.valid?(BasicObject.new)).to eq(false)
         expect(nilable_tuple_type.valid?('test')).to eq(false)
 
         expect { nilable_tuple_type.validate!([]) }.to raise_error(SmartCore::Types::TypeError)
         expect { nilable_tuple_type.validate!([:test, 5, Date.new]) }.to raise_error(SmartCore::Types::TypeError)
         expect { nilable_tuple_type.validate!([123, 456]) }.to raise_error(SmartCore::Types::TypeError)
         expect { nilable_tuple_type.validate!(Set.new([])) }.to raise_error(SmartCore::Types::TypeError)
-        expect { nilable_tuple_type.validate!(Object.new) }.to raise_error(SmartCore::Types::TypeError)
+        expect { nilable_tuple_type.validate!(BasicObject.new) }.to raise_error(SmartCore::Types::TypeError)
         expect { nilable_tuple_type.validate!('test') }.to raise_error(SmartCore::Types::TypeError)
       end
 

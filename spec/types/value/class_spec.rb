@@ -18,6 +18,7 @@ RSpec.describe 'SmartCore::Types::Value::Class' do
       expect(type.valid?(nil)).to eq(false)
       expect(type.valid?(Module.new)).to eq(false)
       expect(type.valid?(Object.new)).to eq(false)
+      expect(type.valid?(BasicObject.new)).to eq(false)
       expect(type.valid?(123)).to eq(false)
       expect(type.valid?('test')).to eq(false)
       expect(type.valid?(:test)).to eq(false)
@@ -31,6 +32,7 @@ RSpec.describe 'SmartCore::Types::Value::Class' do
       expect { type.validate!(nil) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(Module.new) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(Object.new) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!(BasicObject.new) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(123) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!('test') }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(:test) }.to raise_error(SmartCore::Types::TypeError)
@@ -46,6 +48,7 @@ RSpec.describe 'SmartCore::Types::Value::Class' do
 
       expect(type.valid?(Module.new)).to eq(false)
       expect(type.valid?(Object.new)).to eq(false)
+      expect(type.valid?(BasicObject.new)).to eq(false)
       expect(type.valid?(123)).to eq(false)
       expect(type.valid?('test')).to eq(false)
       expect(type.valid?(:test)).to eq(false)
@@ -59,6 +62,7 @@ RSpec.describe 'SmartCore::Types::Value::Class' do
 
       expect { type.validate!(Module.new) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(Object.new) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!(BasicObject.new) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(123) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!('test') }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(:test) }.to raise_error(SmartCore::Types::TypeError)

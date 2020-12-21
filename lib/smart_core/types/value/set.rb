@@ -12,6 +12,10 @@ SmartCore::Types::Value.define_type(:Set) do |type|
   end
 
   type.define_caster do |value|
-    ::Set.new(SmartCore::Types::Value::Array.cast(value))
+    begin
+      ::Set.new(SmartCore::Types::Value::Array.cast(value))
+    rescue ::ArgumentError, ::NoMethodError
+      raise(SmartCore::Types::TypeCastingError, 'Non-castable to Set')
+    end
   end
 end

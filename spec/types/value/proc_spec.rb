@@ -20,6 +20,7 @@ RSpec.describe 'SmartCore::Types::Value::Proc' do
     specify 'invalid casting' do
       expect { type.cast(Class.new.new) }.to raise_error(SmartCore::Types::TypeCastingError)
       expect { type.cast(Object.new) }.to raise_error(SmartCore::Types::TypeCastingError)
+      expect { type.cast(BasicObject.new) }.to raise_error(SmartCore::Types::TypeCastingError)
 
       non_castable = Class.new { def to_proc; nil; end; }.new
       expect { type.cast(non_castable) }.to raise_error(SmartCore::Types::TypeCastingError)
@@ -33,6 +34,7 @@ RSpec.describe 'SmartCore::Types::Value::Proc' do
 
       expect(type.valid?(nil)).to eq(false)
       expect(type.valid?(Object.new)).to eq(false)
+      expect(type.valid?(BasicObject.new)).to eq(false)
       expect(type.valid?({})).to eq(false)
       expect(type.valid?([])).to eq(false)
       expect(type.valid?('test')).to eq(false)
@@ -47,6 +49,7 @@ RSpec.describe 'SmartCore::Types::Value::Proc' do
 
       expect { type.validate!(nil) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(Object.new) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!(BasicObject.new) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!({}) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!([]) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!('test') }.to raise_error(SmartCore::Types::TypeError)
@@ -63,6 +66,7 @@ RSpec.describe 'SmartCore::Types::Value::Proc' do
       expect(type.valid?(nil)).to eq(true)
 
       expect(type.valid?(Object.new)).to eq(false)
+      expect(type.valid?(BasicObject.new)).to eq(false)
       expect(type.valid?({})).to eq(false)
       expect(type.valid?([])).to eq(false)
       expect(type.valid?('test')).to eq(false)
@@ -77,6 +81,7 @@ RSpec.describe 'SmartCore::Types::Value::Proc' do
       expect { type.validate!(nil) }.not_to raise_error
 
       expect { type.validate!(Object.new) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!(BasicObject.new) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!({}) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!([]) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!('test') }.to raise_error(SmartCore::Types::TypeError)

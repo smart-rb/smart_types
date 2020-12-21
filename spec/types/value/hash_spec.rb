@@ -11,6 +11,7 @@ RSpec.describe 'SmartCore::Types::Value::Hash' do
 
       expect { type.cast(1) }.to raise_error(SmartCore::Types::TypeCastingError)
       expect { type.cast(Object.new) }.to raise_error(SmartCore::Types::TypeCastingError)
+      expect { type.cast(BasicObject.new) }.to raise_error(SmartCore::Types::TypeCastingError)
 
       as_hash_1 = Class.new { def to_h; { a: 1, 'b' => :baz }; end; }.new
       as_hash_2 = Class.new { def to_hash; { c: 3, 'd' => :fiz }; end; }.new
@@ -35,6 +36,7 @@ RSpec.describe 'SmartCore::Types::Value::Hash' do
       expect(type.valid?([])).to eq(false)
       expect(type.valid?([[:a, 1], ['b', Object.new]])).to eq(false)
       expect(type.valid?(Object.new)).to eq(false)
+      expect(type.valid?(BasicObject.new)).to eq(false)
     end
 
     specify 'type-validation' do
@@ -46,6 +48,7 @@ RSpec.describe 'SmartCore::Types::Value::Hash' do
       expect { type.validate!([]) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!([[:a, 1], ['b', :test]]) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(Object.new) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!(BasicObject.new) }.to raise_error(SmartCore::Types::TypeError)
     end
   end
 
@@ -59,6 +62,7 @@ RSpec.describe 'SmartCore::Types::Value::Hash' do
       expect(type.valid?([])).to eq(false)
       expect(type.valid?([[:a, 1], ['b', Object.new]])).to eq(false)
       expect(type.valid?(Object.new)).to eq(false)
+      expect(type.valid?(BasicObject.new)).to eq(false)
     end
 
     specify 'type-validation' do
@@ -70,6 +74,7 @@ RSpec.describe 'SmartCore::Types::Value::Hash' do
       expect { type.validate!([]) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!([[:a, 1], ['b', :test]]) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(Object.new) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!(BasicObject.new) }.to raise_error(SmartCore::Types::TypeError)
     end
   end
 

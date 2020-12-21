@@ -14,11 +14,16 @@ RSpec.describe 'SmartCore::Types::Value::Set' do
       as_array_2 = Class.new { def to_ary; ['456']; end }.new
       non_array_1 = Class.new { def to_a; :test; end }.new
       non_array_2 = Class.new { def to_ary; 'test'; end }.new
+      object = Object.new
 
       expect(type.cast(as_array_1)).to eq(Set.new([123]))
       expect(type.cast(as_array_2)).to eq(Set.new(['456']))
       expect(type.cast(non_array_1)).to eq(Set.new([non_array_1]))
       expect(type.cast(non_array_2)).to eq(Set.new([non_array_2]))
+      expect(type.cast(object)).to eq(Set.new([object]))
+
+      basic_object = BasicObject.new
+      expect { type.cast(basic_object) }.to raise_error(SmartCore::Types::TypeCastingError)
     end
   end
 
@@ -31,6 +36,7 @@ RSpec.describe 'SmartCore::Types::Value::Set' do
       expect(type.valid?({})).to eq(false)
       expect(type.valid?(nil)).to eq(false)
       expect(type.valid?(Object.new)).to eq(false)
+      expect(type.valid?(BasicObject.new)).to eq(false)
       expect(type.valid?(123.456)).to eq(false)
       expect(type.valid?(123)).to eq(false)
       expect(type.valid?(:test)).to eq(false)
@@ -45,6 +51,7 @@ RSpec.describe 'SmartCore::Types::Value::Set' do
       expect { type.validate!({}) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(nil) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(Object.new) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!(BasicObject.new) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(123.456) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(123) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(:test) }.to raise_error(SmartCore::Types::TypeError)
@@ -61,6 +68,7 @@ RSpec.describe 'SmartCore::Types::Value::Set' do
       expect(type.valid?([])).to eq(false)
       expect(type.valid?({})).to eq(false)
       expect(type.valid?(Object.new)).to eq(false)
+      expect(type.valid?(BasicObject.new)).to eq(false)
       expect(type.valid?(123.456)).to eq(false)
       expect(type.valid?(123)).to eq(false)
       expect(type.valid?(:test)).to eq(false)
@@ -75,6 +83,7 @@ RSpec.describe 'SmartCore::Types::Value::Set' do
       expect { type.validate!([]) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!({}) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(Object.new) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!(BasicObject.new) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(123.456) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(123) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(:test) }.to raise_error(SmartCore::Types::TypeError)

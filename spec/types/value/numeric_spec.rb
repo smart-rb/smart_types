@@ -38,6 +38,7 @@ RSpec.describe 'SmartCore::Types::Value::Numeric' do
 
     specify 'invalid casting' do
       expect { type.cast(Object.new) }.to raise_error(SmartCore::Types::TypeCastingError)
+      expect { type.cast(BasicObject.new) }.to raise_error(SmartCore::Types::TypeCastingError)
       expect { type.cast({}) }.to raise_error(SmartCore::Types::TypeCastingError)
       expect { type.cast([]) }.to raise_error(SmartCore::Types::TypeCastingError)
       expect { type.cast(:test) }.to raise_error(SmartCore::Types::TypeCastingError)
@@ -80,6 +81,7 @@ RSpec.describe 'SmartCore::Types::Value::Numeric' do
       expect(type.valid?('test')).to eq(false)
       expect(type.valid?(:test)).to eq(false)
       expect(type.valid?(Object.new)).to eq(false)
+      expect(type.valid?(BasicObject.new)).to eq(false)
     end
 
     specify 'type-validation' do
@@ -94,6 +96,7 @@ RSpec.describe 'SmartCore::Types::Value::Numeric' do
       expect { type.validate!('test') }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(:test) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(Object.new) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!(BasicObject.new) }.to raise_error(SmartCore::Types::TypeError)
     end
   end
 
@@ -110,6 +113,7 @@ RSpec.describe 'SmartCore::Types::Value::Numeric' do
       expect(type.valid?('test')).to eq(false)
       expect(type.valid?(:test)).to eq(false)
       expect(type.valid?(Object.new)).to eq(false)
+      expect(type.valid?(BasicObject.new)).to eq(false)
     end
 
     specify 'type-validation' do
@@ -124,6 +128,7 @@ RSpec.describe 'SmartCore::Types::Value::Numeric' do
       expect { type.validate!('test') }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(:test) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(Object.new) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!(BasicObject.new) }.to raise_error(SmartCore::Types::TypeError)
     end
   end
 

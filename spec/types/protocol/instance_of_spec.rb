@@ -42,6 +42,7 @@ RSpec.describe 'SmartCore::Types::Protocol::InstanceOf' do
       )
     end
 
+    # rubocop:disable Layout/LineLength
     specify 'type-checking / type-validation' do
       string_type = SmartCore::Types::Protocol::InstanceOf(::String, ::Symbol)
       nilable_string_type = string_type.nilable
@@ -51,21 +52,29 @@ RSpec.describe 'SmartCore::Types::Protocol::InstanceOf' do
         expect(string_type.valid?('test')).to eq(true)
         expect(string_type.valid?(123)).to eq(false)
         expect(string_type.valid?(nil)).to eq(false)
+        expect(string_type.valid?(Object.new)).to eq(false)
+        expect(string_type.valid?(BasicObject.new)).to eq(false)
         expect { string_type.validate!(:test) }.not_to raise_error
         expect { string_type.validate!('test') }.not_to raise_error
         expect { string_type.validate!(123) }.to raise_error(SmartCore::Types::TypeError)
+        expect { string_type.validate!(Object.new) }.to raise_error(SmartCore::Types::TypeError)
+        expect { string_type.validate!(BasicObject.new) }.to raise_error(SmartCore::Types::TypeError)
         expect { string_type.validate!(nil) }.to raise_error(SmartCore::Types::TypeError)
       end
 
       aggregate_failures 'example of string-types collection (nilable)' do
         expect(nilable_string_type.valid?(:test)).to eq(true)
         expect(nilable_string_type.valid?('test')).to eq(true)
-        expect(nilable_string_type.valid?(123)).to eq(false)
         expect(nilable_string_type.valid?(nil)).to eq(true)
+        expect(nilable_string_type.valid?(123)).to eq(false)
+        expect(nilable_string_type.valid?(Object.new)).to eq(false)
+        expect(nilable_string_type.valid?(BasicObject.new)).to eq(false)
         expect { nilable_string_type.validate!(:test) }.not_to raise_error
         expect { nilable_string_type.validate!('test') }.not_to raise_error
         expect { nilable_string_type.validate!(123) }.to raise_error(SmartCore::Types::TypeError)
         expect { nilable_string_type.validate!(nil) }.not_to raise_error
+        expect { nilable_string_type.validate!(Object.new) }.to raise_error(SmartCore::Types::TypeError)
+        expect { nilable_string_type.validate!(BasicObject.new) }.to raise_error(SmartCore::Types::TypeError)
       end
 
       numeric_type = SmartCore::Types::Protocol::InstanceOf(::Integer, ::Float)
@@ -77,26 +86,32 @@ RSpec.describe 'SmartCore::Types::Protocol::InstanceOf' do
         expect(numeric_type.valid?(123)).to eq(true)
         expect(numeric_type.valid?(123.567)).to eq(true)
         expect(numeric_type.valid?(nil)).to eq(false)
+        expect(numeric_type.valid?(Object.new)).to eq(false)
+        expect(numeric_type.valid?(BasicObject.new)).to eq(false)
         expect { numeric_type.validate!(:test) }.to raise_error(SmartCore::Types::TypeError)
         expect { numeric_type.validate!('test') }.to raise_error(SmartCore::Types::TypeError)
         expect { numeric_type.validate!(123) }.not_to raise_error
         expect { numeric_type.validate!(123.567) }.not_to raise_error
         expect { numeric_type.validate!(nil) }.to raise_error(SmartCore::Types::TypeError)
+        expect { numeric_type.validate!(Object.new) }.to raise_error(SmartCore::Types::TypeError)
+        expect { numeric_type.validate!(BasicObject.new) }.to raise_error(SmartCore::Types::TypeError)
       end
 
-      # rubocop:disable Layout/LineLength
       aggregate_failures 'example of numeric-types collection (nilable)' do
         expect(nilable_numeric_type.valid?(:test)).to eq(false)
         expect(nilable_numeric_type.valid?('test')).to eq(false)
+        expect(nilable_numeric_type.valid?(Object.new)).to eq(false)
+        expect(nilable_numeric_type.valid?(BasicObject.new)).to eq(false)
         expect(nilable_numeric_type.valid?(123.567)).to eq(true)
         expect(nilable_numeric_type.valid?(nil)).to eq(true)
         expect { nilable_numeric_type.validate!(:test) }.to raise_error(SmartCore::Types::TypeError)
         expect { nilable_numeric_type.validate!('test') }.to raise_error(SmartCore::Types::TypeError)
+        expect { nilable_numeric_type.validate!(Object.new) }.to raise_error(SmartCore::Types::TypeError)
+        expect { nilable_numeric_type.validate!(BasicObject.new) }.to raise_error(SmartCore::Types::TypeError)
         expect { nilable_numeric_type.validate!(123) }.not_to raise_error
         expect { nilable_numeric_type.validate!(123.567) }.not_to raise_error
         expect { nilable_numeric_type.validate!(nil) }.not_to raise_error
       end
-      # rubocop:enable Layout/LineLength
 
       no_any_type = SmartCore::Types::Protocol::InstanceOf
       nillable_no_any_type = no_any_type.nilable
@@ -104,14 +119,17 @@ RSpec.describe 'SmartCore::Types::Protocol::InstanceOf' do
       aggregate_failures 'example of no-one-type-is-supported collection (non-nilable)' do
         expect(no_any_type.valid?('test')).to eq(false)
         expect(no_any_type.valid?(Object.new)).to eq(false)
+        expect(no_any_type.valid?(BasicObject.new)).to eq(false)
         expect(no_any_type.valid?(nil)).to eq(false)
       end
 
       aggregate_failures 'example of no-one-type-is-supported collection (nilable)' do
         expect(nillable_no_any_type.valid?('test')).to eq(false)
         expect(nillable_no_any_type.valid?(Object.new)).to eq(false)
+        expect(nillable_no_any_type.valid?(BasicObject.new)).to eq(false)
         expect(nillable_no_any_type.valid?(nil)).to eq(true)
       end
     end
+    # rubocop:enable Layout/LineLength
   end
 end

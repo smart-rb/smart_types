@@ -13,6 +13,7 @@ RSpec.describe 'SmartCore::Types::Value::BigDecimal' do
       expect(type.cast(as_decimal)).to eq(BigDecimal('77.11')).and be_a(::BigDecimal)
 
       expect { type.cast(Object.new) }.to raise_error(SmartCore::Types::TypeCastingError)
+      expect { type.cast(BasicObject.new) }.to raise_error(SmartCore::Types::TypeCastingError)
       expect { type.cast([]) }.to raise_error(SmartCore::Types::TypeCastingError)
       expect { type.cast({}) }.to raise_error(SmartCore::Types::TypeCastingError)
       expect { type.cast(:test) }.to raise_error(SmartCore::Types::TypeCastingError)
@@ -32,6 +33,7 @@ RSpec.describe 'SmartCore::Types::Value::BigDecimal' do
       expect(type.valid?({})).to eq(false)
       expect(type.valid?([])).to eq(false)
       expect(type.valid?(Object.new)).to eq(false)
+      expect(type.valid?(BasicObject.new)).to eq(false)
     end
 
     specify 'type-validation' do
@@ -46,6 +48,7 @@ RSpec.describe 'SmartCore::Types::Value::BigDecimal' do
       expect { type.validate!({}) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!([]) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(Object.new) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!(BasicObject.new) }.to raise_error(SmartCore::Types::TypeError)
     end
   end
 
@@ -62,6 +65,7 @@ RSpec.describe 'SmartCore::Types::Value::BigDecimal' do
       expect(type.valid?({})).to eq(false)
       expect(type.valid?([])).to eq(false)
       expect(type.valid?(Object.new)).to eq(false)
+      expect(type.valid?(BasicObject.new)).to eq(false)
     end
 
     specify 'type-validation' do
@@ -76,6 +80,7 @@ RSpec.describe 'SmartCore::Types::Value::BigDecimal' do
       expect { type.validate!({}) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!([]) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(Object.new) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!(BasicObject.new) }.to raise_error(SmartCore::Types::TypeError)
     end
   end
 
