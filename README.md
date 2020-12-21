@@ -469,6 +469,7 @@ SmartCore::Types::Value::Rational
 SmartCore::Types::Value::SortedSet
 SmartCore::Types::Value::IO
 SmartCore::Types::Value::StringIO
+SmartCore::Types::Value::BasicObject
 SmartCore::Types::Struct::Schema
 SmartCore::Types::Struct::JSONSchema
 SmartCore::Types::Struct::StrictArray
