@@ -77,8 +77,6 @@ type.valid?([:test, 2]) # => false
 
 #### Primitives:
 
-- `SmartCore::Types::Value` category;
-
 ```ruby
 SmartCore::Types::Value::Any
 SmartCore::Types::Value::Nil
@@ -106,8 +104,6 @@ SmartCore::Types::Value::TimeBased
 
 #### Protocols:
 
-- `SmartCore::Types::Protocol` type category;
-
 ```ruby
 SmartCore::Types::Protocol::InstanceOf
 ```
@@ -122,8 +118,6 @@ SmartCore::Types::Protocol::InstanceOf(::Time, ::DateTime, ::Date) # time or dat
 ---
 
 #### Variadic:
-
-- `SmartCore::Types::Variadic` type category;
 
 ```ruby
 SmartCore::Types::Variadic::Tuple
