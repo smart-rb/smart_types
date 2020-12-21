@@ -2,6 +2,7 @@
 
 # @api private
 # @since 0.2.0
+# @version 0.3.0
 class SmartCore::Types::Primitive::Validator
   require_relative 'validator/result'
 
@@ -23,11 +24,7 @@ class SmartCore::Types::Primitive::Validator
   # @since 0.2.0
   attr_reader :invariant_control
 
-  # @param type_checker [
-  #   SmartCore::Types::Primitive::Checker,
-  #   SmartCore::Types::Primitive::MultChecker,
-  #   SmartCore::Types::Primitive::SumChecker
-  # ]
+  # @param type_checker [SmartCore::Types::Primitive::Checker]
   # @param invariant_control [SmartCore::Types::Primitive::InvariantControl]
   # @return [void]
   #
@@ -37,6 +34,17 @@ class SmartCore::Types::Primitive::Validator
     @type = nil
     @type_checker = type_checker
     @invariant_control = invariant_control
+  end
+
+  # @param type [SmartCore::Types::Primitive]
+  # @return [SmartCore::Types::Primitive::Validator]
+  #
+  # @api private
+  # @since 0.3.0
+  def ___copy_for___(type)
+    self.class.new(type_checker, invariant_control).tap do |instance_copy|
+      instance_copy.___assign_type___(type)
+    end
   end
 
   # @param type [SmartCore::Types::Primitive]
@@ -62,10 +70,11 @@ class SmartCore::Types::Primitive::Validator
   #
   # @api private
   # @since 0.2.0
+  # @version 0.3.0
   def validate(value)
-    checker_result = type_checker.call(value) # => Boolean
+    checker_result = type_checker.call(value, type.runtime_attributes) # => Boolean
     return Result.new(type, value, checker_result) unless checker_result
-    invariant_result = invariant_control.check(value)
+    invariant_result = invariant_control.check(value, type.runtime_attributes)
     invariant_errors = invariant_result.invariant_errors.map { |error| "#{type.name}.#{error}" }
     Result.new(type, value, checker_result, invariant_errors)
   end

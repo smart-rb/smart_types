@@ -12,6 +12,7 @@ RSpec.describe 'SmartCore::Types::Value::Float' do
       expect(type.cast(Float::NAN).object_id).to eq(Float::NAN.object_id)
 
       expect { type.cast(Object.new) }.to raise_error(SmartCore::Types::TypeCastingError)
+      expect { type.cast(BasicObject.new) }.to raise_error(SmartCore::Types::TypeCastingError)
       expect { type.cast([]) }.to raise_error(SmartCore::Types::TypeCastingError)
       expect { type.cast({}) }.to raise_error(SmartCore::Types::TypeCastingError)
 
@@ -25,11 +26,7 @@ RSpec.describe 'SmartCore::Types::Value::Float' do
     end
   end
 
-  context 'non-nilable type' do
-    let(:type) { SmartCore::Types::Value::Float }
-
-    include_examples 'type casting'
-
+  shared_examples 'type-checking / type-validation (non-nilable)' do
     specify 'type-checking' do
       expect(type.valid?(0.0)).to eq(true)
       expect(type.valid?(1234.567)).to eq(true)
@@ -44,6 +41,7 @@ RSpec.describe 'SmartCore::Types::Value::Float' do
       expect(type.valid?(-123)).to eq(false)
       expect(type.valid?(0)).to eq(false)
       expect(type.valid?(Object.new)).to eq(false)
+      expect(type.valid?(BasicObject.new)).to eq(false)
     end
 
     specify 'type-validation' do
@@ -60,14 +58,11 @@ RSpec.describe 'SmartCore::Types::Value::Float' do
       expect { type.validate!(-123) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(0) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(Object.new) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!(BasicObject.new) }.to raise_error(SmartCore::Types::TypeError)
     end
   end
 
-  context 'nilable type' do
-    let(:type) { SmartCore::Types::Value::Float.nilable }
-
-    include_examples 'type casting'
-
+  shared_examples 'type-checking / type-validation (nilable)' do
     specify 'type-checking' do
       expect(type.valid?(0.0)).to eq(true)
       expect(type.valid?(1234.567)).to eq(true)
@@ -82,6 +77,7 @@ RSpec.describe 'SmartCore::Types::Value::Float' do
       expect(type.valid?(-123)).to eq(false)
       expect(type.valid?(0)).to eq(false)
       expect(type.valid?(Object.new)).to eq(false)
+      expect(type.valid?(BasicObject.new)).to eq(false)
     end
 
     specify 'type-validation' do
@@ -98,6 +94,41 @@ RSpec.describe 'SmartCore::Types::Value::Float' do
       expect { type.validate!(-123) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(0) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(Object.new) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!(BasicObject.new) }.to raise_error(SmartCore::Types::TypeError)
     end
+  end
+
+  context 'non-nilable type' do
+    let(:type) { SmartCore::Types::Value::Float }
+
+    include_examples 'type casting'
+    include_examples 'type-checking / type-validation (non-nilable)'
+  end
+
+  context 'runtime-based non-nilable type' do
+    let(:type) { SmartCore::Types::Value::Float() }
+
+    include_examples 'type casting'
+    include_examples 'type-checking / type-validation (non-nilable)'
+  end
+
+  context 'nilable type' do
+    let(:type) { SmartCore::Types::Value::Float.nilable }
+
+    include_examples 'type casting'
+    include_examples 'type-checking / type-validation (nilable)'
+  end
+
+  context 'runtime-based nilable type' do
+    let(:type) { SmartCore::Types::Value::Float().nilable }
+
+    include_examples 'type casting'
+    include_examples 'type-checking / type-validation (nilable)'
+  end
+
+  specify 'has no support for runtime attributes' do
+    expect { SmartCore::Types::Value::Float(33.0) }.to raise_error(
+      SmartCore::Types::RuntimeAttriburtesUnsupportedError
+    )
   end
 end
