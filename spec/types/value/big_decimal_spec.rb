@@ -13,17 +13,14 @@ RSpec.describe 'SmartCore::Types::Value::BigDecimal' do
       expect(type.cast(as_decimal)).to eq(BigDecimal('77.11')).and be_a(::BigDecimal)
 
       expect { type.cast(Object.new) }.to raise_error(SmartCore::Types::TypeCastingError)
+      expect { type.cast(BasicObject.new) }.to raise_error(SmartCore::Types::TypeCastingError)
       expect { type.cast([]) }.to raise_error(SmartCore::Types::TypeCastingError)
       expect { type.cast({}) }.to raise_error(SmartCore::Types::TypeCastingError)
       expect { type.cast(:test) }.to raise_error(SmartCore::Types::TypeCastingError)
     end
   end
 
-  context 'non-nilable type' do
-    let(:type) { SmartCore::Types::Value::BigDecimal }
-
-    include_examples 'type casting'
-
+  shared_examples 'type-checking / type-validation (non-nilable)' do
     specify 'type-checking' do
       expect(type.valid?(BigDecimal('123.456'))).to eq(true)
       expect(type.valid?(BigDecimal('99999999999999999999999999'))).to eq(true)
@@ -36,6 +33,7 @@ RSpec.describe 'SmartCore::Types::Value::BigDecimal' do
       expect(type.valid?({})).to eq(false)
       expect(type.valid?([])).to eq(false)
       expect(type.valid?(Object.new)).to eq(false)
+      expect(type.valid?(BasicObject.new)).to eq(false)
     end
 
     specify 'type-validation' do
@@ -50,14 +48,11 @@ RSpec.describe 'SmartCore::Types::Value::BigDecimal' do
       expect { type.validate!({}) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!([]) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(Object.new) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!(BasicObject.new) }.to raise_error(SmartCore::Types::TypeError)
     end
   end
 
-  context 'nilable type' do
-    let(:type) { SmartCore::Types::Value::BigDecimal.nilable }
-
-    include_examples 'type casting'
-
+  shared_examples 'type-checking / type-validation (nilable)' do
     specify 'type-checking' do
       expect(type.valid?(BigDecimal('123.456'))).to eq(true)
       expect(type.valid?(BigDecimal('99999999999999999999999999'))).to eq(true)
@@ -70,6 +65,7 @@ RSpec.describe 'SmartCore::Types::Value::BigDecimal' do
       expect(type.valid?({})).to eq(false)
       expect(type.valid?([])).to eq(false)
       expect(type.valid?(Object.new)).to eq(false)
+      expect(type.valid?(BasicObject.new)).to eq(false)
     end
 
     specify 'type-validation' do
@@ -84,6 +80,41 @@ RSpec.describe 'SmartCore::Types::Value::BigDecimal' do
       expect { type.validate!({}) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!([]) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(Object.new) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!(BasicObject.new) }.to raise_error(SmartCore::Types::TypeError)
     end
+  end
+
+  context 'non-nilable type' do
+    let(:type) { SmartCore::Types::Value::BigDecimal }
+
+    include_examples 'type casting'
+    include_examples 'type-checking / type-validation (non-nilable)'
+  end
+
+  context 'runtime-based non-nilable type' do
+    let(:type) { SmartCore::Types::Value::BigDecimal() }
+
+    include_examples 'type casting'
+    include_examples 'type-checking / type-validation (non-nilable)'
+  end
+
+  context 'nilable type' do
+    let(:type) { SmartCore::Types::Value::BigDecimal.nilable }
+
+    include_examples 'type casting'
+    include_examples 'type-checking / type-validation (nilable)'
+  end
+
+  context 'runtime-based nilable type' do
+    let(:type) { SmartCore::Types::Value::BigDecimal().nilable }
+
+    include_examples 'type casting'
+    include_examples 'type-checking / type-validation (nilable)'
+  end
+
+  specify 'has no support for runtime attributes' do
+    expect { SmartCore::Types::Value::BigDecimal('1.0') }.to raise_error(
+      SmartCore::Types::RuntimeAttriburtesUnsupportedError
+    )
   end
 end

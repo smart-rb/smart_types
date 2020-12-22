@@ -16,24 +16,23 @@ RSpec.describe 'SmartCore::Types::Value::Array' do
       as_array_2 = Class.new { def to_ary; ['456']; end }.new
       non_array_1 = Class.new { def to_a; :test; end }.new
       non_array_2 = Class.new { def to_ary; 'test'; end }.new
+      basic_object = BasicObject.new
 
       expect(type.cast(as_array_1)).to eq([123])
       expect(type.cast(as_array_2)).to eq(['456'])
       expect(type.cast(non_array_1)).to eq([non_array_1])
       expect(type.cast(non_array_2)).to eq([non_array_2])
+      expect(type.cast(basic_object)).to eq([basic_object])
     end
   end
 
-  context 'non-nilable type' do
-    let(:type) { SmartCore::Types::Value::Array }
-
-    include_examples 'type casting'
-
+  shared_examples 'type-checking / type-validation (non-nilable)' do
     specify 'type-checking' do
       expect(type.valid?([])).to eq(true)
       expect(type.valid?([123, '456', :test])).to eq(true)
       expect(type.valid?(123)).to eq(false)
       expect(type.valid?(Object.new)).to eq(false)
+      expect(type.valid?(BasicObject.new)).to eq(false)
       expect(type.valid?(nil)).to eq(false)
     end
 
@@ -41,28 +40,62 @@ RSpec.describe 'SmartCore::Types::Value::Array' do
       expect { type.validate!([]) }.not_to raise_error
       expect { type.validate!([123, '456', :test]) }.not_to raise_error
       expect { type.validate!(123) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!(BasicObject.new) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(nil) }.to raise_error(SmartCore::Types::TypeError)
     end
   end
 
-  context 'nilable type' do
-    let(:type) { SmartCore::Types::Value::Array.nilable }
-
-    include_examples 'type casting'
-
+  shared_examples 'type-checking / type-validation (nilable)' do
     specify 'type-checking' do
       expect(type.valid?([])).to eq(true)
       expect(type.valid?([123, '456', :test])).to eq(true)
       expect(type.valid?(123)).to eq(false)
       expect(type.valid?(Object.new)).to eq(false)
+      expect(type.valid?(BasicObject.new)).to eq(false)
       expect(type.valid?(nil)).to eq(true) # NOTE: nil
     end
 
     specify 'type-validation' do
       expect { type.validate!([]) }.not_to raise_error
       expect { type.validate!([123, '456', :test]) }.not_to raise_error
-      expect { type.validate!(nil) }.not_to raise_error # NOTE: nil
+      expect { type.validate!(nil) }.not_to raise_error
       expect { type.validate!(123) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!(BasicObject.new) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!(Object.new) }.to raise_error(SmartCore::Types::TypeError)
     end
+  end
+
+  context 'runtime-based non-nilable type' do
+    let(:type) { SmartCore::Types::Value::Array() }
+
+    include_examples 'type casting'
+    include_examples 'type-checking / type-validation (non-nilable)'
+  end
+
+  context 'non-nilable type' do
+    let(:type) { SmartCore::Types::Value::Array }
+
+    include_examples 'type casting'
+    include_examples 'type-checking / type-validation (non-nilable)'
+  end
+
+  context 'runtime-based nilable type' do
+    let(:type) { SmartCore::Types::Value::Array().nilable }
+
+    include_examples 'type casting'
+    include_examples 'type-checking / type-validation (nilable)'
+  end
+
+  context 'nilable type' do
+    let(:type) { SmartCore::Types::Value::Array.nilable }
+
+    include_examples 'type casting'
+    include_examples 'type-checking / type-validation (nilable)'
+  end
+
+  specify 'has no support for runtime attributes' do
+    expect { SmartCore::Types::Value::Array(1) }.to raise_error(
+      SmartCore::Types::RuntimeAttriburtesUnsupportedError
+    )
   end
 end

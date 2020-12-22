@@ -2,11 +2,14 @@
 
 # @api public
 # @since 0.1.0
-SmartCore::Types::Value::TimeBased = SmartCore::Types::System.type_sum(
-  SmartCore::Types::Value::Time,
-  SmartCore::Types::Value::DateTime,
-  SmartCore::Types::Value::Date
-) do |type|
+# @version 0.3.0
+SmartCore::Types::Value.define_type(:TimeBased) do |type|
+  type.define_checker do |value|
+    SmartCore::Types::Value::Time.valid?(value) ||
+      SmartCore::Types::Value::DateTime.valid?(value) ||
+      SmartCore::Types::Value::Date.valid?(value)
+  end
+
   type.define_caster do |value|
     next value if SmartCore::Types::Value::Time.valid?(value)
     next value if SmartCore::Types::Value::DateTime.valid?(value)

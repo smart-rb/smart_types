@@ -11,6 +11,7 @@ RSpec.describe 'SmartCore::Types::Value::Hash' do
 
       expect { type.cast(1) }.to raise_error(SmartCore::Types::TypeCastingError)
       expect { type.cast(Object.new) }.to raise_error(SmartCore::Types::TypeCastingError)
+      expect { type.cast(BasicObject.new) }.to raise_error(SmartCore::Types::TypeCastingError)
 
       as_hash_1 = Class.new { def to_h; { a: 1, 'b' => :baz }; end; }.new
       as_hash_2 = Class.new { def to_hash; { c: 3, 'd' => :fiz }; end; }.new
@@ -25,11 +26,7 @@ RSpec.describe 'SmartCore::Types::Value::Hash' do
     end
   end
 
-  context 'non-nilable type' do
-    let(:type) { SmartCore::Types::Value::Hash }
-
-    include_examples 'type casting'
-
+  shared_examples 'type-checking / type-validation (non-nilable)' do
     specify 'type-checking' do
       expect(type.valid?({})).to eq(true)
       expect(type.valid?({ a: 1, 'b' => 2 })).to eq(true)
@@ -39,6 +36,7 @@ RSpec.describe 'SmartCore::Types::Value::Hash' do
       expect(type.valid?([])).to eq(false)
       expect(type.valid?([[:a, 1], ['b', Object.new]])).to eq(false)
       expect(type.valid?(Object.new)).to eq(false)
+      expect(type.valid?(BasicObject.new)).to eq(false)
     end
 
     specify 'type-validation' do
@@ -50,14 +48,11 @@ RSpec.describe 'SmartCore::Types::Value::Hash' do
       expect { type.validate!([]) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!([[:a, 1], ['b', :test]]) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(Object.new) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!(BasicObject.new) }.to raise_error(SmartCore::Types::TypeError)
     end
   end
 
-  context 'nilable type' do
-    let(:type) { SmartCore::Types::Value::Hash.nilable }
-
-    include_examples 'type casting'
-
+  shared_examples 'type-checking / type-validation (nilable)' do
     specify 'type-checking' do
       expect(type.valid?({})).to eq(true)
       expect(type.valid?({ a: 1, 'b' => 2 })).to eq(true)
@@ -67,6 +62,7 @@ RSpec.describe 'SmartCore::Types::Value::Hash' do
       expect(type.valid?([])).to eq(false)
       expect(type.valid?([[:a, 1], ['b', Object.new]])).to eq(false)
       expect(type.valid?(Object.new)).to eq(false)
+      expect(type.valid?(BasicObject.new)).to eq(false)
     end
 
     specify 'type-validation' do
@@ -78,6 +74,41 @@ RSpec.describe 'SmartCore::Types::Value::Hash' do
       expect { type.validate!([]) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!([[:a, 1], ['b', :test]]) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(Object.new) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!(BasicObject.new) }.to raise_error(SmartCore::Types::TypeError)
     end
+  end
+
+  context 'non-nilable type' do
+    let(:type) { SmartCore::Types::Value::Hash }
+
+    include_examples 'type casting'
+    include_examples 'type-checking / type-validation (non-nilable)'
+  end
+
+  context 'runtime-based non-nilable type' do
+    let(:type) { SmartCore::Types::Value::Hash() }
+
+    include_examples 'type casting'
+    include_examples 'type-checking / type-validation (non-nilable)'
+  end
+
+  context 'nilable type' do
+    let(:type) { SmartCore::Types::Value::Hash.nilable }
+
+    include_examples 'type casting'
+    include_examples 'type-checking / type-validation (nilable)'
+  end
+
+  context 'runtime-based nilable type' do
+    let(:type) { SmartCore::Types::Value::Hash().nilable }
+
+    include_examples 'type casting'
+    include_examples 'type-checking / type-validation (nilable)'
+  end
+
+  specify 'has no support for runtime attributes' do
+    expect { SmartCore::Types::Value::Hash({}) }.to raise_error(
+      SmartCore::Types::RuntimeAttriburtesUnsupportedError
+    )
   end
 end

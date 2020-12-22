@@ -2,6 +2,7 @@
 
 # @api private
 # @since 0.2.0
+# @version 0.3.0
 class SmartCore::Types::Primitive::SumValidator
   require_relative 'sum_validator/result'
 
@@ -13,6 +14,17 @@ class SmartCore::Types::Primitive::SumValidator
   def initialize(*validators)
     @type = nil
     @validators = validators
+  end
+
+  # @param type [SmartCore::Types::Primitive]
+  # @return [SmartCore::Types::Primitive::SumValidator]
+  #
+  # @api private
+  # @since 0.3.0
+  def ___copy_for___(type)
+    self.class.new(type_checker, invariant_control).tap do |instance_copy|
+      instance_copy.___assign_type___(type)
+    end
   end
 
   # @param type [SmartCore::Types::Primitive]
@@ -28,11 +40,14 @@ class SmartCore::Types::Primitive::SumValidator
   #
   # @api private
   # @since 0.2.0
+  # @version 0.3.0
   def valid?(value)
     # NOTE: at this moment type sum does not support invariant checking
     # TODO (0.x.0):
     #   validators.any? { |validator| validator.valid?(value) }
-    validators.any? { |validator| validator.type_checker.call(value) }
+    validators.any? do |validator|
+      validator.type_checker.call(value, type.runtime_attributes)
+    end
   end
 
   # @param value [Any]
@@ -40,6 +55,7 @@ class SmartCore::Types::Primitive::SumValidator
   #
   # @api private
   # @since 0.2.0
+  # @version 0.3.0
   def validate(value)
     compile_validation_result do
       SmartCore::Engine::Atom.new.tap do |result|
@@ -48,7 +64,7 @@ class SmartCore::Types::Primitive::SumValidator
           # TODO (0.x.0):
           #   result.swap { validator.validate(value) }
           #   break if result.value.success?
-          result.swap { validator.type_checker.call(value) }
+          result.swap { validator.type_checker.call(value, type.runtime_attributes) }
           break if result.value # => boolean
         end
       end

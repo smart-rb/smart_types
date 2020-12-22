@@ -12,6 +12,7 @@ RSpec.describe 'SmartCore::Types::Value::Any' do
       mod_instance = Module.new
       klass = Class
       klass_instance = Class.new
+      basic_object = BasicObject.new
       object = Object.new
       hash_instance = {}
       arr_instance = []
@@ -35,6 +36,7 @@ RSpec.describe 'SmartCore::Types::Value::Any' do
       expect(type.cast(klass)).to eq(klass).and be_a(::Class)
       expect(type.cast(klass_instance)).to eq(klass_instance).and be_a(::Class)
       expect(type.cast(object)).to eq(object).and be_a(::Object)
+      expect(type.cast(basic_object)).to eq(basic_object)
       expect(type.cast(hash_instance)).to eq(hash_instance).and be_a(::Hash)
       expect(type.cast(arr_instance)).to eq(arr_instance).and be_a(::Array)
       expect(type.cast(time)).to eq(time).and be_a(::Time)
@@ -61,6 +63,7 @@ RSpec.describe 'SmartCore::Types::Value::Any' do
       expect(type.valid?(Class)).to eq(true)
       expect(type.valid?(Class.new)).to eq(true)
       expect(type.valid?(Object.new)).to eq(true)
+      expect(type.valid?(BasicObject.new)).to eq(true)
       expect(type.valid?({})).to eq(true)
       expect(type.valid?([])).to eq(true)
       expect(type.valid?(Time.new)).to eq(true)
@@ -87,6 +90,7 @@ RSpec.describe 'SmartCore::Types::Value::Any' do
       expect { type.validate!(Class) }.not_to raise_error
       expect { type.validate!(Class.new) }.not_to raise_error
       expect { type.validate!(Object.new) }.not_to raise_error
+      expect { type.validate!(BasicObject.new) }.not_to raise_error
       expect { type.validate!({}) }.not_to raise_error
       expect { type.validate!([]) }.not_to raise_error
       expect { type.validate!(Time.new) }.not_to raise_error
@@ -99,6 +103,14 @@ RSpec.describe 'SmartCore::Types::Value::Any' do
       expect { type.validate!(DateTime::Infinity) }.not_to raise_error
       expect { type.validate!(BigDecimal('123.456')) }.not_to raise_error
     end
+  end
+
+  context 'runtime-based non-nilable type' do
+    let(:type) { SmartCore::Types::Value::Any() }
+
+    include_examples 'type casting'
+    include_examples 'type checking'
+    include_examples 'type validation'
   end
 
   context 'non-nilable type' do
@@ -115,5 +127,19 @@ RSpec.describe 'SmartCore::Types::Value::Any' do
     include_examples 'type casting'
     include_examples 'type checking'
     include_examples 'type validation'
+  end
+
+  context 'runtime-based nilable type' do
+    let(:type) { SmartCore::Types::Value::Any().nilable }
+
+    include_examples 'type casting'
+    include_examples 'type checking'
+    include_examples 'type validation'
+  end
+
+  specify 'has no support for runtime attributes' do
+    expect { SmartCore::Types::Value::Any(1) }.to raise_error(
+      SmartCore::Types::RuntimeAttriburtesUnsupportedError
+    )
   end
 end

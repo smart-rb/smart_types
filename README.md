@@ -1,4 +1,4 @@
-# SmartCore::Types &middot; [![Gem Version](https://badge.fury.io/rb/smart_types.svg)](https://badge.fury.io/rb/smart_types) [![Build Status](https://travis-ci.org/smart-rb/smart_types.svg?branch=master)](https://travis-ci.org/smart-rb/smart_types)
+# SmartCore::Types &middot; [![Gem Version](https://badge.fury.io/rb/smart_types.svg)](https://badge.fury.io/rb/smart_types)
 
 > A set of objects that acts like types (type checking and type casting) with a support for basic type algebra.
 
@@ -26,9 +26,11 @@ require 'smart_core/types'
 
 ## Usage
 
-- [Type interface](#type-interface)
-- [Basic type algebra](#basic-type-algebra)
+- [Type interface and basic type algebra](#type-interface-and-basic-type-algebra)
 - [Supported types](#supported-types)
+  - [Primitives](#primitives) (`SmartCore::Types::Value`)
+  - [Protocols](#protocols) (`SmartCore::Types::Protocol`)
+  - [Variadic](#variadic) (`SmartCore::Types::Variadic`)
 - [Nilable types](#nilable-types)
 - [Custom type definition](#custom-type-definition)
   - [Primitive type definition](#primitive-type-definition)
@@ -37,12 +39,13 @@ require 'smart_core/types'
 - [Type casting](#type-casting)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
+- [Build](#build)
 - [License](#license)
 - [Authors](#authors)
 
 ---
 
-## Type Interface
+## Type Interface and basic type algebra
 
 ```ruby
 # documentation is coming
@@ -55,9 +58,24 @@ type3 = type1 | type2
 type4 = type1 & type2
 ```
 
+Types with runtime:
+
+```ruby
+# get a type object with a custom runtime (instances of String or Symbol):
+type = SmartCore::Types::Protocol::InstanceOf(::String, ::Symbol)
+type.valid?(:test) # => true
+type.valid?('test') # => true
+type.valid?(123.456) # => false
+
+# another type object with a custom runtime (tuple (String, Integer, Time)):
+type = SmartCore::Types::Variadic::Tuple(::String, ::Integer, ::DateTime)
+type.valid?(['test', 1, DateTime.new]) # => true
+type.valid?([:test, 2]) # => false
+```
+
 ## Supported types
 
-- Primitives
+#### Primitives:
 
 ```ruby
 SmartCore::Types::Value::Any
@@ -71,6 +89,7 @@ SmartCore::Types::Value::Numeric
 SmartCore::Types::Value::BigDecimal
 SmartCore::Types::Value::Boolean
 SmartCore::Types::Value::Array
+SmartCore::Types::Value::Set
 SmartCore::Types::Value::Hash
 SmartCore::Types::Value::Proc
 SmartCore::Types::Value::Class
@@ -79,6 +98,35 @@ SmartCore::Types::Value::Time
 SmartCore::Types::Value::DateTime
 SmartCore::Types::Value::Date
 SmartCore::Types::Value::TimeBased
+```
+
+---
+
+#### Protocols:
+
+```ruby
+SmartCore::Types::Protocol::InstanceOf
+```
+
+```ruby
+# examples (SmartCore::Types::Protocol::InstanceOf):
+SmartCore::Types::Protocol::InstanceOf(::Integer) # only integer
+SmartCore::Types::Protocol::InstanceOf(::String, ::Symbol) # string or symbol
+SmartCore::Types::Protocol::InstanceOf(::Time, ::DateTime, ::Date) # time or datetime or date
+```
+
+---
+
+#### Variadic:
+
+```ruby
+SmartCore::Types::Variadic::Tuple
+```
+
+```ruby
+# examples (SmartCore::Types::Variadic::Tuple):
+SmartCore::Types::Variadic::Tuple(::String, ::Integer, ::Time) # array with signature [<string>, <integer>, <time>]
+SmartCore::Types::Variadic::Tuple(::Symbol, ::Float) # array with signature [<symbol>, <float>]
 ```
 
 ---
@@ -125,41 +173,56 @@ Invariant checking is a special validation layer (see [#type validation](#type-v
 
 # example:
 SmartCore::Types::Value.define_type(:String) do |type|
-  type.define_checker do |value|
+  type.define_checker do |value, runtime_attrs| # runtime attributes are optional
     value.is_a?(::String)
   end
 
-  type.define_caster do |value|
+  type.define_caster do |value, runtime_attrs| # runtime attributes are optional
     value.to_s
   end
 end
+
+# get a type object:
+SmartCore::Types::Value::String
+# --- or ---
+SmartCore::Types::Value::String() # without runtime attributes
+# --- or ---
+SmartCore::Types::Value::String('some_attr', :another_attr) # with runtime attributes
+
+# work with type object: see documentation below
 ```
 
 #### With type invariants
 
 ```ruby
 SmartCore::Types::Value.define_type(:String) do |type|
-  type.define_checker do |value|
+  type.define_checker do |value, runtime_attrs|
     value.is_a?(::String)
   end
 
-  type.define_caster do |value|
+  type.define_caster do |value, runtime_attrs|
     value.to_s
   end
 
   # NOTE:
   #    invariant defined out from chain does not depends on other invariants
-  type.invariant(:uncensored_content) do |value|
+  type.invariant(:uncensored_content) do |value, runtime_attrs|
     !value.include?('uncensored_word')
   end
 
-  type.invariant(:filled) do |value|
+  type.invariant(:filled) do |value, runtime_attrs|
     value != ''
   end
 
   type.invariant_chain(:password) do
-    invariant(:should_present) { |value| value != '' }
-    invariant(:should_have_numbers) { |value| v.match?(/[0-9]+/) }
+    invariant(:should_present) do |value, runtime_attrs|
+      value != ''
+    end
+
+    invariant(:should_have_numbers) do |value, runtime_attrs|
+      v.match?(/[0-9]+/)
+    end
+
     # NOTE:
     #   inside a chain each next invariant invokation
     #   depends on previous successful invariant check
@@ -305,6 +368,10 @@ SmartCore::Types::Value::CryptoString = SmartCore::Types::Value::NumberdString &
 
 ## Roadmap
 
+- migrate to `Github Actions`;
+
+- support for `block`-attribute in runtime attributes;
+
 - type configuration:
 
 ```ruby
@@ -367,8 +434,17 @@ SmartCore::Types::Value::Time.refine_caster do |value, original_caster|
   # new type caster
 end
 
-# .refine_invariant
-# .refine_invariant_chain
+SmartCore::Types::Value::Time.refine_runtime_attributes_checker do |value, original_checker|
+  # new runtime attribute checker
+end
+
+SmartCore::Types::Value::Time.refine_invariant(:name) do |value|
+  # new invariant
+end
+
+SmartCore::Types::Value::Time.refine_invariant_chain(:chain_name) do
+  # new invariant chain
+end
 ```
 
 - options for type casters:
@@ -396,24 +472,33 @@ SmartCore::Types::Value::Enumerator
 SmartCore::Types::Value::EnumeratorChain
 SmartCore::Types::Value::Range
 SmartCore::Types::Value::Rational
-SmartCore::Types::Value::Set
 SmartCore::Types::Value::SortedSet
 SmartCore::Types::Value::IO
 SmartCore::Types::Value::StringIO
+SmartCore::Types::Value::BasicObject
 SmartCore::Types::Struct::Schema
 SmartCore::Types::Struct::JSONSchema
 SmartCore::Types::Struct::StrictArray
 SmartCore::Types::Struct::StrictHash
 SmartCore::Types::Struct::Map
-SmartCore::Types::Variative::Enum
-SmartCore::Types::Variative::Variant
-SmartCore::Types::Protocol::InstanceOf
+SmartCore::Types::Variadic::Enum
 SmartCore::Types::Protocol::Interface
 SmartCore::Types::Protocol::Ancestors
 SmartCore::Types::Protocol::Enumerable
 SmartCore::Types::Protocol::Comparable
 SmartCore::Types::Protocol::Forwardable
 SmartCore::Types::Protocol::Callable
+```
+
+- `#sum` alias for `|` and `#mult` alias for `&` (with a support for type name definition and other API);
+
+- type category in invariant error codes:
+```ruby
+# before:
+'String.password.should_contain_numbers' # `String` type from `Value` category
+
+# after:
+'Value.String.password.should_contain_numbers' # `Value::String`
 ```
 
 - support for type of empty non-defined type (`SmartCore::Types::Primitive::Undefined`);
@@ -438,6 +523,24 @@ SmartCore::Types::Protocol::Callable
 - Commit your changes (`git commit -am '[feature_context] Add some feature'`)
 - Push to the branch (`git push origin feature/my-new-feature`)
 - Create new Pull Request
+
+## Build
+
+- run tests:
+
+```shell
+bundle exec rake rspec
+# --- or ---
+bundle exec rspec
+```
+
+- run code stye linting:
+
+```shell
+bundle exec rake rubocop
+# --- or ---
+bundle exec rubocop
+```
 
 ## License
 

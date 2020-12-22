@@ -2,6 +2,7 @@
 
 # @api private
 # @since 0.2.0
+# @version 0.3.0
 class SmartCore::Types::Primitive::InvariantControl::Single
   require_relative 'single/result'
 
@@ -35,12 +36,14 @@ class SmartCore::Types::Primitive::InvariantControl::Single
   end
 
   # @param value [Any]
+  # @param runtime_attributes [Array<Any>]
   # @return [SmartCore::Types::Primitive::InvariantControl::Single::Result]
   #
   # @api private
   # @since 0.2.0
-  def check(value)
-    validation_result = !!invariant_checker.call(value)
+  # @version 0.3.0
+  def check(value, runtime_attributes)
+    validation_result = !!invariant_checker.call(value, runtime_attributes)
     Result.new(self, value, validation_result)
   end
 
