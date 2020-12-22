@@ -13,7 +13,7 @@ SimpleCov.configure do
   enable_coverage :line
   enable_coverage :branch
 
-  minimum_coverage 100
+  minimum_coverage 95
 
   formatter SimpleCov::Formatter::MultiFormatter.new([
     SimpleCov::Formatter::HTMLFormatter,

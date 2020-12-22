@@ -9,18 +9,23 @@ on:
       - master
 
 jobs:
-  build:
+  ci:
     runs-on: ubuntu-latest
 
     strategy:
       fail-fast: false
       matrix:
         ruby:
-          - 2.5
-          - 2.6
-          - 2.7
-          - ruby-head
-          - jruby-head
+          - version: 2.5
+            continue-on-error: false
+          - version: 2.6
+            continue-on-error: false
+          - version: 2.7
+            continue-on-error: false
+          - version: ruby-head
+            continue-on-error: true
+          - version: jruby-head
+            continue-on-error: true
 
     steps:
       - uses: actions/checkout@v2
@@ -28,14 +33,18 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-          ruby-version: ${{ matrix.ruby }}
+          ruby-version: ${{ matrix.ruby.version }}
       - name: Install dependencies
         run: bundle install
+        continue-on-error: ${{ matrix.ruby.continue-on-error }}
       - name: Run rubocop
         run: bundle exec rubocop
+        continue-on-error: ${{ matrix.ruby.continue-on-error }}
       - name: Run specs
         run: bundle exec rspec
+        continue-on-error: ${{ matrix.ruby.continue-on-error }}
       - name: Coveralls
         uses: coverallsapp/github-action@master
+        continue-on-error: true
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
