@@ -2,7 +2,7 @@
 
 > A set of objects that acts like types (type checking and type casting) with a support for basic type algebra.
 
-Minimalistic type system for any ruby project. Supports custom type definitioning,
+Minimalistic type system for any ruby project. Supports custom type definition,
 type validation, type casting and type categorizing. Provides a set of commonly used type
 categories and general purpose types. Has a flexible and simplest type definition toolchain.
 
@@ -117,16 +117,32 @@ SmartCore::Types::Protocol::InstanceOf(::Time, ::DateTime, ::Date) # time or dat
 
 ---
 
+#### Struct:
+
+```ruby
+SmartCore::Types::Protocol::Struct
+```
+
+```ruby
+# examples (SmartCore::Types::Struct::StrictHash):
+SmartCore::Types::Struct::StrictHash(int: SmartCore::Types::Value::Integer, str: SmartCore::Types::Value::String) # hash with the following schema: {int: <integer>, str: <string>}
+SmartCore::Types::Struct::StrictHash(klass: SmartCore::Types::Protocol::InstanceOf(::Class)) # hash with the following schema: {klass: <class>}
+```
+
+---
+
 #### Variadic:
 
 ```ruby
 SmartCore::Types::Variadic::Tuple
+SmartCore::Types::Variadic::Enum
 ```
 
 ```ruby
-# examples (SmartCore::Types::Variadic::Tuple):
+# examples (SmartCore::Types::Variadic::Tuple, SmartCore::Types::Variadic::Enum):
 SmartCore::Types::Variadic::Tuple(::String, ::Integer, ::Time) # array with signature [<string>, <integer>, <time>]
 SmartCore::Types::Variadic::Tuple(::Symbol, ::Float) # array with signature [<symbol>, <float>]
+SmartCore::Types::Variadic::Enum('string', 1337, :symbol) # one of enumerated values
 ```
 
 ---
@@ -157,9 +173,9 @@ Invariant is a custom validation block that will work as a logical value checker
 
 Type invariants does not depends on each other (invariant defined out from chain does not depends on other invariants);
 
-Invariants inside invariant chains will be invoked in order they was defined and each internal invariant depends on the valid previous invairant check.
+Invariants inside invariant chains will be invoked in order they was defined and each internal invariant depends on the valid previous invariant check.
 
-**!IMPORTANT!** Type sum and type multiplication does not support invariant checking and custom invariant definitioning at this moment.
+**!IMPORTANT!** Type sum and type multiplication does not support invariant checking and custom invariant definition at this moment.
 Type sum and type mult ignores type invariants in their validation logic (currently this functionality in development yet).
 
 Invariant checking is a special validation layer (see [#type validation](#type-validation) readme section). Invariant error code pattern:
@@ -224,7 +240,7 @@ SmartCore::Types::Value.define_type(:String) do |type|
     end
 
     # NOTE:
-    #   inside a chain each next invariant invokation
+    #   inside a chain each next invariant invocation
     #   depends on previous successful invariant check
   end
 end
@@ -241,14 +257,14 @@ Type validation reflects on two APIs:
 
 Type invariants does not depends on each other (invariant defined out from the chain does not depends on other invariants);
 
-Invariants inside invariant chains will be invoked in order they was defined and each internal invariant depends on the valid previous invairant check.
+Invariants inside invariant chains will be invoked in order they was defined and each internal invariant depends on the valid previous invariant check.
 
-**!IMPORTANT!** Type sum and type multiplication does not support invariant checking and custom invariant definitioning at this moment.
+**!IMPORTANT!** Type sum and type multiplication does not support invariant checking and custom invariant definition at this moment.
 Type sum and type mult ignores type invariants in their validation logic (currently this functionality in development yet).
 
 Invariant checking is a special validation layer (see [#type validation](#type-validation) readme section) and represents a set of error codes in result object;
 
-Type valdiation interface:
+Type validation interface:
 
 - `valid?(value)` - validates value and returns `true` or `false`;
   - returns `ture` only if the type checker returns `true` and all invariants are valid;
@@ -479,9 +495,7 @@ SmartCore::Types::Value::BasicObject
 SmartCore::Types::Struct::Schema
 SmartCore::Types::Struct::JSONSchema
 SmartCore::Types::Struct::StrictArray
-SmartCore::Types::Struct::StrictHash
 SmartCore::Types::Struct::Map
-SmartCore::Types::Variadic::Enum
 SmartCore::Types::Protocol::Interface
 SmartCore::Types::Protocol::Ancestors
 SmartCore::Types::Protocol::Enumerable
@@ -503,18 +517,18 @@ SmartCore::Types::Protocol::Callable
 
 - support for type of empty non-defined type (`SmartCore::Types::Primitive::Undefined`);
 - constrained types;
-- moudle-based type system integration;
+- module-based type system integration;
 - constructor implementation and support;
-- support for invariant checking (and custom definitioning) in sum-types;
-  - to provide a type comparability and compatability between all passed types
+- support for invariant checking (and custom definition) in sum-types;
+  - to provide a type comparability and compatibility between all passed types
     you should provide `type.reconcilable { |value, *types| .... }`  setting;
-  - `type.reconcilable` should be accesible for type sum and type mult definitions;
-  - (**preliminarily**) invariants of the concrete passed type should be valid for sucessful invariant check;
-- support for invariant checking (and definitioning) in mult-types;
-  - to provide a type comparability and compatability between all passed types
+  - `type.reconcilable` should be accessible for type sum and type mult definitions;
+  - (**preliminarily**) invariants of the concrete passed type should be valid for successful invariant check;
+- support for invariant checking (and definition) in mult-types;
+  - to provide a type comparability and compatibility between all passed types
     you should provide `type.reconcilable { |value, *types| .... }`  setting;
-  - `type.reconcilable` should be accesible for type sum and type mult definitions;
-  - (**preliminarily**) all invariants of all types should be valid for sucessful invariant check;
+  - `type.reconcilable` should be accessible for type sum and type mult definitions;
+  - (**preliminarily**) all invariants of all types should be valid for successful invariant check;
 
 ## Contributing
 
