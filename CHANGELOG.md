@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 - Brand new `SmartCore::Types::Variadic::Enum` type (runtime-based type);
 - Brand new `SmartCore::Types::Struct` type category and new types:
   - `SmartCore::Types::Struct::StrictHash` (runtime-based type);
+- `Github Actions` CI & `Coveralls` coverage badge;
 
 ## [0.3.0] - 2020-12-22
 ### Added

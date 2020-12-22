@@ -1,4 +1,4 @@
-# SmartCore::Types &middot; [![Gem Version](https://badge.fury.io/rb/smart_types.svg)](https://badge.fury.io/rb/smart_types)
+# SmartCore::Types &middot; [![Gem Version](https://badge.fury.io/rb/smart_types.svg)](https://badge.fury.io/rb/smart_types) [![coverage](https://coveralls.io/repos/github/smart-rb/smart-types/badge.svg?branch=master)](https://coveralls.io/github/smart-rb/smart-types?branch=master)
 
 > A set of objects that acts like types (type checking and type casting) with a support for basic type algebra.
 
