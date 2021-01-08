@@ -20,7 +20,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Extended **Type Definition API**: support for **runtime attributes**:
   - Type checkers, type casters and type invariants now receives runtime attributes (you can omit these);
-  - Type definitioning extended with `runtime_attribute_checker`-checker definition (runtime attributes validator);
+  - Type definition extended with `runtime_attribute_checker`-checker definition (runtime attributes validator);
   - Types with incorrect runtime attributes will raise `SmartCore::Types::IncorrectRuntimeAttributesError` exception;
   - Types which has no support for runtime attributes will raise `SmartCore::Types::RuntimeAttributesUnsupportedError` excpetion;
   - All types by default has a method alias (`()`) which does not allow runtime attributes (for example: `SmartCore::Types::Value::String` has
@@ -44,9 +44,9 @@ All notable changes to this project will be documented in this file.
 ## [0.2.0] - 2020-11-21
 ### Added
 - Brand new **Type invariant API**:
-  - globally refactored validation logic (with backward compatability for `#valid?(value)` method);
+  - globally refactored validation logic (with backward compatibility for `#valid?(value)` method);
   - new type definition DSL: `.invariant(name)` and `.invariant_chain(name)`;
-  - chained invariants will be invoked according to the definition order (second invokation
+  - chained invariants will be invoked according to the definition order (second invocation
     depends on previous successful invariant check);
   - new validation API: `validate(value)` (with `#errors` support based on invariant names);
   - at this moment Invariant API is supported only by primitive types (type sum and type multiplication support coming soon);
