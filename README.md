@@ -121,12 +121,14 @@ SmartCore::Types::Protocol::InstanceOf(::Time, ::DateTime, ::Date) # time or dat
 
 ```ruby
 SmartCore::Types::Variadic::Tuple
+SmartCore::Types::Variadic::Enum
 ```
 
 ```ruby
-# examples (SmartCore::Types::Variadic::Tuple):
+# examples (SmartCore::Types::Variadic::Tuple, SmartCore::Types::Variadic::Enum):
 SmartCore::Types::Variadic::Tuple(::String, ::Integer, ::Time) # array with signature [<string>, <integer>, <time>]
 SmartCore::Types::Variadic::Tuple(::Symbol, ::Float) # array with signature [<symbol>, <float>]
+SmartCore::Types::Variadic::Enum('string', 1337, :symbol) # one of enumerated values
 ```
 
 ---
@@ -481,7 +483,6 @@ SmartCore::Types::Struct::JSONSchema
 SmartCore::Types::Struct::StrictArray
 SmartCore::Types::Struct::StrictHash
 SmartCore::Types::Struct::Map
-SmartCore::Types::Variadic::Enum
 SmartCore::Types::Protocol::Interface
 SmartCore::Types::Protocol::Ancestors
 SmartCore::Types::Protocol::Enumerable
