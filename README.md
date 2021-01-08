@@ -1,4 +1,4 @@
-# SmartCore::Types &middot; <a target="_blank" href="https://github.com/Cado-Labs"><img src="https://github.com/Cado-Labs/cado-labs-logos/raw/main/cado_labs_badge.svg" alt="Supported by Cado Labs" style="max-width: 100%; height: 20px"></a> &middot; [![Gem Version](https://badge.fury.io/rb/smart_types.svg)](https://badge.fury.io/rb/smart_types)
+# SmartCore::Types &middot; <a target="_blank" href="https://github.com/Cado-Labs"><img src="https://github.com/Cado-Labs/cado-labs-logos/raw/main/cado_labs_badge.svg" alt="Supported by Cado Labs" style="max-width: 100%; height: 20px"></a> &middot; [![Gem Version](https://badge.fury.io/rb/smart_types.svg)](https://badge.fury.io/rb/smart_types) ![ci](https://github.com/smart-rb/smart_types/workflows/ci/badge.svg?branch=master) [![coverage](https://coveralls.io/repos/github/smart-rb/smart_types/badge.svg?branch=master)](https://coveralls.io/github/smart-rb/smart_types?branch=master)
 
 > A set of objects that acts like types (type checking and type casting) with a support for basic type algebra.
 
