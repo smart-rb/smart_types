@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+# [0.4.0] - 2021-01-17
+### Added
+- Support for *Ruby 3*;
+
 ## [0.3.0] - 2020-12-22
 ### Added
 - Extended **Type Definition API**: support for **runtime attributes**:
