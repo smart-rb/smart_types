@@ -542,6 +542,14 @@ bundle exec rake rubocop
 bundle exec rubocop
 ```
 
+- run code style linting with auto-correction:
+
+```shell
+bundle exec rake rubcoop -A
+# --- or ---
+bundle exec rubocop -A
+```
+
 ## License
 
 Released under MIT License.
