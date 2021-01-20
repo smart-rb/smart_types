@@ -26,6 +26,7 @@ RSpec.describe 'SmartCore::Types::Variadic::Enum' do
       expect(type.valid?({})).to eq(false)
       expect(type.valid?([])).to eq(false)
       expect(type.valid?(Object.new)).to eq(false)
+      expect(type.valid?(BasicObject.new)).to eq(false)
     end
 
     specify 'type-validation' do
@@ -42,6 +43,7 @@ RSpec.describe 'SmartCore::Types::Variadic::Enum' do
       expect { type.validate!({}) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!([]) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(Object.new) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!(BasicObject.new) }.to raise_error(SmartCore::Types::TypeError)
     end
 
     context 'nilable type' do
@@ -61,6 +63,7 @@ RSpec.describe 'SmartCore::Types::Variadic::Enum' do
         expect(type.valid?({})).to eq(false)
         expect(type.valid?([])).to eq(false)
         expect(type.valid?(Object.new)).to eq(false)
+        expect(type.valid?(BasicObject.new)).to eq(false)
       end
 
       specify 'type-validation' do
@@ -77,6 +80,7 @@ RSpec.describe 'SmartCore::Types::Variadic::Enum' do
         expect { type.validate!({}) }.to raise_error(SmartCore::Types::TypeError)
         expect { type.validate!([]) }.to raise_error(SmartCore::Types::TypeError)
         expect { type.validate!(Object.new) }.to raise_error(SmartCore::Types::TypeError)
+        expect { type.validate!(BasicObject.new) }.to raise_error(SmartCore::Types::TypeError)
       end
     end
   end
