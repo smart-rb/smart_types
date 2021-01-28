@@ -1,11 +1,16 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+# [0.6.0] - 2021-11-22
+### Added
+- Added Github Actions CI;
+- Use `ArgumentError` instead of `DateError` in related type-casters;
+- Fix typos in documentation;
+
 # [0.6.0] - 2021-04-29
 ### Added
 - New type of `SmartCode::Types::Variadic` category:
   - `SmartCore::Types::Variadic::ArrayOf` (`Array` with element types validation)
-
 
 # [0.5.0] - 2021-01-28
 ### Added
