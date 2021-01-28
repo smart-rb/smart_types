@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+# [0.6.0] - 2021-02-05
+### Added
+- New types of `SmartCore::Types::Struct` category:
+  - `SmartCore::Types::Value::StrictHash` (`Hash` with nested types validation);
+
 # [0.5.0] - 2021-01-28
 ### Added
 - New types of `SmartCore::Types::Variadic` category:
