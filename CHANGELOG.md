@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+# [0.5.0] - 2021-01-28
+### Added
+- New types of `SmartCore::Types::Variadic` category:
+  - `SmartCore::Types::Variadic::Enum` (a simple enumeration on plain values);
+
 # [0.4.0] - 2021-01-18
 ### Added
 - Support for *Ruby 3*;
