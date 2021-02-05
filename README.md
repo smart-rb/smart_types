@@ -117,6 +117,20 @@ SmartCore::Types::Protocol::InstanceOf(::Time, ::DateTime, ::Date) # time or dat
 
 ---
 
+#### Struct:
+
+```ruby
+SmartCore::Types::Protocol::Struct
+```
+
+```ruby
+# examples (SmartCore::Types::Struct::StrictHash):
+SmartCore::Types::Struct::StrictHash(int: SmartCore::Types::Value::Integer, str: SmartCore::Types::Value::String) # hash with the following schema: {int: <integer>, str: <string>}
+SmartCore::Types::Struct::StrictHash(klass: SmartCore::Types::Protocol::InstanceOf(::Class)) # hash with the following schema: {klass: <class>}
+```
+
+---
+
 #### Variadic:
 
 ```ruby
