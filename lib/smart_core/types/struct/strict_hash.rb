@@ -3,7 +3,7 @@
 using SmartCore::Ext::BasicObjectAsObject
 
 # @api public
-# @since 0.5.0
+# @since 0.6.0
 SmartCore::Types::Struct.define_type(:StrictHash) do |type|
   type.runtime_attributes_checker do |runtime_attrs|
     schema = runtime_attrs.first

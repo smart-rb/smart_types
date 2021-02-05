@@ -4,7 +4,7 @@ require 'smart_core'
 
 # @api public
 # @since 0.1.0
-# @version 0.5.0
+# @version 0.6.0
 module SmartCore::Types
   require_relative 'types/errors'
   require_relative 'types/primitive'
