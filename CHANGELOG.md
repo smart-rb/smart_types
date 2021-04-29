@@ -1,6 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+# [0.6.0] - 2021-04-29
+### Added
+- New type of `SmartCode::Types::Variadic` category:
+  - `SmartCore::Types::Variadic::ArrayOf` (`Array` with element types validation)
+
+
 # [0.5.0] - 2021-01-28
 ### Added
 - New types of `SmartCore::Types::Variadic` category:
