@@ -1,4 +1,4 @@
-# SmartCore::Types &middot; [![Supporting](https://github.com/Cado-Labs/cado-labs-logos/blob/main/cado_labs_badge.png)](https://github.com/Cado-Labs/) &middot; [![Gem Version](https://badge.fury.io/rb/smart_types.svg)](https://badge.fury.io/rb/smart_types)
+# SmartCore::Types &middot; [![Supporting](https://github.com/Cado-Labs/cado-labs-logos/blob/main/cado_labs_badge.png)](https://github.com/Cado-Labs/) &middot; [![Gem Version](https://badge.fury.io/rb/smart_types.svg)](https://badge.fury.io/rb/smart_types) <!-- omit in toc -->
 
 > A set of objects that acts like types (type checking and type casting) with a support for basic type algebra.
 
@@ -8,15 +8,11 @@ categories and general purpose types. Has a flexible and simplest type definitio
 
 ---
 
-<p>
-  <a href="https://github.com/Cado-Labs">
-    <img src="https://github.com/Cado-Labs/cado-labs-logos/blob/main/cado_labs_supporting.svg" alt="Supported by Cado Labs" />
-  </a>
-</p>
+[![Supported by Cado Labs](https://github.com/Cado-Labs/cado-labs-logos/blob/main/cado_labs_supporting.svg)](https://github.com/Cado-Labs)
 
 ---
 
-## Installation
+## Installation <!-- omit in toc -->
 
 ```ruby
 gem 'smart_types'
@@ -34,28 +30,30 @@ require 'smart_core/types'
 
 ---
 
-## Usage
+## Usage <!-- omit in toc -->
 
 - [Type interface and basic type algebra](#type-interface-and-basic-type-algebra)
 - [Supported types](#supported-types)
-  - [Primitives](#primitives) (`SmartCore::Types::Value`)
-  - [Protocols](#protocols) (`SmartCore::Types::Protocol`)
-  - [Variadic](#variadic) (`SmartCore::Types::Variadic`)
+  - [Primitives (`SmartCore::Types::Value`)](#primitives-smartcoretypesvalue)
+  - [Protocols (`SmartCore::Types::Protocol`)](#protocols-smartcoretypesprotocol)
+  - [Variadic (`SmartCore::Types::Variadic`)](#variadic-smartcoretypesvariadic)
 - [Nilable types](#nilable-types)
 - [Custom type definition](#custom-type-definition)
   - [Primitive type definition](#primitive-type-definition)
   - [With type invariants](#with-type-invariants)
 - [Type validation](#type-validation)
 - [Type casting](#type-casting)
+- [Basic type algebra](#basic-type-algebra)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
 - [Build](#build)
 - [License](#license)
+- [Supporting](#supporting)
 - [Authors](#authors)
 
 ---
 
-## Type Interface and basic type algebra
+## Type interface and basic type algebra
 
 ```ruby
 # documentation is coming
@@ -85,7 +83,7 @@ type.valid?([:test, 2]) # => false
 
 ## Supported types
 
-#### Primitives:
+### Primitives (`SmartCore::Types::Value`)
 
 ```ruby
 SmartCore::Types::Value::Any
@@ -112,7 +110,7 @@ SmartCore::Types::Value::TimeBased
 
 ---
 
-#### Protocols:
+### Protocols (`SmartCore::Types::Protocol`)
 
 ```ruby
 SmartCore::Types::Protocol::InstanceOf
@@ -127,7 +125,7 @@ SmartCore::Types::Protocol::InstanceOf(::Time, ::DateTime, ::Date) # time or dat
 
 ---
 
-#### Variadic:
+### Variadic (`SmartCore::Types::Variadic`)
 
 ```ruby
 SmartCore::Types::Variadic::ArrayOf
@@ -175,16 +173,17 @@ Invariant is a custom validation block that will work as a logical value checker
 
 Type invariants does not depends on each other (invariant defined out from chain does not depends on other invariants);
 
-Invariants inside invariant chains will be invoked in order they was defined and each internal invariant depends on the valid previous invairant check.
+Invariants inside invariant chains will be invoked in order they was defined and each internal invariant depends on the valid previous invariant check.
 
-**!IMPORTANT!** Type sum and type multiplication does not support invariant checking and custom invariant definitioning at this moment.
+**!IMPORTANT!** Type sum and type multiplication does not support invariant checking and custom invariant definition at this moment.
 Type sum and type mult ignores type invariants in their validation logic (currently this functionality in development yet).
 
 Invariant checking is a special validation layer (see [#type validation](#type-validation) readme section). Invariant error code pattern:
-  - for invariant chains: `TypeName.invariant_chain_name.invariant_name`;
-  - for single invariant: `TypeName.invariant_name`;
 
-#### Primitive type definition
+- for invariant chains: `TypeName.invariant_chain_name.invariant_name`;
+- for single invariant: `TypeName.invariant_name`;
+
+### Primitive type definition
 
 ```ruby
 # documentation is coming
@@ -210,7 +209,7 @@ SmartCore::Types::Value::String('some_attr', :another_attr) # with runtime attri
 # work with type object: see documentation below
 ```
 
-#### With type invariants
+### With type invariants
 
 ```ruby
 SmartCore::Types::Value.define_type(:String) do |type|
@@ -242,7 +241,7 @@ SmartCore::Types::Value.define_type(:String) do |type|
     end
 
     # NOTE:
-    #   inside a chain each next invariant invokation
+    #   inside a chain each next invariant invocation
     #   depends on previous successful invariant check
   end
 end
@@ -259,17 +258,17 @@ Type validation reflects on two APIs:
 
 Type invariants does not depends on each other (invariant defined out from the chain does not depends on other invariants);
 
-Invariants inside invariant chains will be invoked in order they was defined and each internal invariant depends on the valid previous invairant check.
+Invariants inside invariant chains will be invoked in order they was defined and each internal invariant depends on the valid previous invariant check.
 
-**!IMPORTANT!** Type sum and type multiplication does not support invariant checking and custom invariant definitioning at this moment.
+**!IMPORTANT!** Type sum and type multiplication does not support invariant checking and custom invariant definition at this moment.
 Type sum and type mult ignores type invariants in their validation logic (currently this functionality in development yet).
 
 Invariant checking is a special validation layer (see [#type validation](#type-validation) readme section) and represents a set of error codes in result object;
 
-Type valdiation interface:
+Type validation interface:
 
 - `valid?(value)` - validates value and returns `true` or `false`;
-  - returns `ture` only if the type checker returns `true` and all invariants are valid;
+  - returns `true` only if the type checker returns `true` and all invariants are valid;
 - `validate(value)` - validates value and returns the monadic result object:
   - `SmartCore::Types::Primitive::Validator::Result` for primitive types;
   - `SmartCore::Types::Primitive::SumValidator::Result` for sum-based types;
@@ -379,7 +378,7 @@ SmartCore::Types::Value::Text = SmartCore::Types::Value::String | SmartCore::Typ
 SmartCore::Types::Value::Numeric = SmartCore::Types::Value::Float | SmartCore::Types::Value::Integer
 
 # how to define primitive type multiplication:
-SmartCore::Types::Value::CryptoString = SmartCore::Types::Value::NumberdString & SmartCore::Types::Value::SymbolicString
+SmartCore::Types::Value::CryptoString = SmartCore::Types::Value::NumberedString & SmartCore::Types::Value::SymbolicString
 ```
 
 ---
@@ -387,16 +386,14 @@ SmartCore::Types::Value::CryptoString = SmartCore::Types::Value::NumberdString &
 ## Roadmap
 
 - migrate to `Github Actions`;
-
 - support for `block`-attribute in runtime attributes;
-
 - type configuration:
 
 ```ruby
 SmartCore::Types::Value.type(:Time) do |type|
   type.configuration do |config| # config definition
     setting :iso, :rfc2822
-    # TODO: think about a more convinient DSL
+    # TODO: think about a more convenient DSL
   end
 
   type.define_caster do |value, config| # config usage
@@ -508,8 +505,8 @@ SmartCore::Types::Protocol::Callable
 ```
 
 - `#sum` alias for `|` and `#mult` alias for `&` (with a support for type name definition and other API);
-
 - type category in invariant error codes:
+
 ```ruby
 # before:
 'String.password.should_contain_numbers' # `String` type from `Value` category
@@ -535,7 +532,7 @@ SmartCore::Types::Protocol::Callable
 
 ## Contributing
 
-- Fork it ( https://github.com/smart-rb/smart_types )
+- Fork it ( <https://github.com/smart-rb/smart_types> )
 - Create your feature branch (`git checkout -b feature/my-new-feature`)
 - Commit your changes (`git commit -am '[feature_context] Add some feature'`)
 - Push to the branch (`git push origin feature/my-new-feature`)
@@ -573,9 +570,7 @@ Released under MIT License.
 
 ## Supporting
 
-<a href="https://github.com/Cado-Labs">
-  <img src="https://github.com/Cado-Labs/cado-labs-logos/blob/main/cado_labs_logo.png" alt="Supported by Cado Labs" />
-</a>
+[![Supported by Cado Labs](https://github.com/Cado-Labs/cado-labs-logos/blob/main/cado_labs_logo.png)](https://github.com/Cado-Labs)
 
 ## Authors
 
