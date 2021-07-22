@@ -1,10 +1,20 @@
-# SmartCore::Types &middot; [![Gem Version](https://badge.fury.io/rb/smart_types.svg)](https://badge.fury.io/rb/smart_types)
+# SmartCore::Types &middot; [![Supporting](https://github.com/Cado-Labs/cado-labs-logos/blob/main/cado_labs_badge.png)](https://github.com/Cado-Labs/) &middot; [![Gem Version](https://badge.fury.io/rb/smart_types.svg)](https://badge.fury.io/rb/smart_types)
 
 > A set of objects that acts like types (type checking and type casting) with a support for basic type algebra.
 
 Minimalistic type system for any ruby project. Supports custom type definitioning,
 type validation, type casting and type categorizing. Provides a set of commonly used type
 categories and general purpose types. Has a flexible and simplest type definition toolchain.
+
+---
+
+<p>
+  <a href="https://github.com/Cado-Labs">
+    <img src="https://github.com/Cado-Labs/cado-labs-logos/blob/main/cado_labs_supporting.svg" alt="Supported by Cado Labs" />
+  </a>
+</p>
+
+---
 
 ## Installation
 
@@ -554,6 +564,12 @@ bundle exec rubocop -A
 ## License
 
 Released under MIT License.
+
+## Supporting
+
+<a href="https://github.com/Cado-Labs">
+  <img src="https://github.com/Cado-Labs/cado-labs-logos/blob/main/cado_labs_logo.png" alt="Supported by Cado Labs" />
+</a>
 
 ## Authors
 
