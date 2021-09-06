@@ -130,15 +130,21 @@ SmartCore::Types::Protocol::InstanceOf(::Time, ::DateTime, ::Date) # time or dat
 #### Variadic:
 
 ```ruby
-SmartCore::Types::Variadic::Tuple
+SmartCore::Types::Variadic::ArrayOf
 SmartCore::Types::Variadic::Enum
+SmartCore::Types::Variadic::Tuple
 ```
 
 ```ruby
-# examples (SmartCore::Types::Variadic::Tuple, SmartCore::Types::Variadic::Enum):
+# example (SmartCore::Types::Variadic::ArrayOf):
+SmartCore::Types::Variadic::ArrayOf(::String, ::Array) # array of strings or arrays
+
+# example (SmartCore::Types::Variadic::Enum):
+SmartCore::Types::Variadic::Enum('string', 1337, :symbol) # one of enumerated values
+
+# examples (SmartCore::Types::Variadic::Tuple):
 SmartCore::Types::Variadic::Tuple(::String, ::Integer, ::Time) # array with signature [<string>, <integer>, <time>]
 SmartCore::Types::Variadic::Tuple(::Symbol, ::Float) # array with signature [<symbol>, <float>]
-SmartCore::Types::Variadic::Enum('string', 1337, :symbol) # one of enumerated values
 ```
 
 ---
