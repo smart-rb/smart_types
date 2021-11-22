@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-# [0.6.0] - 2021-11-22
+# [0.7.0] - 2021-11-22
 ### Added
 - Added Github Actions CI;
 - Use `ArgumentError` instead of `DateError` in related type-casters;
