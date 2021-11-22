@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-RSpec.describe 'INVARIANTS: definitioning and logic' do
+RSpec.describe 'INVARIANTS: definition and logic' do
   SmartCore::Types::Value.define_type(:LikePasswordForRSpec) do |type|
     type.define_checker { |value| value.is_a?(::String) }
     type.invariant_chain(:security) do
       invariant(:minimal_length) { |value| value.size >= 8 }
       invariant(:has_digits) { |value| value.match?(/[0-9]+/) }
     end
-    type.invariant_chain(:compatability) do
+    type.invariant_chain(:compatibility) do
       invariant(:count_bound) { |value| value.size <= 25 }
       invariant(:no_spaces) { |value| !value.match?(/\s/) }
     end
@@ -41,7 +41,7 @@ RSpec.describe 'INVARIANTS: definitioning and logic' do
         expect(nilable_type.valid?('testtest')).to eq(false)
         expect(nilable_type.valid?('test1234test1234test1234test1234')).to eq(false)
 
-        # checker - not passed => invairants - not checked
+        # checker - not passed => invariants - not checked
         expect(type.valid?(1234)).to eq(false)
         expect(type.valid?(::Time.now)).to eq(false)
         expect(type.valid?(nil)).to eq(false)
@@ -127,7 +127,7 @@ RSpec.describe 'INVARIANTS: definitioning and logic' do
 
             expect(result.error_codes).to contain_exactly(
               'LikePasswordForRSpec.security.minimal_length',
-              'LikePasswordForRSpec.compatability.no_spaces'
+              'LikePasswordForRSpec.compatibility.no_spaces'
             )
             expect(result.errors).to eq(result.error_codes)
             expect(result.invariant_errors).to eq(result.error_codes)
@@ -216,7 +216,7 @@ RSpec.describe 'INVARIANTS: definitioning and logic' do
             expect(result.is_valid_check).to eq(result.valid_check?)
 
             expect(result.error_codes).to contain_exactly(
-              'LikePasswordForRSpec.compatability.count_bound'
+              'LikePasswordForRSpec.compatibility.count_bound'
             )
             expect(result.errors).to eq(result.error_codes)
             expect(result.invariant_errors).to eq(result.error_codes)
@@ -243,7 +243,7 @@ RSpec.describe 'INVARIANTS: definitioning and logic' do
             expect(result.is_valid_check).to eq(result.valid_check?)
 
             expect(result.error_codes).to contain_exactly(
-              'LikePasswordForRSpec.compatability.no_spaces'
+              'LikePasswordForRSpec.compatibility.no_spaces'
             )
             expect(result.errors).to eq(result.error_codes)
             expect(result.invariant_errors).to eq(result.error_codes)

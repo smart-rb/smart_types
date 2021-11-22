@@ -1,12 +1,7 @@
 # frozen_string_literal: true
 
-require 'simplecov'
+require_relative './setup_simplecov'
 
-SimpleCov.formatter = SimpleCov::Formatter::HTMLFormatter
-SimpleCov.minimum_coverage(100)
-SimpleCov.enable_coverage(:branch)
-SimpleCov.enable_coverage(:line)
-SimpleCov.add_filter('spec')
 SimpleCov.start
 
 require 'bundler/setup'

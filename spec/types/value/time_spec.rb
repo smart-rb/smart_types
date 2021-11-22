@@ -5,7 +5,7 @@ RSpec.describe 'SmartCore::Types::Value::Time' do
     specify 'type-casting' do
       expect(type.cast('2010-10-31')).to eq(Time.new(2010, 10, 31))
       expect(type.cast(Time.new(2010, 10, 31))).to eq(Time.new(2010, 10, 31))
-      expect(type.cast(946702800)).to eq(Time.new(2000, 1, 1, 8))
+      expect(type.cast(946702800)).to eq(Time.utc(2000, 1, 1, 5))
 
       current_time  = Time.now
       current_year  = current_time.year

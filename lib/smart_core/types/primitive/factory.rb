@@ -47,7 +47,7 @@ class SmartCore::Types::Primitive::Factory
     # @api private
     # @since 0.1.0
     def build_type_definitions(type_definition)
-      raise 'Type definition is not provied' unless type_definition.is_a?(Proc)
+      raise 'Type definition is not provided' unless type_definition.is_a?(Proc)
       SmartCore::Types::Primitive::Factory::DefinitionContext.new.tap do |context|
         context.instance_eval(&type_definition)
       end.tap do |context|

@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
 
   spec.summary = 'Full-featured type system for any ruby project.'
   spec.description = <<~DESCRIPTION
-    Full-featured type system for any ruby project. Supports custom type definitioning,
+    Full-featured type system for any ruby project. Supports custom type definition,
     type validation, type casting and type categorizing. Provides a set of commonly used type
     categories and general purpose types. Has a flexible and simplest type definition toolchain.
   DESCRIPTION
@@ -39,5 +39,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec',            '~> 3.10'
   spec.add_development_dependency 'armitage-rubocop', '~> 1.7'
   spec.add_development_dependency 'simplecov',        '~> 0.21'
+  spec.add_development_dependency 'simplecov-lcov',   '~> 0.8'
   spec.add_development_dependency 'pry',              '~> 0.13'
 end

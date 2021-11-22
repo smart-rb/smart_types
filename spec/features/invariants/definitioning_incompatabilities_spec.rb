@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe 'INVARIANTS: Type invariant definitioning incompatabilities' do
+RSpec.describe 'INVARIANTS: Type invariant definition incompatabilities' do
   specify 'definition incompatabilities' do
     aggregate_failures 'definition_incompatabilities' do
       expect do # missing invariant name, missing block argument
