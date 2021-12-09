@@ -24,7 +24,7 @@ SmartCore::Types::Value.define_type(:BigDecimal) do |type|
       begin
         ::Kernel.BigDecimal(value.to_d)
       rescue ::ArgumentError, ::TypeError, ::NoMethodError
-        raise(SmartCore::Types::TypeCastingError, 'Non-castable to BigDecimal')
+        raise(SmartCore::Types::TypeCastingError, "#{value.inspect} non-castable to BigDecimal")
       end
     end
   end

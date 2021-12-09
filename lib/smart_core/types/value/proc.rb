@@ -14,11 +14,11 @@ SmartCore::Types::Value.define_type(:Proc) do |type|
     begin
       value.to_proc.tap do |result|
         unless result.is_a?(::Proc)
-          raise(SmartCore::Types::TypeCastingError, 'Non-castable to Proc')
+          raise(SmartCore::Types::TypeCastingError, "#{value.inspect} non-castable to Proc")
         end
       end
     rescue ::NoMethodError
-      raise(SmartCore::Types::TypeCastingError, 'Non-castable to Proc')
+      raise(SmartCore::Types::TypeCastingError, "#{value.inspect} non-castable to Proc")
     end
   end
 end

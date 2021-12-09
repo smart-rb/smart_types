@@ -18,7 +18,7 @@ SmartCore::Types::Value.define_type(:DateTime) do |type|
     begin
       ::DateTime.parse(value)
     rescue ::ArgumentError, ::TypeError
-      raise(SmartCore::Types::TypeCastingError, 'Non-castable to DateTime')
+      raise(SmartCore::Types::TypeCastingError, "#{value.inspect} non-castable to DateTime")
     end
   end
 end

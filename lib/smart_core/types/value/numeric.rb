@@ -22,7 +22,7 @@ SmartCore::Types::Value.define_type(:Numeric) do |type|
         begin
           SmartCore::Types::Value::BigDecimal.cast(value)
         rescue SmartCore::Types::TypeCastingError
-          raise(SmartCore::Types::TypeCastingError, 'Non-castable to Numeric')
+          raise(SmartCore::Types::TypeCastingError, "#{value.inspect} non-castable to Numeric")
         end
       end
     end

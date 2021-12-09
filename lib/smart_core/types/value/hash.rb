@@ -20,7 +20,7 @@ SmartCore::Types::Value.define_type(:Hash) do |type|
         # - ::Kernel.Hash is used to validate the returned value from `#to_h`
         ::Kernel.Hash(value.to_h)
       rescue ::TypeError, ::NoMethodError, ::ArgumentError
-        raise(SmartCore::Types::TypeCastingError, 'Non-castable to Hash')
+        raise(SmartCore::Types::TypeCastingError, "#{value.inspect} non-castable to Hash")
       end
     end
   end

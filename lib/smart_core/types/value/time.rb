@@ -18,7 +18,7 @@ SmartCore::Types::Value.define_type(:Time) do |type|
     begin
       SmartCore::Types::Value::Integer.valid?(value) ? ::Time.at(value) : ::Time.parse(value)
     rescue ::TypeError, ::ArgumentError
-      raise(SmartCore::Types::TypeCastingError, 'Non-castable to Time')
+      raise(SmartCore::Types::TypeCastingError, "#{value.inspect} non-castable to Time")
     end
   end
 end

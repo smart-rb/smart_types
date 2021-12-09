@@ -17,7 +17,7 @@ SmartCore::Types::Value.define_type(:Float) do |type|
       begin
         ::Kernel.Float(value.to_f)
       rescue ::NoMethodError, ::TypeError, ::ArgumentError
-        raise(SmartCore::Types::TypeCastingError, 'Non-castable to Float')
+        raise(SmartCore::Types::TypeCastingError, "#{value.inspect} non-castable to Float")
       end
     end
   end

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+using SmartCore::Ext::BasicObjectAsObject
+
 # @api public
 # @since 0.1.0
 # @version 0.3.0
@@ -24,7 +26,10 @@ SmartCore::Types::Value.define_type(:TimeBased) do |type|
         begin
           SmartCore::Types::Value::Date.cast(value)
         rescue SmartCore::Types::TypeCastingError
-          raise(SmartCore::Types::TypeCastingError, 'Non-castable to time-based type')
+          raise(
+            SmartCore::Types::TypeCastingError,
+            "#{value.inspect} non-castable to time-based type"
+          )
         end
       end
     end

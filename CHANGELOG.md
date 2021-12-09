@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+# [0.8.0] - 2021-12-09
+### Added
+- Extend message with value inspecting while raises TypeCastingError;
+
 # [0.7.0] - 2021-11-22
 ### Added
 - Added Github Actions CI;

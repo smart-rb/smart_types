@@ -14,7 +14,7 @@ SmartCore::Types::Value.define_type(:Symbol) do |type|
     begin
       value.to_sym
     rescue ::NoMethodError, ::ArgumentError
-      raise(SmartCore::Types::TypeCastingError, 'Non-castable to Symbol')
+      raise(SmartCore::Types::TypeCastingError, "#{value.inspect} non-castable to Symbol")
     end
   end
 end
