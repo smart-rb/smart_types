@@ -444,6 +444,22 @@ SmartCore::Types::Value::Class.cast(123)
 - type refinements:
 
 ```ruby
+SmartCore::Types.configure do |config|
+  config.warn_on_type_refinements = true # false by default
+end
+```
+
+```ruby
+SmartCore::Types::Value.refine(:Time) do |type|
+  # new type definition
+end
+
+SmartCore::Types::Value::Time.refine do |type|
+  # new type definition
+end
+```
+
+```ruby
 SmartCore::Types::Value::Time.refine_checker do |value, original_checker|
   # new type checker
 end
