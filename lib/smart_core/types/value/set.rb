@@ -15,7 +15,7 @@ SmartCore::Types::Value.define_type(:Set) do |type|
     begin
       ::Set.new(SmartCore::Types::Value::Array.cast(value))
     rescue ::ArgumentError, ::NoMethodError
-      raise(SmartCore::Types::TypeCastingError, 'Non-castable to Set')
+      raise(SmartCore::Types::TypeCastingError, "#{value.inspect} non-castable to Set")
     end
   end
 end

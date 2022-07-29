@@ -14,7 +14,7 @@ SmartCore::Types::Value.define_type(:String) do |type|
     begin
       ::Kernel.String(value)
     rescue ::TypeError, ::ArgumentError
-      raise(SmartCore::Types::TypeCastingError, 'Non-castable to String')
+      raise(SmartCore::Types::TypeCastingError, "#{value.inspect} non-castable to String")
     end
   end
 end

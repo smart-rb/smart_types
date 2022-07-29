@@ -20,7 +20,7 @@ SmartCore::Types::Value.define_type(:Integer) do |type|
         # => ::Kernel.Integer(nil.to_i) # => 0 (::Kernel.Integer used as validation layer)
         ::Kernel.Integer(value.to_i)
       rescue ::TypeError, ::NoMethodError, ::ArgumentError, ::FloatDomainError
-        raise(SmartCore::Types::TypeCastingError, 'Non-castable to Integer')
+        raise(SmartCore::Types::TypeCastingError, "#{value.inspect} non-castable to Integer")
       end
     end
   end
