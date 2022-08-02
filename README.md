@@ -521,6 +521,8 @@ SmartCore::Types::Protocol::Enumerable
 SmartCore::Types::Protocol::Comparable
 SmartCore::Types::Protocol::Forwardable
 SmartCore::Types::Protocol::Callable
+SmartCore::Types::Behavior::Truthy
+SmartCore::Types::Behavior::Falsy
 ```
 
 - `#sum` alias for `|` and `#mult` alias for `&` (with a support for type name definition and other API);
