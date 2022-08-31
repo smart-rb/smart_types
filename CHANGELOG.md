@@ -4,7 +4,8 @@ All notable changes to this project will be documented in this file.
 # [0.7.1] - 2022-08-31
 ### Fixed
 - **TruffelRuby**: fixed `NoMethodError: private method 'initialize_clone'` failing on type object duplication and cloning (`#dup` and `#clone`).
-  `TruffleRuby` implementation makes `initialize_clone` method private by default even if your manually defined method is implicitly public.
+  `TruffleRuby` implementation makes `initialize_clone` method private by default even if your manually defined method is implicitly public
+  (see `SmartCore::Types::Primitive::Factory::RuntimeTypeBuilder.initialize_clone` and `SmartCore::Types::Primitive#initialize_copy`).
   To fix this we should explicitly define our method as a public method (`public def initialize_clone`).
 
 # [0.7.0] - 2021-11-22
