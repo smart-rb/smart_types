@@ -28,8 +28,9 @@ module SmartCore::Types::Primitive::Factory::RuntimeTypeBuilder
     #
     # @api private
     # @since 0.3.0
+    # @version 0.7.1
     # rubocop:disable Metrics/AbcSize, Layout/LineLength
-    def initialize_clone(new_instance, cloneable_instance)
+    public def initialize_clone(new_instance, cloneable_instance)
       name_clone = cloneable_instance.instance_variable_get(:@name)
       category_clone = cloneable_instance.instance_variable_get(:@category)
       validator_clone = cloneable_instance.instance_variable_get(:@validator).___copy_for___(new_instance)
