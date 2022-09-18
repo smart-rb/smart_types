@@ -525,6 +525,13 @@ SmartCore::Types::Behavior::Truthy
 SmartCore::Types::Behavior::Falsy
 ```
 
+```ruby
+# think about:
+Clonable # for example, you can not clone or duplicate Method-objects
+Duplicable
+Allocatable # for example, Method object can not be allocated with #allocate method
+```
+
 - `#sum` alias for `|` and `#mult` alias for `&` (with a support for type name definition and other API);
 
 - type category in invariant error codes:
