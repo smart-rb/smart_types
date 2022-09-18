@@ -108,6 +108,7 @@ SmartCore::Types::Value::Time
 SmartCore::Types::Value::DateTime
 SmartCore::Types::Value::Date
 SmartCore::Types::Value::TimeBased
+SmartCore::Types::Value::Method
 ```
 
 ---
@@ -498,7 +499,6 @@ SmartCore::Types::Value::Date.cast('2020-01-01', { iso: :rfc3339 })
 - new types:
 
 ```ruby
-SmartCore::Types::Value::Method
 SmartCore::Types::Value::UnboundMethod
 SmartCore::Types::Value::Enumerable
 SmartCore::Types::Value::Comparable
