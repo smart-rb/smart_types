@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+# Unreleased
+### Added
+- New types of `SmartCore::Types::Value` category:
+  - `SmartCore::Types::Value::Method`
+
 # [0.7.1] - 2022-08-31
 ### Fixed
 - **TruffelRuby**: fixed `NoMethodError: private method 'initialize_clone'` failing on type object duplication and cloning (`#dup` and `#clone`).
