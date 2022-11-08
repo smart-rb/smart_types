@@ -496,6 +496,13 @@ end
 SmartCore::Types::Value::Date.cast('2020-01-01', { iso: :rfc3339 })
 ```
 
+- custom type categories (an ability to register your own type category)
+
+```ruby
+SmartCore::Types.define_category(:YourCategoryName)
+SmartCore::Types::YourCategoryName.define_type(:YourNewType) { ... }
+```
+
 - new types:
 
 ```ruby
