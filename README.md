@@ -532,7 +532,7 @@ SmartCore::Types::Behavior::Truthy
 SmartCore::Types::Behavior::Falsy
 ```
 
-``ruby
+```ruby
 # Common types:
 SmartCore::Types::Common::UUDv4
 ```
