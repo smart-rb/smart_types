@@ -532,6 +532,11 @@ SmartCore::Types::Behavior::Truthy
 SmartCore::Types::Behavior::Falsy
 ```
 
+``ruby
+# Common types:
+SmartCore::Types::Common::UUDv4
+```
+
 ```ruby
 # think about:
 Clonable # for example, you can not clone or duplicate Method-objects
