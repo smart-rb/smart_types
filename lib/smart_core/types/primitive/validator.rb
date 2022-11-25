@@ -2,7 +2,7 @@
 
 # @api private
 # @since 0.2.0
-# @version 0.3.0
+# @version 0.8.0
 class SmartCore::Types::Primitive::Validator
   require_relative 'validator/result'
 
@@ -61,8 +61,11 @@ class SmartCore::Types::Primitive::Validator
   #
   # @api private
   # @since 0.2.0
+  # @version 0.8.0
   def valid?(value)
-    validate(value).success?
+    return false unless type_checker.call(value, type.runtime_attributes) # => Boolean
+    return false unless invariant_control.simply_check(value, type.runtime_attributes) # => Boolean
+    true
   end
 
   # @param value [Any]

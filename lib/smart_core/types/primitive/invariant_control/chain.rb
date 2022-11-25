@@ -2,7 +2,7 @@
 
 # @api private
 # @since 0.2.0
-# @version 0.3.0
+# @version 0.8.0
 class SmartCore::Types::Primitive::InvariantControl::Chain
   require_relative 'chain/result'
 
@@ -49,6 +49,18 @@ class SmartCore::Types::Primitive::InvariantControl::Chain
     SmartCore::Types::Primitive::InvariantControl::Chain::Result.new(
       self, value, invariant_results
     )
+  end
+
+  # @param value [Any]
+  # @param runtime_attributes [Array<Any>]
+  # @return [Boolean]
+  #
+  # @api private
+  # @since 0.8.0
+  def simply_check(value, runtime_attributes)
+    (invariants.any? do |invariant|
+      invariant.simply_check(value, runtime_attributes) == false
+    end) ? false : true
   end
 
   private

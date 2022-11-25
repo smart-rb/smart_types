@@ -38,10 +38,8 @@ RSpec.describe 'SmartCore::Types::Value::Text' do
 
     specify 'cast priority (string > symbol)' do
       castable = Class.new do
-        # rubocop:disable Layout/EmptyLineBetweenDefs
         def to_s; 'as_string'; end
         def to_sym; :as_sym; end
-        # rubocop:enable Layout/EmptyLineBetweenDefs
       end.new
       expect(type.cast(castable)).to eq('as_string')
     end

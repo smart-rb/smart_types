@@ -14,7 +14,7 @@ RSpec.describe 'SmartCore::Types::Value::Date' do
       expect { type.cast(nil) }.to raise_error(SmartCore::Types::TypeCastingError)
       expect { type.cast(Object.new) }.to raise_error(SmartCore::Types::TypeCastingError)
       expect { type.cast(BasicObject.new) }.to raise_error(SmartCore::Types::TypeCastingError)
-      expect { type.cast({}) }.to raise_error(SmartCore::Types::TypeCastingError)
+      expect { type.cast(Hash.new({})) }.to raise_error(SmartCore::Types::TypeCastingError)
       expect { type.cast([]) }.to raise_error(SmartCore::Types::TypeCastingError)
     end
   end
@@ -29,7 +29,7 @@ RSpec.describe 'SmartCore::Types::Value::Date' do
       expect(type.valid?(nil)).to eq(false)
       expect(type.valid?(Time.new)).to eq(false)
       expect(type.valid?(123)).to eq(false)
-      expect(type.valid?({})).to eq(false)
+      expect(type.valid?(Hash.new({}))).to eq(false)
       expect(type.valid?('test')).to eq(false)
       expect(type.valid?(:test)).to eq(false)
       expect(type.valid?(Object.new)).to eq(false)
@@ -46,7 +46,7 @@ RSpec.describe 'SmartCore::Types::Value::Date' do
       expect { type.validate!(nil) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(Time.new) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(123) }.to raise_error(SmartCore::Types::TypeError)
-      expect { type.validate!({}) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!(Hash.new({})) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!('test') }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(:test) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(Object.new) }.to raise_error(SmartCore::Types::TypeError)
@@ -65,7 +65,7 @@ RSpec.describe 'SmartCore::Types::Value::Date' do
 
       expect(type.valid?(Time.new)).to eq(false)
       expect(type.valid?(123)).to eq(false)
-      expect(type.valid?({})).to eq(false)
+      expect(type.valid?(Hash.new({}))).to eq(false)
       expect(type.valid?('test')).to eq(false)
       expect(type.valid?(:test)).to eq(false)
       expect(type.valid?(Object.new)).to eq(false)
@@ -82,7 +82,7 @@ RSpec.describe 'SmartCore::Types::Value::Date' do
 
       expect { type.validate!(Time.new) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(123) }.to raise_error(SmartCore::Types::TypeError)
-      expect { type.validate!({}) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!(Hash.new({})) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!('test') }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(:test) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(Object.new) }.to raise_error(SmartCore::Types::TypeError)

@@ -49,7 +49,7 @@ class SmartCore::Types::Primitive::InvariantControl::Chain::Result
   # @api private
   # @since 0.1.0
   def error_codes
-    invariant_results.select(&:failure?).map do |invariant_result|
+    invariant_results.select(&:failure?).map! do |invariant_result|
       "#{invariant_chain.name}.#{invariant_result.invariant.name}".tap(&:freeze)
     end
   end

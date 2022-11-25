@@ -47,21 +47,17 @@ RSpec.describe 'SmartCore::Types::Value::Numeric' do
     context 'cast priority' do
       specify 'float > all (> integer > bigdecimal)' do
         value = Class.new do
-          # rubocop:disable Layout/EmptyLineBetweenDefs
           def to_i; 1; end
           def to_f; 2.0; end
           def to_d; BigDecial('3.0'); end
-          # rubocop:enable Layout/EmptyLineBetweenDefs
         end.new
         expect(type.cast(value)).to eq(2.0).and be_a(::Float)
       end
 
       specify 'integer > bigdecimal' do
         value = Class.new do
-          # rubocop:disable Layout/EmptyLineBetweenDefs
           def to_i; 15; end
           def to_d; BigDecial('3.0'); end
-          # rubocop:enable Layout/EmptyLineBetweenDefs
         end.new
         expect(type.cast(value)).to eq(15).and be_a(::Integer)
       end

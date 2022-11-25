@@ -6,7 +6,7 @@ RSpec.describe 'SmartCore::Types::Value::TimeBased' do
       expect(type.cast('2020-05-01')).to eq(Time.new(2020, 5, 1))
       expect(type.cast('20210417')).to eq(Time.new(2021, 4, 17))
       expect(type.cast('3rd Feb 2019')).to eq(Time.new(2019, 2, 3))
-      expect(type.cast(946702800)).to eq(Time.utc(2000, 1, 1, 5))
+      expect(type.cast(946_702_800)).to eq(Time.utc(2000, 1, 1, 5))
       expect(type.cast(Time.new(2010, 10, 31))).to eq(Time.new(2010, 10, 31))
       expect(type.cast(Date.new(2021, 1, 7))).to eq(Date.new(2021, 1, 7)).and be_a(::Date)
 
@@ -27,7 +27,7 @@ RSpec.describe 'SmartCore::Types::Value::TimeBased' do
       expect { type.cast(nil) }.to raise_error(SmartCore::Types::TypeCastingError)
       expect { type.cast(Object.new) }.to raise_error(SmartCore::Types::TypeCastingError)
       expect { type.cast(BasicObject.new) }.to raise_error(SmartCore::Types::TypeCastingError)
-      expect { type.cast({}) }.to raise_error(SmartCore::Types::TypeCastingError)
+      expect { type.cast(Hash.new({})) }.to raise_error(SmartCore::Types::TypeCastingError)
       expect { type.cast([]) }.to raise_error(SmartCore::Types::TypeCastingError)
     end
   end
@@ -42,7 +42,7 @@ RSpec.describe 'SmartCore::Types::Value::TimeBased' do
 
       expect(type.valid?(nil)).to eq(false)
       expect(type.valid?(123)).to eq(false)
-      expect(type.valid?({})).to eq(false)
+      expect(type.valid?(Hash.new({}))).to eq(false)
       expect(type.valid?('test')).to eq(false)
       expect(type.valid?(:test)).to eq(false)
       expect(type.valid?(Object.new)).to eq(false)
@@ -59,7 +59,7 @@ RSpec.describe 'SmartCore::Types::Value::TimeBased' do
 
       expect { type.validate!(nil) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(123) }.to raise_error(SmartCore::Types::TypeError)
-      expect { type.validate!({}) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!(Hash.new({})) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!('test') }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(:test) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(Object.new) }.to raise_error(SmartCore::Types::TypeError)
@@ -78,7 +78,7 @@ RSpec.describe 'SmartCore::Types::Value::TimeBased' do
       expect(type.valid?(nil)).to eq(true)
 
       expect(type.valid?(123)).to eq(false)
-      expect(type.valid?({})).to eq(false)
+      expect(type.valid?(Hash.new({}))).to eq(false)
       expect(type.valid?('test')).to eq(false)
       expect(type.valid?(:test)).to eq(false)
       expect(type.valid?(Object.new)).to eq(false)
@@ -95,7 +95,7 @@ RSpec.describe 'SmartCore::Types::Value::TimeBased' do
       expect { type.validate!(nil) }.not_to raise_error
 
       expect { type.validate!(123) }.to raise_error(SmartCore::Types::TypeError)
-      expect { type.validate!({}) }.to raise_error(SmartCore::Types::TypeError)
+      expect { type.validate!(Hash.new({})) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!('test') }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(:test) }.to raise_error(SmartCore::Types::TypeError)
       expect { type.validate!(Object.new) }.to raise_error(SmartCore::Types::TypeError)

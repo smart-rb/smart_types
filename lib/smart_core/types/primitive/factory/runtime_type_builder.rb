@@ -29,7 +29,7 @@ module SmartCore::Types::Primitive::Factory::RuntimeTypeBuilder
     # @api private
     # @since 0.3.0
     # @version 0.7.1
-    # rubocop:disable Metrics/AbcSize, Layout/LineLength
+    # rubocop:disable Style/AccessModifierDeclarations, Metrics/AbcSize, Layout/LineLength
     public def initialize_clone(new_instance, cloneable_instance)
       name_clone = cloneable_instance.instance_variable_get(:@name)
       category_clone = cloneable_instance.instance_variable_get(:@category)
@@ -49,6 +49,6 @@ module SmartCore::Types::Primitive::Factory::RuntimeTypeBuilder
       new_instance.instance_variable_set(:@lock_clone, lock_clone)
       new_instance.instance_variable_set(:@nilable, nilable_clone)
     end
-    # rubocop:enable Metrics/AbcSize, Layout/LineLength
+    # rubocop:enable Style/AccessModifierDeclarations, Metrics/AbcSize, Layout/LineLength
   end
 end

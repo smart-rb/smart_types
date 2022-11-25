@@ -1,10 +1,16 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-# Unreleased
+# [0.8.0] - 2022-11-25
 ### Added
 - New types of `SmartCore::Types::Value` category:
   - `SmartCore::Types::Value::Method`
+- Support for *Ruby@3.1*;
+### Changed
+- `SmartCore::Types::Primitive#valid?` now has no dependency on invariant control result object interface
+  (reduced object allocation count during validation: move from OOP-style to Procedure-style inside boolean methods);
+- Updated development dependencies (see `Gemfile.lock` diffs);
+- Support for *Ruby@2.4*, *Ruby@2.5* and *Ruby@2.6* has ended;
 
 # [0.7.1] - 2022-08-31
 ### Fixed

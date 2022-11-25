@@ -34,7 +34,7 @@ class SmartCore::Types::Primitive::NilableValidator
   # @api private
   # @since 0.2.0
   def valid?(value)
-    value == nil ? true : validator.valid?(value)
+    (value == nil) ? true : validator.valid?(value)
   end
 
   # @param value [Any]
