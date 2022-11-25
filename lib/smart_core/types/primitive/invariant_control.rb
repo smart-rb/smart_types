@@ -2,7 +2,7 @@
 
 # @api private
 # @since 0.2.0
-# @version 0.3.0
+# @version 0.8.0
 class SmartCore::Types::Primitive::InvariantControl
   require_relative 'invariant_control/result'
   require_relative 'invariant_control/single'
@@ -49,6 +49,24 @@ class SmartCore::Types::Primitive::InvariantControl
         result.add_single_result(invariant.check(value, runtime_attributes))
       end
     end
+  end
+
+  # @param value [Any]
+  # @param runtime_attributes [Array<Any>]
+  # @return [Boolean]
+  #
+  # @api private
+  # @since 0.8.0
+  def simply_check(value, runtime_attributes)
+    return false if invariant_chains.any? do |chain|
+      chain.simply_check(value, runtime_attributes) == false
+    end
+
+    return false if invariants.any? do |invariant|
+      invariant.simply_check(value, runtime_attributes) == false
+    end
+
+    true
   end
 
   private
