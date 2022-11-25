@@ -16,8 +16,6 @@ jobs:
       fail-fast: false
       matrix:
         ruby:
-          - version: 2.6
-            continue-on-error: false
           - version: 2.7
             continue-on-error: false
           - version: 3.0

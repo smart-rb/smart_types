@@ -3,7 +3,7 @@
 require_relative 'lib/smart_core/types/version'
 
 Gem::Specification.new do |spec|
-  spec.required_ruby_version = Gem::Requirement.new('>= 2.6.10')
+  spec.required_ruby_version = Gem::Requirement.new('>= 2.7')
 
   spec.name    = 'smart_types'
   spec.version = SmartCore::Types::VERSION
