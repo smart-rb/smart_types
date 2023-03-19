@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+# [Unreleased]
+- New types of `SmartCore::Types::Value` category:
+  - `SmartComre::Types::Value::UnboundMethod`;
+
 # [0.8.0] - 2022-11-25
 ### Added
 - New types of `SmartCore::Types::Value` category:
