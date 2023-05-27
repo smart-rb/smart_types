@@ -3,7 +3,7 @@
 require_relative 'lib/smart_core/types/version'
 
 Gem::Specification.new do |spec|
-  spec.required_ruby_version = Gem::Requirement.new('>= 2.7')
+  spec.required_ruby_version = Gem::Requirement.new('>= 3.0')
 
   spec.name    = 'smart_types'
   spec.version = SmartCore::Types::VERSION
@@ -32,13 +32,13 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'smart_engine', '~> 0.11'
+  spec.add_dependency 'smart_engine', '~> 0.17'
 
-  spec.add_development_dependency 'bundler',          '~> 2.1'
+  spec.add_development_dependency 'bundler',          '~> 2.4'
   spec.add_development_dependency 'rake',             '~> 13.0'
-  spec.add_development_dependency 'rspec',            '~> 3.10'
-  spec.add_development_dependency 'armitage-rubocop', '~> 1.7'
-  spec.add_development_dependency 'simplecov',        '~> 0.21'
+  spec.add_development_dependency 'rspec',            '~> 3.12'
+  spec.add_development_dependency 'armitage-rubocop', '~> 1.51'
+  spec.add_development_dependency 'simplecov',        '~> 0.22'
   spec.add_development_dependency 'simplecov-lcov',   '~> 0.8'
-  spec.add_development_dependency 'pry',              '~> 0.13'
+  spec.add_development_dependency 'pry',              '~> 0.14'
 end

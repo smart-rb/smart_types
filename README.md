@@ -102,6 +102,8 @@ SmartCore::Types::Value::Array
 SmartCore::Types::Value::Set
 SmartCore::Types::Value::Hash
 SmartCore::Types::Value::Proc
+SmartCore::Types::Value::Range
+SmartCore::Types::Value::Rational
 SmartCore::Types::Value::Class
 SmartCore::Types::Value::Module
 SmartCore::Types::Value::Time
@@ -109,6 +111,7 @@ SmartCore::Types::Value::DateTime
 SmartCore::Types::Value::Date
 SmartCore::Types::Value::TimeBased
 SmartCore::Types::Value::Method
+SmartCore::Types::Value::UnboundMethod
 ```
 
 ---
@@ -506,13 +509,10 @@ SmartCore::Types::YourCategoryName.define_type(:YourNewType) { ... }
 - new types:
 
 ```ruby
-SmartCore::Types::Value::UnboundMethod
 SmartCore::Types::Value::Enumerable
 SmartCore::Types::Value::Comparable
 SmartCore::Types::Value::Enumerator
 SmartCore::Types::Value::EnumeratorChain
-SmartCore::Types::Value::Range
-SmartCore::Types::Value::Rational
 SmartCore::Types::Value::SortedSet
 SmartCore::Types::Value::IO
 SmartCore::Types::Value::StringIO

@@ -26,3 +26,6 @@ Lint/EmptyBlock:
 # NOTE: too situative and too subjective
 Naming/VariableNumber:
   Enabled: false
+
+Style/RedundantConstantBase:
+  Enabled: false
