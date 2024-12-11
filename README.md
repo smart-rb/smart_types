@@ -392,6 +392,8 @@ SmartCore::Types::Value::CryptoString = SmartCore::Types::Value::NumberdString &
 
 - migrate to `Github Actions`;
 
+- an ability to cast `nil` to `nil` if `nil` is passed (example: `String.nilable_cast(nil) # => nil` and `String.cast(nil) # => ""`);
+
 - support for `block`-attribute in runtime attributes;
 
 - type configuration:
