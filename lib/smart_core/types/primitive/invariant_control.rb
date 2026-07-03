@@ -27,6 +27,7 @@ class SmartCore::Types::Primitive::InvariantControl
   #
   # @api private
   # @since 0.2.0
+  # @version 0.8.1
   def initialize(invariant_chains, invariants)
     @invariant_chains = invariant_chains
     @invariants = invariants
@@ -60,6 +61,7 @@ class SmartCore::Types::Primitive::InvariantControl
   #
   # @api private
   # @since 0.8.0
+  # @version 0.8.1
   def simply_check(value, runtime_attributes)
     return true if @no_invariants
 

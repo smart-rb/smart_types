@@ -61,7 +61,7 @@ class SmartCore::Types::Primitive::Validator
   #
   # @api private
   # @since 0.2.0
-  # @version 0.8.0
+  # @version 0.8.1
   def valid?(value)
     runtime_attributes = type.runtime_attributes
     return false unless type_checker.call(value, runtime_attributes) # => Boolean
