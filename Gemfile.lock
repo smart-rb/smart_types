@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    smart_types (0.8.0)
+    smart_types (0.8.1)
       smart_engine (~> 0.17)
 
 GEM
@@ -98,6 +98,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-22
+  x86_64-linux
 
 DEPENDENCIES
   armitage-rubocop (~> 1.51)

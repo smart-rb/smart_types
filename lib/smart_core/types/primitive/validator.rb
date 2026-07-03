@@ -63,9 +63,9 @@ class SmartCore::Types::Primitive::Validator
   # @since 0.2.0
   # @version 0.8.0
   def valid?(value)
-    return false unless type_checker.call(value, type.runtime_attributes) # => Boolean
-    return false unless invariant_control.simply_check(value, type.runtime_attributes) # => Boolean
-    true
+    runtime_attributes = type.runtime_attributes
+    return false unless type_checker.call(value, runtime_attributes) # => Boolean
+    invariant_control.simply_check(value, runtime_attributes) # => Boolean
   end
 
   # @param value [Any]

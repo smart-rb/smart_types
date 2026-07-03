@@ -30,6 +30,9 @@ class SmartCore::Types::Primitive::InvariantControl
   def initialize(invariant_chains, invariants)
     @invariant_chains = invariant_chains
     @invariants = invariants
+    # NOTE: most types define only a checker (no invariants); precompute the
+    #   empty-case so #simply_check can short-circuit on the hot validation path.
+    @no_invariants = invariant_chains.empty? && invariants.empty?
   end
 
   # @param value [Any]
@@ -58,6 +61,8 @@ class SmartCore::Types::Primitive::InvariantControl
   # @api private
   # @since 0.8.0
   def simply_check(value, runtime_attributes)
+    return true if @no_invariants
+
     return false if invariant_chains.any? do |chain|
       chain.simply_check(value, runtime_attributes) == false
     end
