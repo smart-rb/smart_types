@@ -61,11 +61,11 @@ class SmartCore::Types::Primitive::Validator
   #
   # @api private
   # @since 0.2.0
-  # @version 0.8.0
+  # @version 0.8.1
   def valid?(value)
-    return false unless type_checker.call(value, type.runtime_attributes) # => Boolean
-    return false unless invariant_control.simply_check(value, type.runtime_attributes) # => Boolean
-    true
+    runtime_attributes = type.runtime_attributes
+    return false unless type_checker.call(value, runtime_attributes) # => Boolean
+    invariant_control.simply_check(value, runtime_attributes) # => Boolean
   end
 
   # @param value [Any]
@@ -73,11 +73,12 @@ class SmartCore::Types::Primitive::Validator
   #
   # @api private
   # @since 0.2.0
-  # @version 0.3.0
+  # @version 0.8.1
   def validate(value)
-    checker_result = type_checker.call(value, type.runtime_attributes) # => Boolean
+    runtime_attributes = type.runtime_attributes
+    checker_result = type_checker.call(value, runtime_attributes) # => Boolean
     return Result.new(type, value, checker_result) unless checker_result
-    invariant_result = invariant_control.check(value, type.runtime_attributes)
+    invariant_result = invariant_control.check(value, runtime_attributes)
     invariant_errors = invariant_result.invariant_errors.map { |error| "#{type.name}.#{error}" }
     Result.new(type, value, checker_result, invariant_errors)
   end

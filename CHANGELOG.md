@@ -7,6 +7,17 @@ All notable changes to this project will be documented in this file.
   - `SmartCore::Types::Value::Range`;
   - `SmartCore::Types::Value::Rational`;
 
+# [0.8.1] - 2026-07-03
+### Changed
+- Performance: faster `SmartCore::Types::Primitive#valid?` (the common validation path):
+  - `SmartCore::Types::Primitive::InvariantControl#simply_check` now short-circuits for types
+    without invariants (precomputed at build time) — the majority of types (e.g. `Value::String`,
+    `Protocol::InstanceOf`) define only a checker, so the empty-invariant iteration is skipped;
+  - `SmartCore::Types::Primitive::Validator#valid?` and `#validate` fetch `runtime_attributes`
+    once instead of twice;
+  - ~17–20% faster validation for `Value::String` and `Protocol::InstanceOf` (3M-iteration benchmark).
+    No public API or validation-semantics change.
+
 # [0.8.0] - 2022-11-25
 ### Added
 - New types of `SmartCore::Types::Value` category:
